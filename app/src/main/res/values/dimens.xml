@@ -1,0 +1,17 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="ancho_alto_img_filtro">80dp</dimen>
+    <dimen name="ancho_alto_img_equipo">100dp</dimen>
+    <dimen name="texto_botones">18sp</dimen>
+    <dimen name="texto_id_filtro">20sp</dimen>
+    <dimen name="texto_peso_filtro">16sp</dimen>
+
+    <dimen name="ancho_alto_img_menu">100dp</dimen>
+    <dimen name="ancho_item_menu">150dp</dimen>
+    <dimen name="alto_item_menu">150dp</dimen>
+
+    <dimen name="texto_datos">18sp</dimen>
+</resources>

@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Aeronet</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Usuario</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Iniciar Sesion</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_usuario_vacio">Por favor ingresar usuario</string>
+    <string name="error_usuario_invalido">Usuario incorrecto</string>
+    <string name="error_pass_vacio">Por favor ingresar Contraseña</string>
+    <string name="error_pass_invalida">Contraseña incorrecta</string>
+
+    <string name="instalar_filtros">Instalar Filtros</string>
+    <string name="recoger_filtros">Recoger Filtros</string>
+    <string name="calibrar">Calibrar equipo</string>
+
+    <!-- Actividad datos -->
+    <string name="hint_temperatura_ambiente">Temperatura ambiente</string>
+    <string name="hint_presion_estancamiento_ini">Presion de estancamiento inicial</string>
+    <string name="hint_horometro">Horómetro</string>
+    <string name="hint_presion_atmosf">Presion atmosferica</string>
+    <string name="hint_presion_estancamiento_fin">Presion de estancamiento final</string>
+
+    <string name="hint_volumen">Volumen</string>
+    <string name="hint_tiempo_operacion">Tiempo de operacion (23 a 25 h)</string>
+
+    <string name="hint_observaciones">Observaciones</string>
+
+    <string-array name="unidades_presion">
+        <item>mmHg</item>
+        <item>atm</item>
+        <item>inHg</item>
+    </string-array>
+
+    <string-array name="unidades_temperatura">
+        <item>°C</item>
+        <item>°F</item>
+        <item>°K</item>
+    </string-array>
+
+</resources>
