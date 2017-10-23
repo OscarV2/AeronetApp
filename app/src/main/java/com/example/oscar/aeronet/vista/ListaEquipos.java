@@ -3,6 +3,7 @@ package com.example.oscar.aeronet.vista;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -30,7 +31,8 @@ public class ListaEquipos extends AppCompatActivity {
         EquipoController equipoController = new EquipoController();
 
         equipoList = equipoController.getEquipos();
-        AdapterEquipos adapterEquipos = new AdapterEquipos(this, equipoList);
+        Log.e("lista eq size", String.valueOf(equipoList.size()));
+        AdapterEquipos adapterEquipos = new AdapterEquipos(ListaEquipos.this, equipoList);
         lvEquipos.setAdapter(adapterEquipos);
 
         lvEquipos.setOnItemClickListener(new AdapterView.OnItemClickListener() {

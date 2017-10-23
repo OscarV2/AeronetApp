@@ -15,24 +15,30 @@
         android:src="@mipmap/ic_equipos_round"
         />
 
-    <TextView
-        android:layout_alignRight="@id/img_filtro"
-        android:layout_alignEnd="@id/img_equipo"
-        android:id="@+id/tv_nombre_equipo"
+    <LinearLayout
+        android:layout_toRightOf="@id/img_equipo"
+        android:layout_toEndOf="@id/img_equipo"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/texto_id_filtro"
         android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"/>
+        android:layout_marginStart="10dp">
 
-    <TextView
-        android:layout_alignRight="@id/img_equipo"
-        android:layout_alignEnd="@id/img_equipo"
-        android:layout_below="@id/tv_nombre_equipo"
-        android:id="@+id/tv_tipo_equipo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/texto_peso_filtro"/>
+        <TextView
+
+            android:id="@+id/tv_nombre_equipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_id_filtro"
+            />
+
+        <TextView
+            android:id="@+id/tv_tipo_equipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_peso_filtro"/>
+    </LinearLayout>
+
 
     <View
         android:layout_below="@id/img_equipo"

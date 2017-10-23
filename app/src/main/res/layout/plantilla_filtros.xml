@@ -15,22 +15,29 @@
         android:src="@mipmap/filter"
         />
 
-    <TextView
-        android:layout_alignRight="@id/img_filtro"
-        android:layout_alignEnd="@id/img_filtro"
-        android:id="@+id/tv_id_filtro"
+    <LinearLayout
+        android:layout_toRightOf="@id/img_filtro"
+        android:layout_toEndOf="@id/img_filtro"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/texto_id_filtro"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp">
 
-    <TextView
-        android:layout_alignRight="@id/img_filtro"
-        android:layout_alignEnd="@id/img_filtro"
-        android:layout_below="@id/tv_id_filtro"
-        android:id="@+id/tv_peso_filtro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/texto_peso_filtro"/>
+        <TextView
+
+            android:id="@+id/tv_id_filtro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_id_filtro"/>
+
+        <TextView
+            android:id="@+id/tv_peso_filtro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/texto_peso_filtro"/>
+
+    </LinearLayout>
 
     <CheckBox
         android:id="@+id/checkFiltro"
@@ -38,7 +45,8 @@
         android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:visibility="gone"/>
 
     <View
         android:layout_below="@id/img_filtro"
@@ -46,4 +54,5 @@
         android:layout_height="2dp"
         android:background="@color/blanco"
         />
+
 </RelativeLayout>

@@ -45,7 +45,7 @@ public class AdapterFiltros extends BaseAdapter {
         if (convertView == null){
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.plantilla_equipos, parent, false);
+            row = inflater.inflate(R.layout.plantilla_filtros, parent, false);
         }
 
         TextView tvNombre = row.findViewById(R.id.tv_id_filtro);

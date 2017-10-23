@@ -3,6 +3,7 @@ package com.example.oscar.aeronet.vista;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -25,7 +26,7 @@ public class ListaFiltros extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_filtros);
 
-        lvFiltros = findViewById(R.id.lv_equipos);
+        lvFiltros = findViewById(R.id.lv_filtros);
         filtroList = new ArrayList<>();
         FiltroController filtroController = new FiltroController();
 
@@ -37,6 +38,7 @@ public class ListaFiltros extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                Log.e("Click","en " + String.valueOf(position));
                 Intent i = new Intent(ListaFiltros.this, Datos.class);
                 startActivity(i);
                 finish();

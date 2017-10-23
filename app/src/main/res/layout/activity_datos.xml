@@ -32,12 +32,12 @@
         android:layout_toRightOf="@id/lay_presion_est_ini"
         android:layout_toEndOf="@id/lay_presion_est_ini"/>
 
-    <EditText
+    <TextView
+        android:layout_above="@id/lay_observaciones"
         android:id="@+id/fecha_datos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="@dimen/texto_datos"
-        />
+        android:textSize="@dimen/texto_datos" />
 
     <!-- Temperatura ambiente -->
     <android.support.design.widget.TextInputLayout
@@ -95,7 +95,8 @@
         <EditText
             android:id="@+id/edt_observaciones"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
+            android:maxLines="5"
             android:textSize="@dimen/texto_datos"
             android:hint="@string/hint_observaciones"/>
 

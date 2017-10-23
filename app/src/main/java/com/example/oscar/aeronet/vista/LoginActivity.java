@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
@@ -41,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         EquipoController equipoController = new EquipoController();
         List<Equipo> equipoList = equipoController.getEquipos();
 
-        if (!(equipoList.size() == 0)){
+        if (equipoList.size() == 0){
             Filtro filtro = new Filtro("22/00/54", 123.0);
             filtro.save();
             Filtro filtro4 = new Filtro("holA", 123.0);
@@ -63,7 +64,11 @@ public class LoginActivity extends AppCompatActivity {
             equipo3.save();
             Equipo equipo4 = new Equipo("C40016", "PQ100");
             equipo4.save();
-        }
+            Log.e("registros", "gusrdados");
+
+    }else {
+            Log.e("ya hay", "registroe");
+    }
 
         edtPassword = findViewById(R.id.password);
 
