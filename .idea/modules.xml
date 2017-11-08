@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Aeronet.iml" filepath="$PROJECT_DIR$/Aeronet.iml" />
+      <module fileurl="file://E:\App_Jhonny\AeronetApp\Aeronet.iml" filepath="E:\App_Jhonny\AeronetApp\Aeronet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AeronetApp.iml" filepath="$PROJECT_DIR$/AeronetApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
