@@ -7,31 +7,31 @@ package modelo;
 public class Constantes {
 
     public static String TABLA_CALIBRADOR = "calibrador";
-    public  String serie;
-    public  String modelo;
-    public  String marca;
-    public  String ultimacalibracion;
-    public  String carta;
-    public  String m_pendientecalibrador;
-    public  String b_interceptocalibrador;
-    public  String rcalibrador;
+    public  static String serie = "serie";
+    public  static String modelo = "modelo";
+    public  static String marca = "marca";
+    public  static String ultimacalibracion = "ultimacalibracion";
+    public  static String carta = "carta";
+    public  static String m_pendientecalibrador = "m_pendientecalibrador";
+    public  static String b_interceptocalibrador = "b_interceptocalibrador";
+    public  static String rcalibrador = "rcalibrador";
 
     public static String TABLA_CALIBRACION = "calibracion";
-    public String fecha;
-    public Integer equipos_idequipo;
-    public String m_pendiente;
-    public String b_intercepto;
-    public String r;
-    public String datosx;
-    public String datosy;
+    public static String fecha = "fecha";
+    public static String equipos_idequipo = "equipos_idequipo";
+    public static String m_pendiente = "m_pendiente";
+    public static String b_intercepto = "b_intercepto";
+    public static String r = "r";
+    public static String datosx = "datosx";
+    public static String datosy = "datosy";
 
     public static String TABLA_USUARIOS = "usuarios";
-    public String nombre;
-    public String apellidos;
-    public String correo;
-    public String telefono;
-    public String rol;
-    public String password;
+    public String nombre = "nombre";
+    public String apellidos = "apellidos";
+    public String correo = "correo";
+    public String telefono = "telefono";
+    public String rol = "rol";
+    public String password = "password";
 
 
 
