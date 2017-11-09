@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.oscar.aeronet.vista.MenuCampo">
+    android:background="@color/color_fondo_App"
+    tools:context="com.example.oscar.aeronet.vista.MenuCampo"
+    android:orientation="vertical"
+    >
 
     <!--- INstalar filtroz -->
     <RelativeLayout
         android:id="@+id/rel_instalar_filtros"
-        android:layout_width="@dimen/ancho_item_menu"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/alto_item_menu"
-        android:background="@color/fondo_item_menu"
-        android:onClick="irInstalarFiltros">
+        android:background="@color/color_fondo_App"
+        android:onClick="irInstalarFiltros"
+        >
 
         <ImageView
             android:id="@+id/imgInstalar"
             android:layout_width="@dimen/ancho_alto_img_menu"
             android:layout_height="@dimen/ancho_alto_img_menu"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
+            android:src="@mipmap/ic_filter"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,17 +33,23 @@
             android:textColor="@color/blanco"
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/imgInstalar"
+            android:layout_centerVertical="true"
+
             />
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/blanco"
+        />
     <RelativeLayout
         android:id="@+id/rel_recoger_filtros"
-        android:layout_width="@dimen/ancho_item_menu"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/alto_item_menu"
-        android:background="@color/fondo_item_menu"
-        android:layout_alignParentRight="true"
+        android:background="@color/color_fondo_App"
         android:onClick="irRecogerFiltros"
+
         >
 
         <ImageView
@@ -46,7 +57,8 @@
             android:layout_width="@dimen/ancho_alto_img_menu"
             android:layout_height="@dimen/ancho_alto_img_menu"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
+
+            android:src="@mipmap/ic_filter"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,16 +68,21 @@
             android:textColor="@color/blanco"
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/img_recoger"
+
+            android:layout_centerVertical="true"
             />
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/blanco"
+        />
     <RelativeLayout
         android:id="@+id/rel_calibrar_equipo"
-        android:layout_width="@dimen/ancho_item_menu"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/alto_item_menu"
-        android:background="@color/fondo_item_menu"
-        android:layout_below="@id/rel_instalar_filtros"
+        android:background="@color/color_fondo_App"
         android:onClick="calibrarEquipo">
 
         <ImageView
@@ -73,46 +90,17 @@
             android:layout_width="@dimen/ancho_alto_img_menu"
             android:layout_height="@dimen/ancho_alto_img_menu"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
+            android:src="@mipmap/ic_filter"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:text="@string/calibrar"
             android:textColor="@color/blanco"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/img_calibrar"
-            />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rel_salir"
-        android:layout_width="@dimen/ancho_item_menu"
-        android:layout_height="@dimen/alto_item_menu"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/rel_recoger_filtros"
-        android:background="@color/fondo_item_menu"
-        android:onClick="salir">
-
-        <ImageView
-            android:id="@+id/img_salir"
-            android:layout_width="@dimen/ancho_alto_img_menu"
-            android:layout_height="@dimen/ancho_alto_img_menu"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="@string/instalar_filtros"
-            android:textColor="@color/blanco"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/img_salir"
-            />
+            android:textStyle="bold" />
     </RelativeLayout>
-</RelativeLayout>
+
+</LinearLayout>

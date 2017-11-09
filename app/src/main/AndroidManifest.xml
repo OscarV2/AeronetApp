@@ -9,11 +9,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
-
-        <meta-data android:name="AA_DB_NAME" android:value="Pickrand" />
-        <meta-data android:name="AA_DB_VERSION" android:value="5" />
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="Pickrand" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="5" />
 
         <activity
             android:name=".vista.LoginActivity"
@@ -24,10 +26,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vista.MenuCampo" android:label="Menu"/>
-        <activity android:name=".vista.ListaEquipos" android:label="Lista de Equipos"/>
-        <activity android:name=".vista.ListaFiltros" android:label="Lista d Filtros" />
-        <activity android:name=".vista.Datos"/>
+        <activity
+            android:name=".vista.MenuCampo"
+            android:label="Menu" />
+        <activity
+            android:name=".vista.ListaEquipos"
+            android:label="Lista de Equipos" />
+        <activity
+            android:name=".vista.ListaFiltros"
+            android:label="Lista d Filtros" />
+        <activity android:name=".vista.Datos" />
+        <activity android:name=".vista.CalibrarActivity"></activity>
     </application>
 
 </manifest>

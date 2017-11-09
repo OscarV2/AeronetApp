@@ -26,16 +26,12 @@ public class Constantes {
     public static String datosy = "datosy";
 
     public static String TABLA_USUARIOS = "usuarios";
-    public String nombre = "nombre";
-    public String apellidos = "apellidos";
-    public String correo = "correo";
-    public String telefono = "telefono";
-    public String rol = "rol";
-    public String password = "password";
+    public static String nombre = "nombre";
+    public static String apellidos = "apellidos";
+    public static String correo = "correo";
+    public static String telefono = "telefono";
+    public static String rol = "rol";
+    public static String password = "password";
 
-
-
-
-
-
+    public static String url = "";
 }
