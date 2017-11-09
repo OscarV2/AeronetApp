@@ -36,7 +36,8 @@
             android:name=".vista.ListaFiltros"
             android:label="Lista d Filtros" />
         <activity android:name=".vista.Datos" />
-        <activity android:name=".vista.CalibrarActivity"></activity>
+        <activity android:name=".vista.CalibrarActivity" />
+        <activity android:name=".vista.Calibradores"></activity>
     </application>
 
 </manifest>

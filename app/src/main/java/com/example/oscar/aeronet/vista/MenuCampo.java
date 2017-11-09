@@ -24,8 +24,9 @@ public class MenuCampo extends AppCompatActivity {
     }
 
     public void calibrarEquipo(View v){
-        irListaEquipos("calibrar");
-    }
+        Intent i = new Intent(MenuCampo.this, Calibradores.class);
+        startActivity(i);
+        finish();    }
 
     public void salir(View v){
 

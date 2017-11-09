@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                irMenu();
+                irListaEquipos();
             }
         });
 
@@ -91,9 +91,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void irMenu(){
+    private void irListaEquipos(){
 
-        startActivity(new Intent(LoginActivity.this, MenuCampo.class));
+        startActivity(new Intent(LoginActivity.this, ListaEquipos.class));
         finish();
     }
 
