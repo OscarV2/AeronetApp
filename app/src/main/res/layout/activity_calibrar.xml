@@ -1,9 +1,284 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_fondo_App"
+    android:orientation="vertical"
     tools:context="com.example.oscar.aeronet.vista.CalibrarActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/datos_calibrador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/datos_calibrador"
+        android:textSize="22dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    </RelativeLayout>
+    <EditText
+        android:id="@+id/temp_Amb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:hint="Temperatura Ambiente"
+        android:maxLines="1"
+        android:inputType="numberDecimal"
+        android:maxLength="6"
+        android:textColorHint="@color/blanco"
+
+        />
+    <EditText
+        android:id="@+id/presion_atm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:hint="Presión Atmosférica"
+        android:maxLines="1"
+        android:inputType="numberDecimal"
+        android:maxLength="6"
+        android:textColorHint="@color/text_Color_Hint"
+
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/Muestras_calibrador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/muestras_calibrador"
+            android:textSize="22dp"
+            android:layout_centerHorizontal="true"
+            />
+        <TextView
+            android:id="@+id/Equipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Equipo"
+            android:textSize="22dp"
+            android:layout_below="@id/Muestras_calibrador"
+            android:layout_marginLeft="30dp"
+            />
+        <TextView
+            android:id="@+id/Calibrador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calibrador"
+            android:textSize="22dp"
+            android:layout_below="@id/Muestras_calibrador"
+            android:layout_marginRight="24dp"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+            <EditText
+                android:id="@+id/deltap1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:hint="P. Estancamiento"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:textColorHint="@color/text_Color_Hint"
+                />
+            <EditText
+                android:id="@+id/deltaH1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:hint="P. Calibrador"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="100dp"
+                android:layout_toRightOf="@id/deltap1"
+                android:layout_toEndOf="@id/deltap1"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:textColorHint="@color/text_Color_Hint"
+                />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+            <EditText
+                android:id="@+id/deltap2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:hint="P. Estancamiento"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:textColorHint="@color/text_Color_Hint"
+                />
+            <EditText
+                android:id="@+id/deltaH2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:hint="P. Calibrador"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="100dp"
+                android:layout_toRightOf="@id/deltap2"
+                android:layout_toEndOf="@id/deltap2"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:textColorHint="@color/text_Color_Hint"
+                />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+            <EditText
+                android:id="@+id/deltap3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:hint="P. Estancamiento"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:textColorHint="@color/text_Color_Hint"
+                />
+            <EditText
+                android:id="@+id/deltaH3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:hint="P. Calibrador"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="100dp"
+                android:layout_toRightOf="@id/deltap3"
+                android:layout_toEndOf="@id/deltap3"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:textColorHint="@color/text_Color_Hint"
+                />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+            <EditText
+                android:id="@+id/deltap4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:hint="P. Estancamiento"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:textColorHint="@color/text_Color_Hint"
+                />
+            <EditText
+                android:id="@+id/deltaH4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:hint="P. Calibrador"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="100dp"
+                android:layout_toRightOf="@id/deltap4"
+                android:layout_toEndOf="@id/deltap4"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:textColorHint="@color/text_Color_Hint"
+                />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+            <EditText
+                android:id="@+id/deltap5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:hint="P. Estancamiento"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:textColorHint="@color/text_Color_Hint"
+                />
+            <EditText
+                android:id="@+id/deltaH5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:hint="P. Calibrador"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="100dp"
+                android:layout_toRightOf="@id/deltap5"
+                android:layout_toEndOf="@id/deltap5"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:textColorHint="@color/text_Color_Hint"
+                />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/email_sign_in_button"
+            style="?android:textAppearanceSmall"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/btn_guardar"
+            android:textStyle="bold"
+            android:textColor="@color/blanco"
+            android:background="@drawable/forma_boton"
+            android:layout_below="@id/tilcontra"
+            android:padding="10dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

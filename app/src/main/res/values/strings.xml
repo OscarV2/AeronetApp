@@ -39,4 +39,10 @@
         <item>°K</item>
     </string-array>
 
+    <string name="datos_calibrador">Datos Calibrador</string>
+    <string name="muestras_calibrador">Muestras(in H2O)</string>
+    <string name="btn_guardar">GUARDAR</string>
+
+
+
 </resources>

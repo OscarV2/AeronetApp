@@ -48,16 +48,16 @@
 
             <Button
                 android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/action_sign_in"
-                android:textStyle="bold"
-                android:textColor="@color/blanco"
-                android:background="@drawable/forma_boton"
-                android:layout_below="@id/tilcontra"
-                android:padding="10dp"/>
+    style="?android:textAppearanceSmall"
+    android:layout_centerHorizontal="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:text="@string/action_sign_in"
+    android:textStyle="bold"
+    android:textColor="@color/blanco"
+    android:background="@drawable/forma_boton"
+    android:layout_below="@id/tilcontra"
+    android:padding="10dp"/>
 
 </RelativeLayout>

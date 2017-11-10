@@ -6,9 +6,12 @@ package utils;
 
 public class Calculos {
 
-    private static float KELVIN = 273.15F;
+    public Calculos() {
+    }
 
-    public static double calcularQa(double DeltaH, double Temp,
+    private static double KELVIN = 273.0;
+
+    public double calcularQa(double DeltaH, double Temp,
                                   double b, double m, double Pa){
 
         double numerador = Math.sqrt(((DeltaH * Temp)/Pa) - b);
@@ -16,15 +19,15 @@ public class Calculos {
         return numerador/m;
     }
 
-    public static double calcularQaSobreTa(Float TempAmbiente, Float Qa){
+    public double calcularQaSobreTa(Float TempAmbiente, Float Qa){
 
         return Qa/(Math.sqrt(TempAmbiente));
     }
     
     //Calcular Po/Pa
-    public static double calcularPoPa(){
+    public double calcularPoPa(double Pa, double Po){
 
-        return 0.0;
+        return (Pa - Po)/Pa;
     }
     //Calcular m
     public double calcularM(double[] x, double[] y, double n){
@@ -34,9 +37,13 @@ public class Calculos {
         return numerador / denominador;
     }
     //Calcular b
-    public static double calcularB(){
+    public double calcularB(double[] x, double[] y,
+                                   double n, double m){
 
-        return 0.0;
+        double y1 = sumatoria(y)/n;
+        double x1 = sumatoria(x)/n;
+
+        return y1 - (m*x1);
     }
     //Calcular r
     public double calcularR(double[] x, double[] y, double n){
@@ -50,12 +57,12 @@ public class Calculos {
         return numerador/denominador;
     }
     //Conversiones
-    public static double inH2OAmmHg(double pulgadasH2O){
+    public double inH2OAmmHg(double pulgadasH2O){
 
         return 0.0F;
     }
 
-    public static double centigradosAKelvin(double centigrados){
+    public double centigradosAKelvin(double centigrados){
 
         return centigrados + KELVIN;
     }

@@ -1,7 +1,5 @@
 package modelo;
 
-import android.graphics.ColorSpace;
-
 /**
  * Created by ING_JANNER on 4/11/2017.
  */
