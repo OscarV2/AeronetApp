@@ -13,7 +13,7 @@ import com.example.oscar.aeronet.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import adapter.AdapterFiltros;
+import adapter.AdapterCalibrador;
 import adapter.Controlador.FiltroController;
 import modelo.Filtro;
 
@@ -26,23 +26,5 @@ public class ListaFiltros extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_filtros);
 
-        lvFiltros = findViewById(R.id.lv_filtros);
-        filtroList = new ArrayList<>();
-        FiltroController filtroController = new FiltroController();
-
-        filtroList = filtroController.getAllFiltros();
-        AdapterFiltros adapterFiltros = new AdapterFiltros(filtroList, this);
-        lvFiltros.setAdapter(adapterFiltros);
-
-        lvFiltros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Log.e("Click","en " + String.valueOf(position));
-                Intent i = new Intent(ListaFiltros.this, Datos.class);
-                startActivity(i);
-                finish();
-            }
-        });
     }
 }

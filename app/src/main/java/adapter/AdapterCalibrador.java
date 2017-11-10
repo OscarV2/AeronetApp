@@ -11,26 +11,27 @@ import com.example.oscar.aeronet.R;
 
 import java.util.List;
 
+import modelo.Calibrador;
 import modelo.Filtro;
 
-public class AdapterFiltros extends BaseAdapter {
+public class AdapterCalibrador extends BaseAdapter {
 
-    private List<Filtro> filtros;
+    private List<Calibrador> calibradores;
     private Context context;
 
-    public AdapterFiltros(List<Filtro> filtros, Context context) {
-        this.filtros = filtros;
+    public AdapterCalibrador(List<Calibrador> calibradores, Context context) {
+        this.calibradores = calibradores;
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return filtros.size();
+        return calibradores.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return filtros.get(position);
+        return calibradores.get(position);
     }
 
     @Override
@@ -45,14 +46,14 @@ public class AdapterFiltros extends BaseAdapter {
         if (convertView == null){
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.plantilla_filtros, parent, false);
+            row = inflater.inflate(R.layout.plantilla_calibradores, parent, false);
         }
 
         TextView tvNombre = row.findViewById(R.id.tv_id_filtro);
         TextView tvPeso = row.findViewById(R.id.tv_peso_filtro);
 
-        tvPeso.setText(String.valueOf(this.filtros.get(position).getPeso())); // mostrar fecha
-        tvNombre.setText(this.filtros.get(position).getNombre()); // mostrar nombre de lote
+        tvPeso.setText(String.valueOf(this.calibradores.get(position).getModelo())); // mostrar fecha
+        tvNombre.setText(this.calibradores.get(position).getMarca()); // mostrar nombre de lote
 
         return row;
     }
