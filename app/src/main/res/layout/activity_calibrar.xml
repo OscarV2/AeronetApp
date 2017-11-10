@@ -277,7 +277,8 @@
             android:textColor="@color/blanco"
             android:background="@drawable/forma_boton"
             android:layout_below="@id/tilcontra"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:onClick="calibrar"/>
 
     </RelativeLayout>
 

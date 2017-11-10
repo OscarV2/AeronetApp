@@ -1,5 +1,7 @@
 package utils;
 
+import android.util.Log;
+
 /**
  * Created by ING_JANNER on 8/11/2017.
  */
@@ -9,7 +11,7 @@ public class Calculos {
     public Calculos() {
     }
 
-    private static double KELVIN = 273.0;
+    private static double KELVIN = 273.15;
 
     public double calcularQa(double DeltaH, double Temp,
                                   double b, double m, double Pa){
@@ -19,7 +21,7 @@ public class Calculos {
         return numerador/m;
     }
 
-    public double calcularQaSobreTa(Float TempAmbiente, Float Qa){
+    public double calcularQaSobreTa(double TempAmbiente, double Qa){
 
         return Qa/(Math.sqrt(TempAmbiente));
     }
@@ -52,14 +54,19 @@ public class Calculos {
         double term1 = sumatoriaCuadrados(x) - (Math.pow(sumatoria(x), 2)/n);
         double term2 = sumatoriaCuadrados(y) - (Math.pow(sumatoria(y), 2)/n);
 
-        double denominador = term1 * term2;
+        double denominador = Math.sqrt(term1 * term2);
 
         return numerador/denominador;
     }
     //Conversiones
-    public double inH2OAmmHg(double pulgadasH2O){
+    public double[] getDeltaPenmmHg(double[] pulgadasH2O){
 
-        return 0.0F;
+        double[] mmHg = new double[pulgadasH2O.length];
+        for (int i = 0; i < pulgadasH2O.length; i++){
+            mmHg[i] = pulgadasH2O[i] * 1.86764706;
+            Log.e("deltaPmmHg", String.valueOf(mmHg[i]));
+        }
+        return mmHg;
     }
 
     public double centigradosAKelvin(double centigrados){
@@ -70,7 +77,7 @@ public class Calculos {
     private double sumatoria(double[] x){
 
         double sum = x[0];
-        for (int i = 1; i<=x.length; i++){
+        for (int i = 1; i<x.length; i++){
             sum+= x[i];
         }
         return sum;
