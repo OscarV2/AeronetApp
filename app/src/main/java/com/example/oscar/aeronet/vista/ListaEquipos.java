@@ -39,10 +39,11 @@ public class ListaEquipos extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent i = new Intent(ListaEquipos.this, ListaFiltros.class);
+                Intent i = new Intent(ListaEquipos.this, MenuCampo.class);
                 startActivity(i);
                 finish();
             }
         });
     }
+
 }

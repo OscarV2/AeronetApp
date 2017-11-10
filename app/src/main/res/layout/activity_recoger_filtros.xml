@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.oscar.aeronet.vista.RecogerFiltros">
+
+    <!-- Presion de estancamiento inicial -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/lay_presion_est_ini"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lay_equipo_pq100">
+
+        <EditText
+            android:id="@+id/edt_presion_est_ini"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/texto_datos"
+            android:hint="@string/hint_presion_estancamiento_ini"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/spin_presion_est_ini"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/lay_presion_est_ini"
+        android:layout_toEndOf="@id/lay_presion_est_ini"/>
+
+    <TextView
+        android:layout_above="@id/lay_observaciones"
+        android:id="@+id/fecha_datos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/texto_datos" />
+
+    <!-- Temperatura ambiente -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/lay_temp_amb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lay_presion_est_ini">
+
+        <EditText
+            android:id="@+id/edt_temp_amb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/texto_datos"
+            android:hint="@string/hint_temperatura_ambiente"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/spin_temp_amb"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/lay_temp_amb"
+        android:layout_toEndOf="@id/lay_temp_amb"
+        android:layout_below="@id/spin_presion_est_ini"/>
+
+    <!-- Presion atmosferica -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/lay_presion_atm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lay_temp_amb">
+
+        <EditText
+            android:id="@+id/edt_presion_atm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/texto_datos"
+            android:hint="@string/hint_presion_atmosf"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/spin_presion_atm"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/lay_presion_atm"
+        android:layout_toEndOf="@id/lay_presion_atm"
+        android:layout_below="@id/spin_temp_amb"/>
+
+    <!-- Observaciones -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/lay_observaciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <EditText
+            android:id="@+id/edt_observaciones"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:maxLines="5"
+            android:textSize="@dimen/texto_datos"
+            android:hint="@string/hint_observaciones"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Horometro -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/lay_horometro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lay_presion_atm">
+
+        <EditText
+            android:id="@+id/edt_horometro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/texto_datos"
+            android:hint="@string/hint_horometro"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <!-- Layout para equipos PQ100 -->
+    <LinearLayout
+        android:id="@+id/lay_equipo_pq100"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/lay_volumen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edt_volumen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/texto_datos"
+                android:hint="@string/hint_volumen"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/lay_tiempo_operacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edt_tiempo_operacion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/texto_datos"
+                android:hint="@string/hint_tiempo_operacion"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -27,9 +27,11 @@ public class Calculos {
         return 0.0;
     }
     //Calcular m
-    public static double calcularM(){
+    public double calcularM(double[] x, double[] y, double n){
 
-        return 0.0;
+        double numerador = sumProductosXY(x, y) - ((sumatoria(x)*sumatoria(y))/n);
+        double denominador = sumatoriaCuadrados(x) - ((Math.pow(sumatoria(x), 2))/n);
+        return numerador / denominador;
     }
     //Calcular b
     public static double calcularB(){
@@ -37,9 +39,15 @@ public class Calculos {
         return 0.0;
     }
     //Calcular r
-    public static double calcularR(){
+    public double calcularR(double[] x, double[] y, double n){
 
-        return 0.0;
+        double numerador = sumProductosXY(x, y) - ((sumatoria(x)*sumatoria(y))/n);
+        double term1 = sumatoriaCuadrados(x) - (Math.pow(sumatoria(x), 2)/n);
+        double term2 = sumatoriaCuadrados(y) - (Math.pow(sumatoria(y), 2)/n);
+
+        double denominador = term1 * term2;
+
+        return numerador/denominador;
     }
     //Conversiones
     public static double inH2OAmmHg(double pulgadasH2O){
@@ -52,4 +60,31 @@ public class Calculos {
         return centigrados + KELVIN;
     }
 
+    private double sumatoria(double[] x){
+
+        double sum = x[0];
+        for (int i = 1; i<=x.length; i++){
+            sum+= x[i];
+        }
+        return sum;
+    }
+
+    //Calcular la sumatoria de todos los terminos elvados al cuadrado
+    private double sumatoriaCuadrados(double[] x){
+
+        double sum = Math.pow(x[0], 2) ;
+        for (int i = 1; i<x.length; i++){
+            sum+= Math.pow(x[i], 2);
+        }
+        return sum;
+    }
+
+    private double sumProductosXY(double[] x, double[] y){
+
+        double sum[] = new double[x.length];
+        for (int i = 0; i<x.length; i++){
+            sum[i] = x[i]*y[i];
+        }
+        return this.sumatoria(sum);
+    }
 }

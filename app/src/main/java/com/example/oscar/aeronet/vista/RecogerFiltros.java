@@ -7,12 +7,12 @@ import android.view.MenuItem;
 
 import com.example.oscar.aeronet.R;
 
-public class Calibradores extends AppCompatActivity {
+public class RecogerFiltros extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calibradores);
+        setContentView(R.layout.activity_recoger_filtros);
     }
 
     @Override
@@ -20,10 +20,11 @@ public class Calibradores extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                startActivity(new Intent(Calibradores.this,MenuCampo.class));
+                startActivity(new Intent(RecogerFiltros.this,MenuCampo.class));
                 finish();
                 return true;
         }
         return onOptionsItemSelected(item);
     }
+
 }

@@ -3,6 +3,7 @@ package com.example.oscar.aeronet.vista;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.oscar.aeronet.R;
@@ -15,12 +16,28 @@ public class MenuCampo extends AppCompatActivity {
         setContentView(R.layout.activity_menu_campo);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                startActivity(new Intent(MenuCampo.this, ListaEquipos.class));
+                finish();
+                return true;
+        }
+       return onOptionsItemSelected(item);
+    }
+
     public void irInstalarFiltros(View v){
-        irListaEquipos("instalar");
+        Intent i = new Intent(MenuCampo.this, InstalarFiltros.class);
+        startActivity(i);
+        finish();
     }
 
     public void irRecogerFiltros(View v){
-        irListaEquipos("recoger");
+        Intent i = new Intent(MenuCampo.this, RecogerFiltros.class);
+        startActivity(i);
+        finish();
     }
 
     public void calibrarEquipo(View v){
