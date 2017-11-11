@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_fondo_App"
     tools:context="com.example.oscar.aeronet.vista.InstalarFiltros">
 
     <!-- Presion de estancamiento inicial -->
@@ -18,7 +19,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="@dimen/texto_datos"
-            android:hint="@string/hint_presion_estancamiento_ini"/>
+            android:hint="@string/hint_presion_estancamiento_ini"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            />
     </android.support.design.widget.TextInputLayout>
 
     <Spinner
@@ -29,10 +33,13 @@
         android:layout_toEndOf="@id/lay_presion_est_ini"/>
 
     <TextView
-        android:layout_above="@id/lay_observaciones"
         android:id="@+id/fecha_datos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:textSize="@dimen/texto_datos" />
 
     <!-- Temperatura ambiente -->
@@ -47,7 +54,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="@dimen/texto_datos"
-            android:hint="@string/hint_temperatura_ambiente"/>
+            android:hint="@string/hint_temperatura_ambiente"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            />
     </android.support.design.widget.TextInputLayout>
 
     <Spinner
@@ -70,7 +80,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="@dimen/texto_datos"
-            android:hint="@string/hint_presion_atmosf"/>
+            android:hint="@string/hint_presion_atmosf"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            />
     </android.support.design.widget.TextInputLayout>
 
     <Spinner
@@ -95,6 +108,26 @@
             android:maxLines="5"
             android:textSize="@dimen/texto_datos"
             android:hint="@string/hint_observaciones"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            >
+            <Button
+                android:id="@+id/email_sign_in_button"
+                style="?android:textAppearanceSmall"
+                android:layout_centerHorizontal="true"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textSize="27sp"
+                android:layout_marginTop="16dp"
+                android:text="@string/btn_guardar"
+                android:textStyle="bold"
+                android:textColor="@color/blanco"
+                android:background="@drawable/forma_boton"
+                />
+
+        </RelativeLayout>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -110,7 +143,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="@dimen/texto_datos"
-            android:hint="@string/hint_horometro"/>
+            android:hint="@string/hint_horometro"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            />
     </android.support.design.widget.TextInputLayout>
 
     <!-- Layout para equipos PQ100 -->
@@ -130,10 +166,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/texto_datos"
-                android:hint="@string/hint_tiempo_operacion"/>
-
+                android:hint="@string/hint_tiempo_operacion"
+                android:maxLength="2"
+                android:maxLines="1"
+                android:inputType="number"
+                />
         </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
+
 
 </RelativeLayout>

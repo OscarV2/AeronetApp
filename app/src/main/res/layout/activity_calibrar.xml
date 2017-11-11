@@ -20,30 +20,43 @@
         />
 
     </RelativeLayout>
-    <EditText
-        android:id="@+id/temp_Amb"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:hint="Temperatura Ambiente"
-        android:maxLines="1"
-        android:inputType="numberDecimal"
-        android:maxLength="6"
-        android:textColorHint="@color/blanco"
+        android:textColorHint="@color/blanco">
+        <EditText
+            android:id="@+id/temp_Amb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:hint="Temperatura Ambiente"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:textColorHint="@color/blanco"
 
-        />
-    <EditText
-        android:id="@+id/presion_atm"
+            />
+
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:hint="Presión Atmosférica"
-        android:maxLines="1"
-        android:inputType="numberDecimal"
-        android:maxLength="6"
-        android:textColorHint="@color/text_Color_Hint"
+        android:textColorHint="@color/blanco">
+        <EditText
+            android:id="@+id/presion_atm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:hint="Presión Atmosférica"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            android:maxLength="6"
+            android:textColorHint="@color/text_Color_Hint"
 
-        />
+            />
+
+    </android.support.design.widget.TextInputLayout>
+    <!-- texto Muestras(in H2O) -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -83,6 +96,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/blanco">
+
+            </android.support.design.widget.TextInputLayout>
+
             <EditText
                 android:id="@+id/deltap1"
                 android:layout_width="wrap_content"
@@ -261,7 +281,6 @@
 
         </RelativeLayout>
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -269,7 +288,7 @@
             android:id="@+id/email_sign_in_button"
             style="?android:textAppearanceSmall"
             android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/btn_guardar"
@@ -277,8 +296,8 @@
             android:textColor="@color/blanco"
             android:background="@drawable/forma_boton"
             android:layout_below="@id/tilcontra"
-            android:padding="10dp"
-            android:onClick="calibrar"/>
+            android:onClick="calibrar"
+            />
 
     </RelativeLayout>
 
