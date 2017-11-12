@@ -41,7 +41,14 @@
             android:name=".vista.ListaFiltros"
             android:label="Lista d Filtros" />
         <activity android:name=".vista.Datos" />
-        <activity android:name=".vista.CalibrarActivity" />
+        <activity android:name=".vista.CalibrarActivity"
+            android:label="Calibrar"
+            android:parentActivityName=".vista.MenuCampo">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".vista.MenuCampo"/>
+        </activity>
+
         <activity android:name=".vista.Calibradores"
             android:label="Calibradores"
             android:parentActivityName=".vista.MenuCampo">

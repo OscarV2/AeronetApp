@@ -1,8 +1,10 @@
 package com.example.oscar.aeronet.vista;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,6 +14,18 @@ import com.example.oscar.aeronet.R;
 import utils.Calculos;
 
 public class CalibrarActivity extends AppCompatActivity {
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                startActivity(new Intent(CalibrarActivity.this, MenuCampo.class));
+                finish();
+                return true;
+        }
+        return onOptionsItemSelected(item);
+    }
 
     private double mCal = 1.0308057;
     private double bCal = -0.0313734;

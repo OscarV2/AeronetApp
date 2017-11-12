@@ -12,6 +12,7 @@
     <dimen name="ancho_alto_img_menu">100dp</dimen>
     <dimen name="ancho_item_menu">150dp</dimen>
     <dimen name="alto_item_menu">170dp</dimen>
-
     <dimen name="texto_datos">18sp</dimen>
+    <dimen name="layout_width">130dp</dimen>
+
 </resources>
