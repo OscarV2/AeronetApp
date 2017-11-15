@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/sincronizar"
+        android:title="@string/sincro"
+        android:orderInCategory="100">
+    </item>
+    <item
+        android:id="@+id/descargarFiltros"
+        android:title="@string/Dfiltros"
+        android:orderInCategory="101">
+    </item>
+    <item
+        android:id="@+id/cerrarSesión"
+        android:title="@string/Csesion"
+        android:orderInCategory="102">
+    </item>
+
+</menu>

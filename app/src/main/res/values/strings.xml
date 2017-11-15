@@ -43,6 +43,11 @@
     <string name="muestras_calibrador">Muestras(in H2O)</string>
     <string name="btn_guardar">GUARDAR</string>
 
+    // texto del menu opciones
+    <string name="sincro">Sincronizar</string>
+    <string name="Dfiltros">Descargar Filtros</string>
+    <string name="Csesion">Cerrar Sesión</string>
+
 
 
 </resources>

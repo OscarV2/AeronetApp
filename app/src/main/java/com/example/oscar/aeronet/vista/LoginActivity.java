@@ -2,6 +2,7 @@ package com.example.oscar.aeronet.vista;
 
 import android.app.Application;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -87,10 +88,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if (usuario.equals("")){
             edtUsuario.requestFocus();
-            
         }
     }
-
     private void irListaEquipos(){
 
         startActivity(new Intent(LoginActivity.this, ListaEquipos.class));
