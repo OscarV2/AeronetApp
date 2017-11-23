@@ -33,5 +33,5 @@ public class Constantes {
     public static String rol = "rol";
     public static String password = "password";
 
-    public static String url = "";
+    public static String BASE_URL = "";
 }
