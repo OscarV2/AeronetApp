@@ -34,4 +34,12 @@ public class Constantes {
     public static String password = "password";
 
     public static String BASE_URL = "";
+
+    public static String LOGIN = "";
+    public static String GET_EQUIPOS = "";
+    public static String GET_FILTROS = "";
+    public static String GET_CALIBRADOR = "";
+    public static String POST_FILTROS_INSTALADO = "";
+    public static String POST_FILTROS_RECOGIDO = "";
+    public static String POST_CALIBRACION = "";
 }
