@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.oscar.aeronet.R;
 
@@ -18,6 +19,7 @@ import java.util.List;
 import adapter.AdapterEquipos;
 import adapter.Controlador.EquipoController;
 import modelo.Equipo;
+import sincronizacion.SincronizarDatos;
 
 public class ListaEquipos extends AppCompatActivity {
 
@@ -59,6 +61,17 @@ public class ListaEquipos extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.sincronizar:
+                SincronizarDatos sincronizar = new SincronizarDatos(this);
+
+                if (sincronizar.tieneInternet()){
+                    Toast t=Toast.makeText(this,"Sincronización Exitosa.", Toast.LENGTH_SHORT);
+                    t.show();
+                // hay internet, se pueden sincronizar los datos
+                }else {
+                    Toast t=Toast.makeText(this,"Debe conectarse a internet para sincronizar los datos.", Toast.LENGTH_SHORT);
+                    t.show();
+                    //no hay internet, dile al usuario que compre datos
+                }
                 break;
 
             case R.id.cerrarSesión:

@@ -12,10 +12,9 @@ import retrofit2.http.Path;
 
 /**
  * Created by oscarvc on 18/05/17.
- * Interfaz con peticiones http a appreforest.com
+ * Interfaz con peticiones http a appaeronet.com
  */
 
 public interface AeronetApiServices {
-
 
 }

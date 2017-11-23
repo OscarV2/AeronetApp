@@ -1,6 +1,8 @@
 package com.example.oscar.aeronet.vista;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -96,6 +98,7 @@ public class CalibrarActivity extends AppCompatActivity {
     public void calibrar(View v){
 
         try {
+
             TempAmbiente = Double.valueOf(edtTempAmbiente.getText().toString());
             //pasar a grados kelvin
             TempAmbiente = calculos.centigradosAKelvin(TempAmbiente);
@@ -158,5 +161,32 @@ public class CalibrarActivity extends AppCompatActivity {
 
             Toast.makeText(this, "Por favor llene todos los campos para realizar la calibración", Toast.LENGTH_SHORT).show();
         }
+
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+        dialogo1.setTitle("Importante");
+        dialogo1.setMessage("¿ Esta seguro que quiere guardar la calibración ?");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                aceptar();
+            }
+        });
+        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                dialogo1.dismiss();
+            }
+        });
+        dialogo1.show();
     }
+    public void aceptar() {
+        Toast t=Toast.makeText(this,"Calibración guardada.", Toast.LENGTH_SHORT);
+        t.show();
+        startActivity(new Intent(CalibrarActivity.this, MenuCampo.class));
+        finish();
+    }
+
+    public void cancelar() {
+
+    }
+
 }

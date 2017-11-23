@@ -125,6 +125,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/blanco"
                 android:background="@drawable/forma_boton"
+                android:onClick="irMenu"
                 />
 
         </RelativeLayout>

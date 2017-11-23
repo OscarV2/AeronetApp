@@ -6,6 +6,7 @@
     android:background="@color/color_fondo_App"
     tools:context="com.example.oscar.aeronet.vista.MenuCampo"
     android:orientation="vertical"
+
     >
 
     <!--- INstalar filtroz -->
@@ -15,6 +16,7 @@
         android:layout_height="@dimen/alto_item_menu"
         android:background="@color/color_fondo_App"
         android:onClick="irInstalarFiltros"
+        android:layout_marginLeft="10dp"
         >
 
         <ImageView
@@ -49,6 +51,7 @@
         android:layout_height="@dimen/alto_item_menu"
         android:background="@color/color_fondo_App"
         android:onClick="irRecogerFiltros"
+        android:layout_marginLeft="10dp"
 
         >
 
@@ -83,7 +86,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/alto_item_menu"
         android:background="@color/color_fondo_App"
-        android:onClick="calibrarEquipo">
+        android:onClick="calibrarEquipo"
+        android:layout_marginLeft="10dp"
+        >
 
         <ImageView
             android:id="@+id/img_calibrar"

@@ -1,9 +1,13 @@
 package com.example.oscar.aeronet.vista;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.oscar.aeronet.R;
 
@@ -26,5 +30,32 @@ public class RecogerFiltros extends AppCompatActivity {
         }
         return onOptionsItemSelected(item);
     }
+    public void irMenu (View v){
 
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+        dialogo1.setTitle("Importante");
+        dialogo1.setMessage("¿ Esta seguro que quiere recoger los filtros ?");
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                aceptar();
+            }
+        });
+        dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                dialogo1.dismiss();
+            }
+        });
+        dialogo1.show();
+    }
+    public void aceptar() {
+        Toast t=Toast.makeText(this,"Filtro Recogido Exitoxamente.", Toast.LENGTH_SHORT);
+        t.show();
+        startActivity(new Intent(RecogerFiltros.this, MenuCampo.class));
+        finish();
+    }
+
+    public void cancelar() {
+
+    }
 }
