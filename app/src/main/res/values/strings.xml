@@ -18,9 +18,10 @@
     <!-- Actividad datos -->
     <string name="hint_temperatura_ambiente">Temperatura ambiente</string>
     <string name="hint_presion_estancamiento_ini">Presion de estancamiento inicial</string>
-    <string name="hint_horometro">Horómetro</string>
-    <string name="hint_presion_atmosf">Presion atmosferica</string>
     <string name="hint_presion_estancamiento_fin">Presion de estancamiento final</string>
+    <string name="hint_horometro_ini">Horómetro inicial</string>
+    <string name="hint_horometro_fin">Horómetro final</string>
+    <string name="hint_presion_atmosf">Presion atmosferica</string>
 
     <string name="hint_volumen">Volumen</string>
     <string name="hint_tiempo_operacion">Tiempo de operacion (23 a 25 h)</string>
