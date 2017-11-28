@@ -111,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="@dimen/texto_datos"
-            android:hint="@string/hint_horometro"/>
+            android:hint="@string/hint_horometro_ini"/>
     </android.support.design.widget.TextInputLayout>
 
     <!-- Layout para equipos PQ100 -->

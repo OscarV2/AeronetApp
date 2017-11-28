@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "equipos")
 public class Equipo extends Model{
 
-    @Column(name = "id")
+    @Column(name = "idequipo")
     public Integer id;
 
     @Column(name = "nombre")
