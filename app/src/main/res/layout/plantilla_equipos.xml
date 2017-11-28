@@ -40,7 +40,6 @@
             android:textSize="@dimen/texto_peso_filtro"/>
     </LinearLayout>
 
-
     <View
         android:layout_below="@id/img_equipo"
         android:layout_width="match_parent"

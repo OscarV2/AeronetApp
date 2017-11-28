@@ -10,6 +10,9 @@ import java.util.List;
 @Table(name = "equipos")
 public class Equipo extends Model{
 
+    @Column(name = "id")
+    public Integer id;
+
     @Column(name = "nombre")
     public String nombre;
 
@@ -20,8 +23,9 @@ public class Equipo extends Model{
         return getMany(Filtro.class, "equipo");
     }
 
-    public Equipo(String nombre, String tipo) {
+    public Equipo(Integer id, String nombre, String tipo) {
         super();
+        this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
     }

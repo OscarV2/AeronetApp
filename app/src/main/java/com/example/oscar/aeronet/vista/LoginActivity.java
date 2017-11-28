@@ -55,17 +55,16 @@ public class LoginActivity extends AppCompatActivity {
             Filtro filtro3 = new Filtro("holA", 123.0);
             filtro3.save();
 
-            Equipo equipo = new Equipo("C40012", "PQ100");
+            Equipo equipo =  new Equipo(1, "C40012", "Hi Vol");
             equipo.save();
-            Equipo equipo1 = new Equipo("C40013", "PQ100");
+            Equipo equipo1 = new Equipo(2, "C40013", "Low Vol");
             equipo1.save();
-            Equipo equipo2 = new Equipo("C40014", "PQ100");
+            Equipo equipo2 = new Equipo(3,"C40014", "Hi Vol");
             equipo2.save();
-            Equipo equipo3 = new Equipo("C40015", "PQ100");
+            Equipo equipo3 = new Equipo(4,"C40015", "Low Vol");
             equipo3.save();
-            Equipo equipo4 = new Equipo("C40016", "PQ100");
+            Equipo equipo4 = new Equipo(5,"C40016", "Hi Vol");
             equipo4.save();
-            Log.e("registros", "gusrdados");
 
     }else {
             Log.e("ya hay", "registroe");
