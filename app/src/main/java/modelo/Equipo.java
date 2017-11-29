@@ -19,15 +19,18 @@ public class Equipo extends Model{
     @Column(name = "tipo")
     private String tipo;
 
-    public List<Filtro> getFiltros(){
-        return getMany(Filtro.class, "equipo");
-    }
+    @Column(name = "filtro")
+    private Filtro Filtro;
 
     public Equipo(Integer id, String nombre, String tipo) {
         super();
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
+    }
+
+    public void setFiltro(modelo.Filtro filtro) {
+        Filtro = filtro;
     }
 
     public Equipo() {
@@ -41,6 +44,5 @@ public class Equipo extends Model{
     public String getTipo() {
         return tipo;
     }
-
 
 }

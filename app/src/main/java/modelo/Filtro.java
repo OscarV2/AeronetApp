@@ -22,13 +22,17 @@ public class Filtro extends Model{
     @Column(name = "recolectado")
     public String recolectado;
 
-    @Column(name = "equipo")
-    public Equipo equipo;
+    @Column(name = "idequipo")
+    public Integer idequipo;
 
-    public Filtro(String nombre, Double peso) {
+    @Column(name = "muestra")
+    public Muestra muestra;
+
+    public Filtro(String nombre, Double peso, Integer idequipo) {
         super();
         this.nombre = nombre;
         this.peso = peso;
+        this.idequipo = idequipo;
     }
 
     public Filtro() {
@@ -41,5 +45,13 @@ public class Filtro extends Model{
 
     public Double getPeso() {
         return peso;
+    }
+
+    public Muestra getMuestra() {
+        return muestra;
+    }
+
+    public void setMuestra(Muestra muestra) {
+        this.muestra = muestra;
     }
 }
