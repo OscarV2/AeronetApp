@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -15,8 +16,10 @@ import android.widget.Toast;
 import com.activeandroid.query.Select;
 import com.example.oscar.aeronet.R;
 
+import java.util.Date;
 import java.util.List;
 
+import modelo.Constantes;
 import modelo.Filtro;
 import modelo.Muestra;
 
@@ -46,11 +49,15 @@ public class InstalarFiltros extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("AeronetPrefs", MODE_PRIVATE);
 
         idFiltro = preferences.getInt("idFiltro", 0);
+        Log.e("idFiltro", String.valueOf(idFiltro));
         // CONSULTAR FILTRO
-        List<Filtro> filtros = new Select().from(Filtro.class).where("idFiltros", idFiltro).execute();
+        List<Filtro> filtros = new Select().from(Filtro.class).where("idFiltros = ?", idFiltro).execute();
+
         if (filtros.size() > 0){
             filtro = filtros.get(0);
         }
+
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -110,6 +117,7 @@ public class InstalarFiltros extends AppCompatActivity {
     public void aceptar() {
         Muestra muestra = new Muestra(PresionEstInicial, PresionAtm, TempAmb, Horometro, idFiltro);
         filtro.setMuestra(muestra);
+        filtro.setInstalado(Constantes.sdf.format(new Date()));
         muestra.save();
         filtro.save();
 

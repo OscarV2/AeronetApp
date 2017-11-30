@@ -58,6 +58,18 @@ public class Filtro extends Model{
         return idFiltros;
     }
 
+    public void setUploaded(boolean uploaded) {
+        this.uploaded = uploaded;
+    }
+
+    public void setInstalado(String instalado) {
+        this.instalado = instalado;
+    }
+
+    public void setRecolectado(String recolectado) {
+        this.recolectado = recolectado;
+    }
+
     public void setMuestra(Muestra muestra) {
         this.muestra = muestra;
     }

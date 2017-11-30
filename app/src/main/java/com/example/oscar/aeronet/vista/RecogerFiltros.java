@@ -30,6 +30,9 @@ public class RecogerFiltros extends AppCompatActivity {
     private EditText edtTiempoOperacion;
 
     private LinearLayout layLowVol;
+    Double PresionEstFinal, Horometro, TempAmb,  Volumen, TiempoOperacion, PresionAtm;
+    private String FechaMuestreo, Observaciones;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +71,28 @@ public class RecogerFiltros extends AppCompatActivity {
         }
         return onOptionsItemSelected(item);
     }
-    public void irMenu (View v){
+    public void guardarMuestra (View v){
+
+        if (tipoEsLowVol()){
+            getValoresLowVol();
+        }else{
+            getValoresHiVol();
+
+        }
+        mostrarDialogo();
+
+    }
+
+    private void getValoresHiVol() {
+    }
+
+    private void getValoresLowVol() {
+
+
+    }
+
+
+    private void mostrarDialogo() {
 
         AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
         dialogo1.setTitle("Importante");
@@ -86,14 +110,19 @@ public class RecogerFiltros extends AppCompatActivity {
         });
         dialogo1.show();
     }
+
     public void aceptar() {
-        Toast t=Toast.makeText(this,"Filtro Recogido Exitoxamente.", Toast.LENGTH_SHORT);
+
+
+
+        Toast t=Toast.makeText(this,    "Filtro Recogido Exitoxamente.", Toast.LENGTH_SHORT);
         t.show();
         startActivity(new Intent(RecogerFiltros.this, MenuCampo.class));
         finish();
     }
 
-    public void cancelar() {
+    private boolean tipoEsLowVol(){
 
+        return tipo.equals("Low Vol");
     }
 }

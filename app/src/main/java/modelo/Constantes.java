@@ -1,5 +1,9 @@
 package modelo;
 
+import android.annotation.SuppressLint;
+
+import java.text.SimpleDateFormat;
+
 /**
  * Created by ING_JANNER on 3/11/2017.
  */
@@ -42,4 +46,8 @@ public class Constantes {
     public static String POST_FILTROS_INSTALADO = "";
     public static String POST_FILTROS_RECOGIDO = "";
     public static String POST_CALIBRACION = "";
+
+    @SuppressLint("SimpleDateFormat")
+    public static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
 }

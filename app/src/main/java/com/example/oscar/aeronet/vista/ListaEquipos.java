@@ -44,8 +44,16 @@ public class ListaEquipos extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                Integer idFiltro;
                 Integer idequipo = equipoList.get(position).getid();
-                Integer idFiltro = equipoList.get(position).getFiltro().getIdFiltro();
+                try{
+
+                    idFiltro = equipoList.get(position).getFiltro().getIdFiltro();
+
+                }catch (NullPointerException e){
+                    idFiltro = 0;
+
+                }
                 String tipo =  equipoList.get(position).getTipo();
 
                 SharedPreferences preferences = getSharedPreferences("AeronetPrefs", MODE_PRIVATE);
