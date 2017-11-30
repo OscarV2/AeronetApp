@@ -1,6 +1,7 @@
 package adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,10 +53,24 @@ AdapterEquipos extends BaseAdapter {
 
         TextView tvNombre = row.findViewById(R.id.tv_nombre_equipo);
         TextView tvTipo = row.findViewById(R.id.tv_tipo_equipo);
+        TextView tvFiltro = row.findViewById(R.id.tv_filtro);
+
+        String filtro = "";
+        try {
+          filtro =  this.equipos.get(position).getFiltro().getNombre();
+
+        }catch (NullPointerException e){
+            Log.e("ocurrio", "una excepcion");
+        }
 
         tvTipo.setText(this.equipos.get(position).getTipo()); // mostrar fecha
         tvNombre.setText(this.equipos.get(position).getNombre()); // mostrar nombre de lote
 
+        if (filtro.equals("")){
+            tvFiltro.setText("Sin filtro asignado.");
+        }else{
+            tvFiltro.setText(filtro);
+        }
         return row;
     }
 }

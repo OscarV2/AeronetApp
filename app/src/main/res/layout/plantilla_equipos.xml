@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/blanco"
         android:textSize="12sp"
-        android:text="holaaaa"
+        android:text=""
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"

@@ -1,6 +1,7 @@
 package com.example.oscar.aeronet.vista;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,6 +44,14 @@ public class ListaEquipos extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                Integer idequipo = equipoList.get(position).getid();
+                String tipo =  equipoList.get(position).getTipo();
+
+                SharedPreferences preferences = getSharedPreferences("AeronetPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putInt("idequipo", idequipo);
+                editor.putString("tipo", tipo);
+                editor.apply();
                 Intent i = new Intent(ListaEquipos.this, MenuCampo.class);
                 startActivity(i);
                 finish();

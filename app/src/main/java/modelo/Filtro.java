@@ -28,11 +28,10 @@ public class Filtro extends Model{
     @Column(name = "muestra")
     public Muestra muestra;
 
-    public Filtro(String nombre, Double peso, Integer idequipo) {
+    public Filtro(String nombre, Double peso) {
         super();
         this.nombre = nombre;
         this.peso = peso;
-        this.idequipo = idequipo;
     }
 
     public Filtro() {

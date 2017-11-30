@@ -39,31 +39,30 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         // Set up the login form.
 
-
         EquipoController equipoController = new EquipoController();
         List<Equipo> equipoList = equipoController.getEquipos();
 
         if (equipoList.size() == 0){
-            Filtro filtro = new Filtro("22/00/54", 123.0);
+            Filtro filtro  = new Filtro("PM10-10-09-2017-01", 123.0);
             filtro.save();
-            Filtro filtro4 = new Filtro("holA", 123.0);
+            Filtro filtro4 = new Filtro("PM10-10-09-2017-02", 123.0);
             filtro4.save();
-            Filtro filtro1 = new Filtro("holA", 123.0);
+            Filtro filtro1 = new Filtro("PM10-10-09-2017-03", 123.0);
             filtro1.save();
-            Filtro filtro2 = new Filtro("holA", 123.0);
+            Filtro filtro2 = new Filtro("PM10-10-09-2017-04", 123.0);
             filtro2.save();
-            Filtro filtro3 = new Filtro("holA", 123.0);
+            Filtro filtro3 = new Filtro("PM10-10-09-2017-05", 123.0);
             filtro3.save();
 
-            Equipo equipo =  new Equipo(1, "C40012", "Hi Vol");
+            Equipo equipo =  new Equipo(1, "C40012", "Hi Vol", filtro);
             equipo.save();
-            Equipo equipo1 = new Equipo(2, "C40013", "Low Vol");
+            Equipo equipo1 = new Equipo(2, "C40013", "Low Vol", filtro1);
             equipo1.save();
-            Equipo equipo2 = new Equipo(3,"C40014", "Hi Vol");
+            Equipo equipo2 = new Equipo(3,"C40014", "Hi Vol", filtro2);
             equipo2.save();
-            Equipo equipo3 = new Equipo(4,"C40015", "Low Vol");
+            Equipo equipo3 = new Equipo(4,"C40015", "Low Vol", filtro3);
             equipo3.save();
-            Equipo equipo4 = new Equipo(5,"C40016", "Hi Vol");
+            Equipo equipo4 = new Equipo(5,"C40016", "Hi Vol", null);
             equipo4.save();
 
     }else {
