@@ -43,15 +43,15 @@ public class LoginActivity extends AppCompatActivity {
         List<Equipo> equipoList = equipoController.getEquipos();
 
         if (equipoList.size() == 0){
-            Filtro filtro  = new Filtro("PM10-10-09-2017-01", 123.0);
+            Filtro filtro  = new Filtro(1, "PM10-10-09-2017-01", 123.0);
             filtro.save();
-            Filtro filtro4 = new Filtro("PM10-10-09-2017-02", 123.0);
+            Filtro filtro4 = new Filtro(2, "PM10-10-09-2017-02", 123.0);
             filtro4.save();
-            Filtro filtro1 = new Filtro("PM10-10-09-2017-03", 123.0);
+            Filtro filtro1 = new Filtro(3, "PM10-10-09-2017-03", 123.0);
             filtro1.save();
-            Filtro filtro2 = new Filtro("PM10-10-09-2017-04", 123.0);
+            Filtro filtro2 = new Filtro(4, "PM10-10-09-2017-04", 123.0);
             filtro2.save();
-            Filtro filtro3 = new Filtro("PM10-10-09-2017-05", 123.0);
+            Filtro filtro3 = new Filtro(5, "PM10-10-09-2017-05", 123.0);
             filtro3.save();
 
             Equipo equipo =  new Equipo(1, "C40012", "Hi Vol", filtro);

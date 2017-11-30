@@ -7,6 +7,9 @@ import com.activeandroid.annotation.Table;
 @Table(name = "filtro")
 public class Filtro extends Model{
 
+    @Column(name = "idFiltros")
+    public Integer idFiltros;
+
     @Column(name = "nombre")
     public String nombre;
 
@@ -28,10 +31,11 @@ public class Filtro extends Model{
     @Column(name = "muestra")
     public Muestra muestra;
 
-    public Filtro(String nombre, Double peso) {
+    public Filtro(Integer id, String nombre, Double peso) {
         super();
         this.nombre = nombre;
         this.peso = peso;
+        this.idFiltros = id;
     }
 
     public Filtro() {
@@ -48,6 +52,10 @@ public class Filtro extends Model{
 
     public Muestra getMuestra() {
         return muestra;
+    }
+
+    public Integer getIdFiltro() {
+        return idFiltros;
     }
 
     public void setMuestra(Muestra muestra) {

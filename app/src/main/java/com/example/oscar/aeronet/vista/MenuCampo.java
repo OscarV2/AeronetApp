@@ -13,7 +13,7 @@ import com.example.oscar.aeronet.R;
 
 public class MenuCampo extends AppCompatActivity {
 
-    private Integer idequipo;
+    private Integer idequipo, idFiltro;
     private String tipo;
 
     @Override
@@ -24,6 +24,7 @@ public class MenuCampo extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("AeronetPrefs", MODE_PRIVATE);
 
         idequipo = preferences.getInt("idequipo", 0);
+        idFiltro = preferences.getInt("idFiltro", 0);
         tipo = preferences.getString("tipo", "");
         try{
             Log.e("tipo: " ,tipo);
@@ -31,8 +32,6 @@ public class MenuCampo extends AppCompatActivity {
             Log.e("tipo: " , " ES NULL");
 
         }
-
-
     }
 
     @Override
@@ -48,19 +47,31 @@ public class MenuCampo extends AppCompatActivity {
     }
 
     public void irInstalarFiltros(View v){
-        if (tipo.equals("Low Vol")){
-            // mostrar mensaje instalacion de filtro.
-        }else{
-            Intent i = new Intent(MenuCampo.this, InstalarFiltros.class);
-            startActivity(i);
-            finish();
+
+        if (idFiltro <= 0){
+            Toast.makeText(this, "ESTE EQUIPO NO TIENE NINGUN FILTRO ASIGNADO.",
+                    Toast.LENGTH_SHORT).show();
+        }else {
+            if (tipo.equals("Low Vol")){
+                // mostrar mensaje instalacion de filtro.
+            }else{
+                Intent i = new Intent(MenuCampo.this, InstalarFiltros.class);
+                startActivity(i);
+                finish();
+            }
         }
     }
 
     public void irRecogerFiltros(View v){
-        Intent i = new Intent(MenuCampo.this, RecogerFiltros.class);
-        startActivity(i);
-        finish();
+        if (idFiltro <= 0){
+            Toast.makeText(this, "ESTE EQUIPO NO TIENE NINGUN FILTRO ASIGNADO.",
+                    Toast.LENGTH_SHORT).show();
+        }else {
+            Intent i = new Intent(MenuCampo.this, RecogerFiltros.class);
+            startActivity(i);
+            finish();
+        }
+
     }
 
     public void calibrarEquipo(View v){

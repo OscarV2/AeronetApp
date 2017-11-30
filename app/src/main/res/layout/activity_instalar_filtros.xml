@@ -11,13 +11,6 @@
     tools:context="com.example.oscar.aeronet.vista.InstalarFiltros"
     >
 
-    <Spinner
-        android:id="@+id/spin_presion_est_ini"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_toRightOf="@id/lay_presion_est_ini"
-        android:layout_toEndOf="@id/lay_presion_est_ini"/>
-
     <TextView
         android:id="@+id/tv_filtro_a_instalar"
         android:layout_width="wrap_content"
@@ -45,14 +38,6 @@
             android:textSize="@dimen/texto_datos" />
     </android.support.design.widget.TextInputLayout>
 
-    <Spinner
-        android:id="@+id/spin_temp_amb"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_toRightOf="@id/lay_temp_amb"
-        android:layout_toEndOf="@id/lay_temp_amb"
-        android:layout_below="@id/spin_presion_est_ini"/>
-
     <!-- Presion atmosferica -->
     <android.support.design.widget.TextInputLayout
         android:id="@+id/lay_presion_atm"
@@ -70,14 +55,6 @@
             android:inputType="numberDecimal"
             />
     </android.support.design.widget.TextInputLayout>
-
-    <Spinner
-        android:id="@+id/spin_presion_atm"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_toRightOf="@id/lay_presion_atm"
-        android:layout_toEndOf="@id/lay_presion_atm"
-        android:layout_below="@id/spin_temp_amb"/>
 
     <!-- Horometro -->
     <android.support.design.widget.TextInputLayout
@@ -128,7 +105,7 @@
         android:textStyle="bold"
         android:textColor="@color/blanco"
         android:background="@drawable/forma_boton"
-        android:onClick="irMenu"
+        android:onClick="guardar"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="12dp"
         />
