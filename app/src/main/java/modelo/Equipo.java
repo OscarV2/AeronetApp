@@ -50,4 +50,6 @@ public class Equipo extends Model{
     public Filtro getFiltro() {
         return Filtro;
     }
+
+
 }

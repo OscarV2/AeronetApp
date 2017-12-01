@@ -73,4 +73,16 @@ public class Filtro extends Model{
     public void setMuestra(Muestra muestra) {
         this.muestra = muestra;
     }
+
+    public boolean isUploaded() {
+        return uploaded;
+    }
+
+    public String getInstalado() {
+        return instalado;
+    }
+
+    public String getRecolectado() {
+        return recolectado;
+    }
 }
