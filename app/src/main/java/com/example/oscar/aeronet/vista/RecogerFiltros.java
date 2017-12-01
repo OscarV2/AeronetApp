@@ -19,6 +19,8 @@ import com.example.oscar.aeronet.R;
 
 import java.util.List;
 
+import modelo.Calibracion;
+import modelo.Equipo;
 import modelo.Filtro;
 
 public class RecogerFiltros extends AppCompatActivity {
@@ -41,6 +43,8 @@ public class RecogerFiltros extends AppCompatActivity {
 
     private Integer idFiltro;
     private Filtro filtro;
+    private Equipo equipo;
+    private Calibracion UltimaCalibracion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +59,23 @@ public class RecogerFiltros extends AppCompatActivity {
         // CONSULTAR FILTRO
         List<Filtro> filtros = new Select().from(Filtro.class).where("idFiltros = ?", idFiltro).execute();
 
+        // CONSULTAR EQUIPO
+        List<Equipo> equiposList = new Select().from(Equipo.class).where("idequipo = ?", idequipo).execute();
+
+        // CONSULTAR ULTIMA CALIBRACION
+        List<Calibracion> calibracions = new Select().from(Calibracion.class).where("idequipo = ?", idequipo).execute();
+
         if (filtros.size() > 0){
             filtro = filtros.get(0);
         }
 
+        if (equiposList.size() > 0){
+            equipo = equiposList.get(0);
+        }
+
+        if (calibracions.size() > 0){
+            UltimaCalibracion = calibracions.get(calibracions.size() - 1);
+        }
         edtTempAmbiente = findViewById(R.id.edt_temp_amb);
         edtFechaMuestreo = findViewById(R.id.edt_fecha_muestreo);
         edtHorometro = findViewById(R.id.edt_horometro_fin);
@@ -107,6 +124,7 @@ public class RecogerFiltros extends AppCompatActivity {
             PresionAtm = Double.valueOf(edtPresionAtm.getText().toString());
             Horometro = Double.valueOf(edtHorometro.getText().toString());
             TempAmb = Double.valueOf(edtTempAmbiente.getText().toString());
+            Observaciones = edtObservaciones.getText().toString();
 
             if (PresionAtm <= 0|| Horometro <=0 || TempAmb <=0 || PresionEstFinal <= 0){
                 // hay valores negativos o iguales a cero.
@@ -125,7 +143,26 @@ public class RecogerFiltros extends AppCompatActivity {
 
     private void getValoresLowVol() {
 
+        try{
+            PresionAtm = Double.valueOf(edtPresionAtm.getText().toString());
+            TiempoOperacion = Double.valueOf(edtHorometro.getText().toString());
+            TempAmb = Double.valueOf(edtTempAmbiente.getText().toString());
+            Volumen = Double.valueOf(edtVolumen.getText().toString());
+            Observaciones = edtObservaciones.getText().toString();
 
+
+            if (PresionAtm <= 0|| TiempoOperacion <=0 || TempAmb <=0 || Volumen <= 0){
+                // hay valores negativos o iguales a cero.
+                Toast.makeText(this, "NO SE ADMITEN VALORES NEGATIVOS O IGUALES A CERO.",
+                        Toast.LENGTH_SHORT).show();
+
+            }else{
+
+                mostrarDialogo();
+            }
+        }catch (NumberFormatException e){
+            Toast.makeText(this, "CAMPOS FALTANTES", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void mostrarDialogo() {
@@ -156,9 +193,26 @@ public class RecogerFiltros extends AppCompatActivity {
             filtro.getMuestra().setPresion_est_final(PresionEstFinal);
             filtro.getMuestra().setTemp_amb2(TempAmb);
 
+            filtro.getMuestra().setPresion_est_promedio();
+            filtro.getMuestra().setPresion_amb();
+            filtro.getMuestra().setTemp_ambC();
+            filtro.getMuestra().setTemp_ambK();
+            filtro.getMuestra().setTiempo_operacion();
+            filtro.getMuestra().setPoPa();
+            filtro.getMuestra().setQr(UltimaCalibracion.getM_pendiente(), UltimaCalibracion.getB_intercepto());
+            filtro.getMuestra().setQstd();
+            filtro.getMuestra().setVstd();
+            filtro.getMuestra().save();
+
+            equipo.setFiltro(null);
+            salir();
+
+        }else { // Equipo Low Vol
+
+
         }
 
-        salir();
+
 
     }
 

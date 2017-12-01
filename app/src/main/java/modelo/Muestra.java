@@ -63,7 +63,7 @@ public class Muestra extends Model {
         this.presion_est_final = presion_est_final;
     }
 
-    public void setPresion_est_promedio(Double presion_est_promedio) {
+    public void setPresion_est_promedio() {
         this.presion_est_promedio = (inH2OAmmHg(presion_est_final) + inH2OAmmHg(presion_est_final))/2;
     }
 
@@ -95,20 +95,20 @@ public class Muestra extends Model {
         this.tiempo_operacion = horomatro2 - horometro1;
     }
 
-    public void setPoPa(Double poPa) {
-        PoPa = poPa;
+    public void setPoPa() {
+        PoPa = (presion_amb - presion_est_promedio)/presion_amb;
     }
 
-    public void setQr(Double qr) {
-        Qr = qr;
+    public void setQr(Double m, Double b) {
+        Qr = (Math.sqrt(temp_ambK)*(PoPa - b))/m;
     }
 
-    public void setQstd(Double qstd) {
-        Qstd = qstd;
+    public void setQstd() {
+        Qstd = Qr*((presion_amb*298)/(760*temp_ambK));
     }
 
-    public void setVstd(Double vstd) {
-        Vstd = vstd;
+    public void setVstd() {
+        Vstd = (tiempo_operacion*Qstd)/1000;
     }
 
     private Double inH2OAmmHg(Double inH2O){
