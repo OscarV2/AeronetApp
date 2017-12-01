@@ -47,6 +47,8 @@ public class Muestra extends Model {
     @Column(name = "vstd")
     private Double Vstd;
 
+    @Column(name = "observaciones")
+    private String Observaciones;
     @Column(name = "idFiltro")
     private Integer idFiltro;
 
@@ -57,6 +59,15 @@ public class Muestra extends Model {
         this.temp_amb1 = temp_amb1;
         this.horometro1 = horometro1;
         this.idFiltro = idFiltro;
+    }
+
+    //Muestra de un Low Vol
+    public Muestra(Double presion_amb, Double temp_ambC, Double tiempo_operacion, Integer idFiltro) {
+        this.presion_amb = presion_amb;
+        this.temp_ambC = temp_ambC;
+        this.tiempo_operacion = tiempo_operacion;
+        this.idFiltro = idFiltro;
+        setTemp_ambK();
     }
 
     public void setPresion_est_final(Double presion_est_final) {
@@ -109,6 +120,10 @@ public class Muestra extends Model {
 
     public void setVstd() {
         Vstd = (tiempo_operacion*Qstd)/1000;
+    }
+
+    public void setObservaciones(String observaciones) {
+        Observaciones = observaciones;
     }
 
     private Double inH2OAmmHg(Double inH2O){

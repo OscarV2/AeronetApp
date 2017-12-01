@@ -22,6 +22,7 @@ import java.util.List;
 import modelo.Calibracion;
 import modelo.Equipo;
 import modelo.Filtro;
+import modelo.Muestra;
 
 public class RecogerFiltros extends AppCompatActivity {
 
@@ -114,8 +115,6 @@ public class RecogerFiltros extends AppCompatActivity {
             getValoresHiVol();
 
         }
-        mostrarDialogo();
-
     }
 
     private void getValoresHiVol() {
@@ -134,7 +133,6 @@ public class RecogerFiltros extends AppCompatActivity {
             }else{
 
                 mostrarDialogo();
-
             }
         }catch (NumberFormatException e){
             Toast.makeText(this, "CAMPOS FALTANTES", Toast.LENGTH_SHORT).show();
@@ -186,7 +184,7 @@ public class RecogerFiltros extends AppCompatActivity {
 
     public void aceptar() {
 
-        if (!tipoEsLowVol()){
+        if (!tipoEsLowVol()){ //guardar muestra HiVol
 
             filtro.getMuestra().setHoromatro2(Horometro);
             filtro.getMuestra().setPresion_amb2(PresionAtm);
@@ -202,18 +200,18 @@ public class RecogerFiltros extends AppCompatActivity {
             filtro.getMuestra().setQr(UltimaCalibracion.getM_pendiente(), UltimaCalibracion.getB_intercepto());
             filtro.getMuestra().setQstd();
             filtro.getMuestra().setVstd();
+            filtro.getMuestra().setObservaciones(Observaciones);
             filtro.getMuestra().save();
 
             equipo.setFiltro(null);
             salir();
 
-        }else { // Equipo Low Vol
-
-
+        }else { // Equipo Low Vol (Nueva muestra)
+            Muestra muestraLowVol = new Muestra(PresionAtm, TempAmb, TiempoOperacion, idFiltro);
+            equipo.setFiltro(null);
+            muestraLowVol.save();
+            salir();
         }
-
-
-
     }
 
     private void salir() {
