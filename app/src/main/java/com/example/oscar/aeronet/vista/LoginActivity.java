@@ -1,8 +1,7 @@
 package com.example.oscar.aeronet.vista;
 
-import android.app.Application;
+import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -12,19 +11,23 @@ import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.oscar.aeronet.R;
 
 import java.util.List;
 
 import adapter.Controlador.EquipoController;
+import api.UpdateListener;
 import modelo.Equipo;
 import modelo.Filtro;
+import modelo.Usuarios;
+import sincronizacion.SincronizarDatos;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements UpdateListener {
 
     String usuario, password;
     // UI references.
@@ -32,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtPassword;
     private View mProgressView;
     private View mLoginFormView;
+    AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +88,18 @@ public class LoginActivity extends AppCompatActivity {
 
     private void validarUsuario(){
 
-        if (usuario.equals("")){
-            edtUsuario.requestFocus();
+        SincronizarDatos sync = new SincronizarDatos(this, LoginActivity.this);
+        String usuarioNombre = edtUsuario.getText().toString();
+        String contra = edtPassword.getText().toString();
+
+        if (contra.equals(" ") || usuarioNombre.equals(" ")){
+            Toast.makeText(this, "Por favor complete los campos faltantes", Toast.LENGTH_SHORT).show();
+        }else{
+
+            Usuarios usuarios = new Usuarios(usuarioNombre, contra);
+            sync.login(usuarios);
         }
+
     }
     private void irListaEquipos(){
 
@@ -94,5 +107,29 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void success(String exito) {
+
+        switch (exito){
+            case "no existe.":
+                break;
+
+
+
+            case "fallo":
+
+            break;
+
+            case "success":
+                irListaEquipos();
+                break;
+        }
+    }
+
+    private void closeDialog(){
+        if (alertDialog.isShowing()){
+            alertDialog.dismiss();
+        }
+    }
 }
 

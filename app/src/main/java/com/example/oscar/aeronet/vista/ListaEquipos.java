@@ -1,5 +1,6 @@
 package com.example.oscar.aeronet.vista;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -19,13 +20,16 @@ import java.util.List;
 
 import adapter.AdapterEquipos;
 import adapter.Controlador.EquipoController;
+import api.UpdateListener;
 import modelo.Equipo;
 import sincronizacion.SincronizarDatos;
 
-public class ListaEquipos extends AppCompatActivity {
+public class ListaEquipos extends AppCompatActivity implements UpdateListener{
 
     List<Equipo> equipoList;
     ListView lvEquipos;
+    AlertDialog alertDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +84,7 @@ public class ListaEquipos extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.sincronizar:
-                SincronizarDatos sincronizar = new SincronizarDatos(this);
+                SincronizarDatos sincronizar = new SincronizarDatos(ListaEquipos.this, this);
 
                 if (sincronizar.tieneInternet()){
                     Toast t=Toast.makeText(this,"Sincronización Exitosa.", Toast.LENGTH_SHORT);
@@ -99,5 +103,16 @@ public class ListaEquipos extends AppCompatActivity {
             case R.id.descargarFiltros:
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void success(String exito) {
+
+    }
+
+    private void closeDialog(){
+        if (alertDialog.isShowing()){
+            alertDialog.dismiss();
+        }
     }
 }

@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 
 public class Constantes {
 
+    public static final String PING = "serie";
+
     public static String TABLA_CALIBRADOR = "calibrador";
     public  static String serie = "serie";
     public  static String modelo = "modelo";
@@ -35,17 +37,17 @@ public class Constantes {
     public static String correo = "correo";
     public static String telefono = "telefono";
     public static String rol = "rol";
-    public static String password = "password";
+    public static final String password = "password";
 
-    public static String BASE_URL = "";
+    public static final String BASE_URL = "http://jorgeeduardodiaz.com/qualis/index.php/api/";
 
-    public static String LOGIN = "";
-    public static String GET_EQUIPOS = "";
-    public static String GET_FILTROS = "";
-    public static String GET_CALIBRADOR = "";
-    public static String POST_FILTROS_INSTALADO = "";
-    public static String POST_FILTROS_RECOGIDO = "";
-    public static String POST_CALIBRACION = "";
+    public static final String LOGIN = "Usuarios/login";
+    public static final String GET_EQUIPOS = "Equipos/getEquipos";
+    public static final String GET_FILTROS = "Filtros/descargarFiltros";
+    public static final String GET_CALIBRADOR = "Calibrador/getCalibradores";
+    public static final String POST_FILTROS_INSTALADO = "";
+    public static final String POST_FILTROS_RECOGIDO = "";
+    public static final String POST_CALIBRACION = "Calibracion/nuevaCalibracion";
 
     @SuppressLint("SimpleDateFormat")
     public static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

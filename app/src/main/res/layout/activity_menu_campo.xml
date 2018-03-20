@@ -6,8 +6,33 @@
     android:background="@color/color_fondo_App"
     tools:context="com.example.oscar.aeronet.vista.MenuCampo"
     android:orientation="vertical"
-
     >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/img_equipo"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@mipmap/pq100_round"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#000000FF"
+            android:layout_marginTop="14dp"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/tx_detalles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_equipo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:textSize="22sp"
+            android:text="PQ-100"
+            android:textColor="@color/blanco"
+            />
+    </RelativeLayout>
 
     <!--- INstalar filtroz -->
     <RelativeLayout
@@ -108,4 +133,35 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/blanco"
+        />
+    <RelativeLayout
+        android:id="@+id/rel_detalles_equipo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/alto_item_menu"
+        android:background="@color/color_fondo_App"
+        android:onClick="calibrarEquipo"
+        android:layout_marginLeft="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/img_detalles"
+            android:layout_width="@dimen/ancho_alto_img_menu"
+            android:layout_height="@dimen/ancho_alto_img_menu"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_filter"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/txt_detalles"
+            android:textColor="@color/blanco"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 </LinearLayout>

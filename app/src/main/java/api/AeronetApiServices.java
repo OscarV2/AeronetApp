@@ -2,6 +2,11 @@ package api;
 
 import java.util.List;
 
+import modelo.Calibrador;
+import modelo.Constantes;
+import modelo.Equipo;
+import modelo.Filtro;
+import modelo.Usuarios;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -16,5 +21,29 @@ import retrofit2.http.Path;
  */
 
 public interface AeronetApiServices {
+
+    @GET(Constantes.PING)
+    Call<String> ping();
+
+    //bajar equipos
+    @GET(Constantes.GET_EQUIPOS)
+    Call<List<Equipo>> getEquipos();
+
+    //bajar calibrador
+    @GET(Constantes.GET_CALIBRADOR)
+    Call<List<Calibrador>> getCalibrador();
+
+    @GET(Constantes.GET_FILTROS)
+    Call<List<Filtro>> getFiltros();
+
+    @POST(Constantes.POST_FILTROS_INSTALADO)
+    Call<String> postFiltro(@Body Filtro filtro);
+
+
+    @POST(Constantes.POST_FILTROS_RECOGIDO)
+    Call<String> postFiltroRecogido(@Body Filtro filtro);
+
+    @POST(Constantes.LOGIN)
+    Call<Usuarios> login(@Body Usuarios persona);
 
 }
