@@ -1,55 +1,95 @@
 package modelo;
 
-import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-@Table(name = "equipos")
-public class Equipo extends Model{
+import java.util.List;
 
-    @Column(name = "idequipo")
-    public Integer id;
+@DatabaseTable(tableName = "equipos")
+public class Equipo {
 
-    @Column(name = "nombre")
-    public String nombre;
+    @DatabaseField
+    public Integer idequipo;
 
-    @Column(name = "tipo")
-    private String tipo;
+    @DatabaseField
+    public String serial;
 
-    @Column(name = "filtro")
-    private Filtro Filtro;
+    @DatabaseField
+    private String marca;
 
-    public Equipo(Integer id, String nombre, String tipo, Filtro filtro) {
-        super();
-        this.id = id;
-        this.nombre = nombre;
-        this.tipo = tipo;
-        this.Filtro = filtro;
-    }
+    @DatabaseField
+    private String modelo;
 
-    public void setFiltro(modelo.Filtro filtro) {
-        Filtro = filtro;
-    }
+    @DatabaseField
+    private String descripcion;
+
+    @DatabaseField
+    private String variable;
+
+    @DatabaseField
+    private String clase;
+
+    @DatabaseField
+    private String localizacion;
+    @DatabaseField
+    private String foto;
+    @DatabaseField
+    private String codigo;
+
+    @DatabaseField
+    private String estacion_idestacion;
+
+    @DatabaseField
+    private String usuarios_idusuarios;
+
+    @DatabaseField
+    private Integer ocupado;
 
     public Equipo() {
-        super();
+
+    }
+
+    public Equipo(Integer idequipo, String serial, String marca, String modelo,
+                  String descripcion, String variable, String clase, String estacion_idestacion,
+                  String usuarios_idusuarios, Integer ocupado) {
+        this.idequipo = idequipo;
+        this.serial = serial;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.descripcion = descripcion;
+        this.variable = variable;
+        this.clase = clase;
+        this.ocupado = ocupado;
     }
 
     public Integer getid() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getTipo() {
-        return tipo;
+        return idequipo;
     }
 
     public Filtro getFiltro() {
-        return Filtro;
+
+        Filtro filtro =  null;
+        //List<Filtro> filtros = Filtro.find(Filtro.class, "idequipo = ?", String.valueOf(idequipo));
+        List<Filtro> filtros = null;
+        try {
+         filtro = filtros.get(0);
+        }catch (Exception e){
+          //  Log.d("no ha filtros", e.getMessage());
+        }
+
+
+        return filtro;
     }
 
+    public String getMarca() {
+        return marca;
+    }
 
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setOcupado(Integer ocupado) {
+        this.ocupado = ocupado;
+    }
 }

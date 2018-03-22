@@ -1,26 +1,37 @@
 package com.example.oscar.aeronet.vista;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.activeandroid.query.Select;
 import com.example.oscar.aeronet.R;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import modelo.DataBaseHelper;
+import modelo.Equipo;
 import modelo.Filtro;
+import utils.CheckFiltros;
 
 public class MenuCampo extends AppCompatActivity {
 
     private Integer idequipo, idFiltro;
     private String tipo;
 
+    Dao<Equipo, Integer> daoEquipos;
+    Dao<Filtro, Integer> daoFiltros;
+    CheckFiltros checkFiltros;
     private Filtro filtro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,22 +40,20 @@ public class MenuCampo extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences("AeronetPrefs", MODE_PRIVATE);
 
+        DataBaseHelper helper = OpenHelperManager.getHelper(this, DataBaseHelper.class);
+
+        try {
+            daoEquipos = helper.getEquipoDao();
+            daoFiltros = helper.getFiltroDao();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         idequipo = preferences.getInt("idequipo", 0);
-        idFiltro = preferences.getInt("idFiltro", 0);
         tipo = preferences.getString("tipo", "");
 
-        // CONSULTAR FILTRO
-        List<Filtro> filtros = new Select().from(Filtro.class).where("idFiltros = ?", idFiltro).execute();
-
-        if (filtros.size() > 0){
-            filtro = filtros.get(0);
-        }
-        try{
-            Log.e("tipo: " ,tipo);
-        }catch (NullPointerException e){
-            Log.e("tipo: " , " ES NULL");
-
-        }
+        checkFiltros = new CheckFiltros(daoEquipos, daoFiltros, MenuCampo.this, idequipo
+                                                     ,helper, tipo);
     }
 
     @Override
@@ -61,22 +70,23 @@ public class MenuCampo extends AppCompatActivity {
 
     public void irInstalarFiltros(View v){
 
-        if (idFiltro <= 0){
-            Toast.makeText(this, "ESTE EQUIPO NO TIENE NINGUN FILTRO ASIGNADO.",
-                    Toast.LENGTH_SHORT).show();
-        }else if(!filtro.getInstalado().equals("")){
+        if (checkFiltros.equipoCalibrado()){  // si el equipo  esta calibrado
+            if (!checkFiltros.tieneFiltroAsignado()){  //si el equipo no tiene filtro asignado
+                checkFiltros.showNoHayFiltrosParaAsignar();
+            }else{             // el equipo tiene filtro asignado
 
-            if (tipo.equals("Low Vol")){
-                // mostrar mensaje instalacion de filtro.
-            }else{
-                Intent i = new Intent(MenuCampo.this, InstalarFiltros.class);
-                startActivity(i);
-                finish();
+                checkFiltros.setIdFiltroAsignado();
+
+                if (tipo.equals("Low Vol")){            //equipo Low Vol
+                    // mostrar mensaje instalacion de filtro.
+                    checkFiltros.mostrarDialogoFiltroLowVolInstalado();
+                }else{                                  //Equipo Hi Vol
+                    checkFiltros.irInstalarFiltro();
+                }
             }
-        }else{
-
-            Toast.makeText(this, "ESTE EQUIPO YA CUENTA CON UN FILTRO INSTALADO.",
-                    Toast.LENGTH_SHORT).show();
+        }else {
+            // EL EQUIPO NO ESTA CALIBRADO.
+            showDialogCalibracion();
         }
     }
 
@@ -89,18 +99,33 @@ public class MenuCampo extends AppCompatActivity {
             startActivity(i);
             finish();
         }
-
     }
 
     public void calibrarEquipo(View v){
         if (tipo.equals("Low Vol")){
             // este equipo no se puede calibrar
+            equipoLowVol();
         }else{
             Intent i = new Intent(MenuCampo.this, CalibrarActivity.class);
+            i.putExtra("idequipo", idequipo);
             startActivity(i);
             finish();
         }
 
+    }
+
+    private void equipoLowVol() {
+        AlertDialog.Builder builder = new  AlertDialog.Builder(MenuCampo.this).setTitle("Equipo Low Vol")
+                .setMessage("No es posible Calibrar este equipo.")
+                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+        builder.create();
+        builder.show();
     }
 
     public void salir(View v){
@@ -114,4 +139,17 @@ public class MenuCampo extends AppCompatActivity {
         finish();
     }
 
+    private void showDialogCalibracion(){
+
+        AlertDialog.Builder builder = new  AlertDialog.Builder(MenuCampo.this).setMessage("")
+                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+        builder.create();
+        builder.show();
+    }
 }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapter.AdapterCalibrador;
-import adapter.Controlador.CalibradorController;
+import controller.CalibradorController;
 import modelo.Calibrador;
 
 public class Calibradores extends AppCompatActivity {
@@ -25,7 +25,7 @@ public class Calibradores extends AppCompatActivity {
         setContentView(R.layout.activity_calibradores);
 
         CalibradorList = new ArrayList<>();
-        CalibradorController controller = new CalibradorController();
+        CalibradorController controller = new CalibradorController(this);
         CalibradorList = controller.getAllCalibradores();
         lvCalibradores = (findViewById(R.id.lv_calibradores));
         AdapterCalibrador adapterCalibrador = new AdapterCalibrador(CalibradorList, this);

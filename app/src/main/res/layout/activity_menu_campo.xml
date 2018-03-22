@@ -29,7 +29,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:textSize="22sp"
-            android:text="PQ-100"
             android:textColor="@color/blanco"
             />
     </RelativeLayout>

@@ -6,7 +6,7 @@
     <dimen name="ancho_alto_img_filtro">80dp</dimen>
     <dimen name="ancho_alto_img_equipo">100dp</dimen>
     <dimen name="texto_botones">18sp</dimen>
-    <dimen name="texto_id_filtro">20sp</dimen>
+    <dimen name="texto_id_filtro">18sp</dimen>
     <dimen name="texto_peso_filtro">16sp</dimen>
 
     <dimen name="ancho_alto_img_menu">50dp</dimen>

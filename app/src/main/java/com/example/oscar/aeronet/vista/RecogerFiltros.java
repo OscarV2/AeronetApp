@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.activeandroid.query.Select;
 import com.example.oscar.aeronet.R;
 
 import java.util.List;
@@ -58,13 +57,15 @@ public class RecogerFiltros extends AppCompatActivity {
         idFiltro = preferences.getInt("idFiltro", 0);
         Log.e("idFiltro", String.valueOf(idFiltro));
         // CONSULTAR FILTRO
-        List<Filtro> filtros = new Select().from(Filtro.class).where("idFiltros = ?", idFiltro).execute();
+        List<Filtro> filtros = null;
 
         // CONSULTAR EQUIPO
-        List<Equipo> equiposList = new Select().from(Equipo.class).where("idequipo = ?", idequipo).execute();
+        //List<Equipo> equiposList = Equipo.find(Equipo.class, "idequipo = ?", String.valueOf(idequipo));
+        List<Equipo> equiposList = null;
 
         // CONSULTAR ULTIMA CALIBRACION
-        List<Calibracion> calibracions = new Select().from(Calibracion.class).where("idequipo = ?", idequipo).execute();
+        List<Calibracion> calibracions = null;
+
 
         if (filtros.size() > 0){
             filtro = filtros.get(0);
@@ -201,15 +202,16 @@ public class RecogerFiltros extends AppCompatActivity {
             filtro.getMuestra().setQstd();
             filtro.getMuestra().setVstd();
             filtro.getMuestra().setObservaciones(Observaciones);
-            filtro.getMuestra().save();
+            //filtro.getMuestra().save();
 
-            equipo.setFiltro(null);
+            filtro.setIdequipo(null);
+            equipo.setOcupado(0);
             salir();
 
         }else { // Equipo Low Vol (Nueva muestra)
             Muestra muestraLowVol = new Muestra(PresionAtm, TempAmb, TiempoOperacion, idFiltro);
-            equipo.setFiltro(null);
-            muestraLowVol.save();
+            equipo.setOcupado(0);
+            //muestraLowVol.save();
             salir();
         }
     }

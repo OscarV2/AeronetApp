@@ -1,55 +1,54 @@
 package modelo;
 
-import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
+
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Created by Usuario on 28/11/2017.
  */
 
-@Table(name = "muestra")
-public class Muestra extends Model {
+@DatabaseTable(tableName = "muestras")
+public class Muestra  {
 
-    @Column(name = "presion_est_inicial")
+    @DatabaseField
     private Double presion_est_inicial;
-    @Column(name = "presion_est_final")
+    @DatabaseField
     private Double presion_est_final;
-    @Column(name = "presion_est_promedio")
+    @DatabaseField
     private Double presion_est_promedio;
-    @Column(name = "presion_amb1")
+    @DatabaseField
     private Double presion_amb1;
-    @Column(name = "presion_amb2")
+    @DatabaseField
     private Double presion_amb2;
-    @Column(name = "presion_amb")
+    @DatabaseField
     private Double presion_amb;
-    @Column(name = "temp_ambC")
+    @DatabaseField
     private Double temp_ambC;
-    @Column(name = "temp_ambK")
+    @DatabaseField
     private Double temp_ambK;
-    @Column(name = "temp_amb1")
+    @DatabaseField
     private Double temp_amb1;
-    @Column(name = "temp_amb2")
+    @DatabaseField
     private Double temp_amb2;
-    @Column(name = "horometro1")
+    @DatabaseField
     private Double horometro1;
-    @Column(name = "horomatro2")
+    @DatabaseField
     private Double horomatro2;
-    @Column(name = "tiempo_operacion")
+    @DatabaseField
     private Double tiempo_operacion;
 
-    @Column(name = "popa")
+    @DatabaseField
     private Double PoPa;
-    @Column(name = "qr")
+    @DatabaseField
     private Double Qr;
-    @Column(name = "qstd")
+    @DatabaseField
     private Double Qstd;
-    @Column(name = "vstd")
+    @DatabaseField
     private Double Vstd;
-
-    @Column(name = "observaciones")
+    @DatabaseField
     private String Observaciones;
-    @Column(name = "idFiltro")
+    @DatabaseField
     private Integer idFiltro;
 
     public Muestra(Double presion_est_inicial, Double presion_amb1,
@@ -129,5 +128,8 @@ public class Muestra extends Model {
     private Double inH2OAmmHg(Double inH2O){
 
         return 1.86832*inH2O;
+    }
+
+    public Muestra() {
     }
 }

@@ -1,35 +1,31 @@
 package modelo;
 
-import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-@Table(name = "filtro")
-public class Filtro extends Model{
+@DatabaseTable
+public class Filtro  {
 
-    @Column(name = "idFiltros")
+    @DatabaseField
     public Integer idFiltros;
 
-    @Column(name = "nombre")
+    @DatabaseField
     public String nombre;
 
-    @Column(name = "peso")
+    @DatabaseField
     public Double peso;
 
-    @Column(name = "uploaded")
+    @DatabaseField
     public transient boolean uploaded;
 
-    @Column(name = "instalado")
+    @DatabaseField
     public String instalado;
 
-    @Column(name = "recolectado")
+    @DatabaseField
     public String recolectado;
 
-    @Column(name = "idequipo")
+    @DatabaseField
     public Integer idequipo;
-
-    @Column(name = "muestra")
-    public Muestra muestra;
 
     public Filtro(Integer id, String nombre, Double peso) {
         super();
@@ -39,7 +35,7 @@ public class Filtro extends Model{
     }
 
     public Filtro() {
-        super();
+
     }
 
     public String getNombre() {
@@ -51,7 +47,7 @@ public class Filtro extends Model{
     }
 
     public Muestra getMuestra() {
-        return muestra;
+        return null;
     }
 
     public Integer getIdFiltro() {
@@ -70,10 +66,6 @@ public class Filtro extends Model{
         this.recolectado = recolectado;
     }
 
-    public void setMuestra(Muestra muestra) {
-        this.muestra = muestra;
-    }
-
     public boolean isUploaded() {
         return uploaded;
     }
@@ -84,5 +76,9 @@ public class Filtro extends Model{
 
     public String getRecolectado() {
         return recolectado;
+    }
+
+    public void setIdequipo(Integer idequipo) {
+        this.idequipo = idequipo;
     }
 }

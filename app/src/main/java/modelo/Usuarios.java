@@ -1,27 +1,32 @@
 package modelo;
 
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Created by ING_JANNER on 4/11/2017.
  */
-@Table(name = "usuario")
+@DatabaseTable(tableName = "usuarios")
 public class Usuarios {
-    @Column(name = "nombre")
+
+    @DatabaseField
+    public Integer idusuarios;
+
+    @DatabaseField
     public String nombre;
-    @Column(name = "apellidos")
+    @DatabaseField
     public String apellidos;
-    @Column(name = "correo")
+    @DatabaseField
     public String correo;
-    @Column(name = "telefono")
+    @DatabaseField
     public String telefono;
-    @Column(name = "rol")
+    @DatabaseField
     public String rol;
-    @Column(name = "password")
+    @DatabaseField
     public String password;
 
     public Usuarios() {
+
     }
 
     public Usuarios(String correo, String password) {

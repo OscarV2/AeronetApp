@@ -22,11 +22,6 @@
         android:layout_marginTop="4dp"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"/>
-    <!--
-    <ImageView
-        android:id=""
-        android:src="@mipmap/pq100_round"
-        /-->
 
     <LinearLayout
         android:layout_toRightOf="@id/img_equipo"
@@ -35,7 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp">
+        android:layout_marginStart="10dp"
+        android:layout_centerVertical="true">
 
         <TextView
 
@@ -43,13 +39,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/texto_id_filtro"
+            android:textColor="@color/blanco"
+
             />
 
         <TextView
             android:id="@+id/tv_tipo_equipo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/texto_peso_filtro"/>
+            android:textSize="@dimen/texto_peso_filtro"
+            android:textColor="@color/blanco"
+            />
     </LinearLayout>
 
     <View
@@ -58,6 +58,10 @@
         android:layout_height="2dp"
         android:background="@color/blanco"
         android:layout_marginTop="2dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginStart="15dp"
         />
 
     <TextView
@@ -67,12 +71,12 @@
         android:layout_height="wrap_content"
         android:textColor="@color/blanco"
         android:textSize="12sp"
-        android:text=""
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
+        android:layout_centerVertical="true"
         tools:ignore="RelativeOverlap" />
 
 </RelativeLayout>

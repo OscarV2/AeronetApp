@@ -1,28 +1,27 @@
 package com.example.oscar.aeronet.vista;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.oscar.aeronet.R;
 
-import java.util.List;
-
-import adapter.Controlador.EquipoController;
 import api.UpdateListener;
-import modelo.Equipo;
-import modelo.Filtro;
+import dmax.dialog.SpotsDialog;
+import modelo.Constantes;
 import modelo.Usuarios;
 import sincronizacion.SincronizarDatos;
+import android.util.Log;
+
 
 /**
  * A login screen that offers login via email/password.
@@ -31,7 +30,7 @@ public class LoginActivity extends AppCompatActivity implements UpdateListener {
 
     String usuario, password;
     // UI references.
-    private AutoCompleteTextView edtUsuario;
+    private EditText edtUsuario;
     private EditText edtPassword;
     private View mProgressView;
     private View mLoginFormView;
@@ -39,39 +38,11 @@ public class LoginActivity extends AppCompatActivity implements UpdateListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-
-        EquipoController equipoController = new EquipoController();
-        List<Equipo> equipoList = equipoController.getEquipos();
-
-        if (equipoList.size() == 0){
-            Filtro filtro  = new Filtro(1, "PM10-10-09-2017-01", 123.0);
-            filtro.save();
-            Filtro filtro4 = new Filtro(2, "PM10-10-09-2017-02", 123.0);
-            filtro4.save();
-            Filtro filtro1 = new Filtro(3, "PM10-10-09-2017-03", 123.0);
-            filtro1.save();
-            Filtro filtro2 = new Filtro(4, "PM10-10-09-2017-04", 123.0);
-            filtro2.save();
-            Filtro filtro3 = new Filtro(5, "PM10-10-09-2017-05", 123.0);
-            filtro3.save();
-
-            Equipo equipo =  new Equipo(1, "C40012", "Hi Vol", filtro);
-            equipo.save();
-            Equipo equipo1 = new Equipo(2, "C40013", "Low Vol", filtro1);
-            equipo1.save();
-            Equipo equipo2 = new Equipo(3,"C40014", "Hi Vol", filtro2);
-            equipo2.save();
-            Equipo equipo3 = new Equipo(4,"C40015", "Low Vol", filtro3);
-            equipo3.save();
-            Equipo equipo4 = new Equipo(5,"C40016", "Hi Vol", null);
-            equipo4.save();
-
-    }else {
-            Log.e("ya hay", "registroe");
-    }
+        edtUsuario = findViewById(R.id.email);
 
         edtPassword = findViewById(R.id.password);
 
@@ -80,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements UpdateListener {
             @Override
             public void onClick(View view) {
 
-                irListaEquipos();
+                validarUsuario();
             }
         });
 
@@ -95,12 +66,15 @@ public class LoginActivity extends AppCompatActivity implements UpdateListener {
         if (contra.equals(" ") || usuarioNombre.equals(" ")){
             Toast.makeText(this, "Por favor complete los campos faltantes", Toast.LENGTH_SHORT).show();
         }else{
-
+            alertDialog = new SpotsDialog(this, R.style.Custom);
+            alertDialog.show();
             Usuarios usuarios = new Usuarios(usuarioNombre, contra);
             sync.login(usuarios);
+
         }
 
     }
+
     private void irListaEquipos(){
 
         startActivity(new Intent(LoginActivity.this, ListaEquipos.class));
@@ -111,16 +85,20 @@ public class LoginActivity extends AppCompatActivity implements UpdateListener {
     public void success(String exito) {
 
         switch (exito){
+
             case "no existe.":
+                Toast.makeText(this, "El usuario no existe.", Toast.LENGTH_SHORT).show();
                 break;
 
-
-
             case "fallo":
-
+                Toast.makeText(this, "No se pudo establecer conexion.", Toast.LENGTH_SHORT).show();
             break;
 
             case "success":
+                SharedPreferences preferences = getSharedPreferences(Constantes.PREFERENCES, Context.MODE_PRIVATE);
+                preferences.edit().putBoolean("sessionStarted", true).apply();
+                closeDialog();
+                Log.e("yendo","Listaequipos");
                 irListaEquipos();
                 break;
         }

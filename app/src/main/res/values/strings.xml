@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Aeronet</string>
+    <string name="app_name">Qualis</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Usuario</string>

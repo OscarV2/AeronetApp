@@ -14,14 +14,19 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.oscar.aeronet.R;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import adapter.AdapterEquipos;
-import adapter.Controlador.EquipoController;
+import controller.EquipoController;
 import api.UpdateListener;
+import modelo.DataBaseHelper;
 import modelo.Equipo;
+import modelo.Filtro;
 import sincronizacion.SincronizarDatos;
 
 public class ListaEquipos extends AppCompatActivity implements UpdateListener{
@@ -29,17 +34,27 @@ public class ListaEquipos extends AppCompatActivity implements UpdateListener{
     List<Equipo> equipoList;
     ListView lvEquipos;
     AlertDialog alertDialog;
+    Dao<Equipo, Integer> daoEquipos;
+    Dao<Filtro, Integer> daoFiltros;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_equipos);
+        DataBaseHelper helper = OpenHelperManager.getHelper(this, DataBaseHelper.class);
 
         lvEquipos = findViewById(R.id.lv_equipos);
         equipoList = new ArrayList<>();
-        EquipoController equipoController = new EquipoController();
 
-        equipoList = equipoController.getEquipos();
+        try {
+            daoEquipos = helper.getEquipoDao();
+            equipoList = daoEquipos.queryForAll();
+            daoFiltros = helper.getFiltroDao();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         Log.e("lista eq size", String.valueOf(equipoList.size()));
         AdapterEquipos adapterEquipos = new AdapterEquipos(ListaEquipos.this, equipoList);
         lvEquipos.setAdapter(adapterEquipos);
@@ -48,22 +63,13 @@ public class ListaEquipos extends AppCompatActivity implements UpdateListener{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Integer idFiltro;
                 Integer idequipo = equipoList.get(position).getid();
-                try{
 
-                    idFiltro = equipoList.get(position).getFiltro().getIdFiltro();
-
-                }catch (NullPointerException e){
-                    idFiltro = 0;
-
-                }
-                String tipo =  equipoList.get(position).getTipo();
+                String tipo =  equipoList.get(position).getMarca();
 
                 SharedPreferences preferences = getSharedPreferences("AeronetPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putInt("idequipo", idequipo);
-                editor.putInt("idFiltro", idFiltro);
                 editor.putString("tipo", tipo);
                 editor.apply();
                 Intent i = new Intent(ListaEquipos.this, MenuCampo.class);

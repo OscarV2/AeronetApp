@@ -63,8 +63,8 @@ AdapterEquipos extends BaseAdapter {
             Log.e("ocurrio", "una excepcion");
         }
 
-        tvTipo.setText(this.equipos.get(position).getTipo()); // mostrar fecha
-        tvNombre.setText(this.equipos.get(position).getNombre()); // mostrar nombre de lote
+        tvTipo.setText(this.equipos.get(position).getMarca()); // mostrar fecha
+        tvNombre.setText(this.equipos.get(position).getModelo()); // mostrar nombre de lote
 
         if (filtro.equals("")){
             tvFiltro.setText("Sin filtro asignado.");

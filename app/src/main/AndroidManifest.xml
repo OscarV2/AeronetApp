@@ -1,29 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.oscar.aeronet">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.activeandroid.app.Application"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logoinicio"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logoround"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <meta-data
-            android:name="AA_DB_NAME"
-            android:value="Pickrand" />
-        <meta-data
-            android:name="AA_DB_VERSION"
-            android:value="5" />
-
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
         <activity
             android:name=".vista.LoginActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".vista.MenuCampo"
             android:label="Menu"
@@ -71,7 +64,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".vista.MenuCampo" />
         </activity>
-        <activity android:name=".vista.MainActivity"
+        <activity
+            android:name=".vista.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -79,6 +73,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".vista.Detalles"></activity>
     </application>
 
 </manifest>

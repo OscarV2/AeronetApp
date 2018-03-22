@@ -13,18 +13,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.activeandroid.query.Select;
 import com.example.oscar.aeronet.R;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
 import modelo.Constantes;
+import modelo.DataBaseHelper;
+import modelo.Equipo;
 import modelo.Filtro;
 import modelo.Muestra;
 
 public class InstalarFiltros extends AppCompatActivity {
 
+
+    private Dao<Equipo, Integer> daoEquipos;
+    private Dao<Filtro, Integer> daoFiltros;
     private TextView tvFiltro;
     private EditText edtTempAmb;
     private EditText edtPresionAtm;
@@ -33,8 +42,8 @@ public class InstalarFiltros extends AppCompatActivity {
 
     Double PresionEstInicial, Horometro, TempAmb, PresionAtm;
     private Integer idFiltro;
-
     private Filtro filtro;
+    private Integer idEquipo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,18 +55,32 @@ public class InstalarFiltros extends AppCompatActivity {
         edtPresionEstIni = findViewById(R.id.edt_presion_est_ini);
         edtTempAmb = findViewById(R.id.edt_temp_amb);
 
-        SharedPreferences preferences = getSharedPreferences("AeronetPrefs", MODE_PRIVATE);
 
-        idFiltro = preferences.getInt("idFiltro", 0);
-        Log.e("idFiltro", String.valueOf(idFiltro));
-        // CONSULTAR FILTRO
-        List<Filtro> filtros = new Select().from(Filtro.class).where("idFiltros = ?", idFiltro).execute();
+        idFiltro = getIntent().getIntExtra("idFiltroAsignado", 0);
+        idEquipo = getIntent().getIntExtra("idequipo", 0);
 
-        if (filtros.size() > 0){
-            filtro = filtros.get(0);
+        DataBaseHelper helper = OpenHelperManager.getHelper(this, DataBaseHelper.class);
+
+        try {
+            daoEquipos = helper.getEquipoDao();
+            daoFiltros = helper.getFiltroDao();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
+        try {
+            QueryBuilder<Filtro, Integer> queryBuilder = daoFiltros.queryBuilder();
+            queryBuilder.where().eq("instalado", null).eq("idequipo", idEquipo);
+            PreparedQuery<Filtro> preparedQuery = queryBuilder.prepare();
+            filtro = daoFiltros.queryForFirst(preparedQuery);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Log.e("idFiltro", String.valueOf(idFiltro));
+        // CONSULTAR FILTRO
+        if (filtro ==  null){
 
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -116,10 +139,10 @@ public class InstalarFiltros extends AppCompatActivity {
 
     public void aceptar() {
         Muestra muestra = new Muestra(PresionEstInicial, PresionAtm, TempAmb, Horometro, idFiltro);
-        filtro.setMuestra(muestra);
+        //filtro.setMuestra(muestra);
         filtro.setInstalado(Constantes.sdf.format(new Date()));
-        muestra.save();
-        filtro.save();
+        //muestra.save();
+        //filtro.save();
 
         Toast t=Toast.makeText(this,"Filtro instalado exitosamente.", Toast.LENGTH_SHORT);
         t.show();

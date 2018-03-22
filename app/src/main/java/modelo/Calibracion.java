@@ -1,29 +1,29 @@
 package modelo;
 
-import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Created by ING_JANNER on 4/11/2017.
  */
 
-@Table(name = "calibracion")
-public class Calibracion extends Model{
-    @Column(name = "fecha")
+@DatabaseTable(tableName = "calibraciones")
+public class Calibracion {
+
+    @DatabaseField
     public String fecha;
 
-    @Column(name = "idequipo")
+    @DatabaseField
     public Integer equipos_idequipo;
-    @Column(name = "pendiente")
+    @DatabaseField
     public Double m_pendiente;
-    @Column(name = "intercepto")
+    @DatabaseField
     public Double b_intercepto;
-    @Column(name = "recta")
+    @DatabaseField
     public Double r;
-    @Column(name = "datosx")
+    @DatabaseField
     public String datosx;
-    @Column(name = "datosy")
+    @DatabaseField
     public String datosy;
 
     public Calibracion() {

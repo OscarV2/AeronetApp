@@ -12,6 +12,8 @@ public class Constantes {
 
     public static final String PING = "serie";
 
+    public static final String PREFERENCES = "MisPreferencias";
+
     public static String TABLA_CALIBRADOR = "calibrador";
     public  static String serie = "serie";
     public  static String modelo = "modelo";
@@ -45,9 +47,10 @@ public class Constantes {
     public static final String GET_EQUIPOS = "Equipos/getEquipos";
     public static final String GET_FILTROS = "Filtros/descargarFiltros";
     public static final String GET_CALIBRADOR = "Calibrador/getCalibradores";
-    public static final String POST_FILTROS_INSTALADO = "";
-    public static final String POST_FILTROS_RECOGIDO = "";
+    public static final String POST_FILTROS_INSTALADO = "Filtros/instalarFiltro";
+    public static final String POST_FILTROS_RECOGIDO = "Filtros/recogerFiltro";
     public static final String POST_CALIBRACION = "Calibracion/nuevaCalibracion";
+
 
     @SuppressLint("SimpleDateFormat")
     public static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
