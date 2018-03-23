@@ -12,7 +12,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.oscar.aeronet.R;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
 
+import java.sql.SQLException;
+import java.util.Date;
+
+import modelo.Calibracion;
+import modelo.Calibrador;
+import modelo.Constantes;
+import modelo.DataBaseHelper;
 import utils.Calculos;
 
 public class CalibrarActivity extends AppCompatActivity {
@@ -49,15 +58,33 @@ public class CalibrarActivity extends AppCompatActivity {
 
     private Calculos calculos;
 
+    private Integer idEquipo;
+
     private EditText edtTempAmbiente, edtPresionAtm, edtDeltaP1, edtDeltaP2, edtDeltaP3, edtDeltaP4, edtDeltaP5,
     edtDeltah1, edtDeltah2, edtDeltah3, edtDeltah4, edtDeltah5;
+
+    Dao<Calibrador, Integer> daoCalibrador;
+    Dao<Calibracion, Integer> daoCalibracion;
+
+    private Calibracion calibracion;
+    String fecha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibrar);
 
+        DataBaseHelper helper = OpenHelperManager.getHelper(this, DataBaseHelper.class);
+        try {
+            daoCalibrador = helper.getCalibradorDao();
+            daoCalibracion = helper.getCalibracionDao();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         calculos = new Calculos();
+
+        idEquipo = getIntent().getIntExtra("idequipo", 0);
 
         edtDeltah1 = findViewById(R.id.deltaH1);
         edtDeltah2 = findViewById(R.id.deltaH2);
@@ -78,6 +105,9 @@ public class CalibrarActivity extends AppCompatActivity {
         Qa = new double[5];
         datosX = new double[5];
         PoPa = new double[5];
+
+        fecha = Constantes.sdf.format(new Date());
+
     }
 
     private void getValues(){
@@ -85,7 +115,6 @@ public class CalibrarActivity extends AppCompatActivity {
     }
 
     private boolean validarTemp(){
-
 
         return (288 <= TempAmbiente) && (TempAmbiente <= 323);
     }
@@ -163,11 +192,13 @@ public class CalibrarActivity extends AppCompatActivity {
         }
 
         AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
-        dialogo1.setTitle("Importante");
-        dialogo1.setMessage("¿ Esta seguro que quiere guardar la calibración ?");
+        dialogo1.setTitle("Datos de Calibracion:");
+        dialogo1.setMessage("m: " + String.valueOf(mEquipo) + "b: " + String.valueOf(bEquipo)
+                + "r:" + String.valueOf(rEquipo));
         dialogo1.setCancelable(false);
-        dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+        dialogo1.setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
+
                 aceptar();
             }
         });
@@ -178,15 +209,24 @@ public class CalibrarActivity extends AppCompatActivity {
         });
         dialogo1.show();
     }
+
+    private void showResults(){
+
+
+    }
+
     public void aceptar() {
+
+        calibracion = new Calibracion(fecha, idEquipo, mEquipo, bEquipo, rEquipo);
+        try {
+            calibracion.setUploaded(false);
+            daoCalibracion.create(calibracion);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         Toast t=Toast.makeText(this,"Calibración guardada.", Toast.LENGTH_SHORT);
         t.show();
         startActivity(new Intent(CalibrarActivity.this, MenuCampo.class));
         finish();
     }
-
-    public void cancelar() {
-
-    }
-
 }

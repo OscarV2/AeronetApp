@@ -13,12 +13,12 @@
         android:contentDescription="@string/hint_fecha_muestreo"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@mipmap/logoinicio"/>
+        android:src="@mipmap/logo"/>
 
     <ImageView
         android:cropToPadding="true"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_width="250dp"
+        android:layout_height="120dp"
         android:contentDescription="@string/hint_fecha_muestreo"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

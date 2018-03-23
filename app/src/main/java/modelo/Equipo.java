@@ -1,5 +1,6 @@
 package modelo;
 
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -66,7 +67,9 @@ public class Equipo {
         return idequipo;
     }
 
-    public Filtro getFiltro() {
+    public Filtro getFiltro(Dao<Filtro, Integer> daoEquipos) {
+
+        //get current filter
 
         Filtro filtro =  null;
         //List<Filtro> filtros = Filtro.find(Filtro.class, "idequipo = ?", String.valueOf(idequipo));
@@ -76,8 +79,6 @@ public class Equipo {
         }catch (Exception e){
           //  Log.d("no ha filtros", e.getMessage());
         }
-
-
         return filtro;
     }
 
@@ -87,6 +88,18 @@ public class Equipo {
 
     public String getModelo() {
         return modelo;
+    }
+
+    public String getClase() {
+        return clase;
+    }
+
+    public void isOcupado(){
+
+    }
+
+    public void setClase(String clase) {
+        this.clase = clase;
     }
 
     public void setOcupado(Integer ocupado) {

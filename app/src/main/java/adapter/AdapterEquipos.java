@@ -9,20 +9,33 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.oscar.aeronet.R;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import modelo.DataBaseHelper;
 import modelo.Equipo;
+import modelo.Filtro;
 
 public class
 AdapterEquipos extends BaseAdapter {
 
     List<Equipo> equipos;
+    Dao<Filtro, Integer> daoFiltros;
+
     private Context context;
     public AdapterEquipos(Context context ,List<Equipo> equipos) {
         this.context = context;
         this.equipos = equipos;
 
+        DataBaseHelper helper = OpenHelperManager.getHelper(context, DataBaseHelper.class);
+        try {
+            daoFiltros = helper.getFiltroDao();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -57,7 +70,7 @@ AdapterEquipos extends BaseAdapter {
 
         String filtro = "";
         try {
-          filtro =  this.equipos.get(position).getFiltro().getNombre();
+          filtro =  this.equipos.get(position).getClase();
 
         }catch (NullPointerException e){
             Log.e("ocurrio", "una excepcion");

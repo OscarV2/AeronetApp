@@ -70,7 +70,7 @@ public class CheckFiltros {
     public boolean tieneFiltroAsignado(){
         try {
             QueryBuilder<Filtro, Integer> queryBuilder = daoFiltros.queryBuilder();
-            queryBuilder.where().eq("instalado", null).eq("idequipo", idEquipo);
+            queryBuilder.where().isNull("instalado").eq("idequipo", idEquipo);
             PreparedQuery<Filtro> preparedQuery = queryBuilder.prepare();
             listaFiltros = daoFiltros.query(preparedQuery);
         } catch (SQLException e) {
@@ -124,7 +124,7 @@ public class CheckFiltros {
         try {
 
             QueryBuilder<Filtro, Integer> queryBuilder = daoFiltros.queryBuilder();
-            queryBuilder.where().eq("instalado", null).eq("idequipo", null);
+            queryBuilder.where().isNull("instalado").isNull("idequipo");
             PreparedQuery<Filtro> preparedQuery = queryBuilder.prepare();
             listaFiltros = daoFiltros.query(preparedQuery);
 

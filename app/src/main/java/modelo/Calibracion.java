@@ -26,14 +26,18 @@ public class Calibracion {
     @DatabaseField
     public String datosy;
 
+    @DatabaseField
+    private transient boolean uploaded;
+
     public Calibracion() {
     }
 
-    public Calibracion(String fecha, Integer equipos_idequipo, Double m_pendiente, Double b_intercepto) {
+    public Calibracion(String fecha, Integer equipos_idequipo, Double m_pendiente, Double b_intercepto, Double r) {
         this.fecha = fecha;
         this.equipos_idequipo = equipos_idequipo;
         this.m_pendiente = m_pendiente;
         this.b_intercepto = b_intercepto;
+        this.r = r;
     }
 
     public Double getM_pendiente() {
@@ -42,5 +46,9 @@ public class Calibracion {
 
     public Double getB_intercepto() {
         return b_intercepto;
+    }
+
+    public void setUploaded(boolean uploaded) {
+        this.uploaded = uploaded;
     }
 }

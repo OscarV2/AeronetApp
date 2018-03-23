@@ -6,14 +6,18 @@
         android:orderInCategory="100">
     </item>
     <item
+        android:id="@+id/ver_filtros"
+        android:title="@string/verfiltros"
+        android:orderInCategory="101">
+    </item>
+    <item
         android:id="@+id/descargarFiltros"
         android:title="@string/Dfiltros"
-        android:orderInCategory="101">
+        android:orderInCategory="102">
     </item>
     <item
         android:id="@+id/cerrarSesión"
         android:title="@string/Csesion"
-        android:orderInCategory="102">
+        android:orderInCategory="103">
     </item>
-
 </menu>

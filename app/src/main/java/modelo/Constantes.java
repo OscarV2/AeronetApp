@@ -39,6 +39,10 @@ public class Constantes {
     public static String correo = "correo";
     public static String telefono = "telefono";
     public static String rol = "rol";
+
+    public static final String INSTALADO_UPLOADED = "uploadedInstalado";
+    public static final String RECOGIDO_UPLOADED = "uploadedRecogido";
+
     public static final String password = "password";
 
     public static final String BASE_URL = "http://jorgeeduardodiaz.com/qualis/index.php/api/";

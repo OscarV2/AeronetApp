@@ -2,10 +2,12 @@ package api;
 
 import java.util.List;
 
+import modelo.Calibracion;
 import modelo.Calibrador;
 import modelo.Constantes;
 import modelo.Equipo;
 import modelo.Filtro;
+import modelo.Muestra;
 import modelo.Usuarios;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -41,7 +43,10 @@ public interface AeronetApiServices {
 
 
     @POST(Constantes.POST_FILTROS_RECOGIDO)
-    Call<String> postFiltroRecogido(@Body Filtro filtro);
+    Call<String> postFiltroRecogido(@Body Muestra muestra);
+
+    @POST(Constantes.POST_CALIBRACION)
+    Call<String> postCalibracion(@Body Calibracion calibracion);
 
     @POST(Constantes.LOGIN)
     Call<Usuarios> login(@Body Usuarios persona);

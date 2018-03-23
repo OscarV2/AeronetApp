@@ -87,10 +87,12 @@ public class LoginActivity extends AppCompatActivity implements UpdateListener {
         switch (exito){
 
             case "no existe.":
+                closeDialog();
                 Toast.makeText(this, "El usuario no existe.", Toast.LENGTH_SHORT).show();
                 break;
 
             case "fallo":
+                closeDialog();
                 Toast.makeText(this, "No se pudo establecer conexion.", Toast.LENGTH_SHORT).show();
             break;
 

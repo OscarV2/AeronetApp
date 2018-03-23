@@ -130,6 +130,14 @@ public class Muestra  {
         return 1.86832*inH2O;
     }
 
+    public Integer getIdFiltro() {
+        return idFiltro;
+    }
+
+    public void setIdFiltro(Integer idFiltro) {
+        this.idFiltro = idFiltro;
+    }
+
     public Muestra() {
     }
 }

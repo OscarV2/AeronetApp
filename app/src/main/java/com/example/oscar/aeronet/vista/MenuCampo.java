@@ -64,6 +64,7 @@ public class MenuCampo extends AppCompatActivity {
                 startActivity(new Intent(MenuCampo.this, ListaEquipos.class));
                 finish();
                 return true;
+
         }
        return onOptionsItemSelected(item);
     }
@@ -91,11 +92,18 @@ public class MenuCampo extends AppCompatActivity {
     }
 
     public void irRecogerFiltros(View v){
-        if (idFiltro <= 0){
+
+        // consultar filtro asignado
+        idFiltro = checkFiltros.getIdFiltroAsignado();
+
+        if (idFiltro == null){
             Toast.makeText(this, "ESTE EQUIPO NO TIENE NINGUN FILTRO ASIGNADO.",
                     Toast.LENGTH_SHORT).show();
-        }else {
+        }else{
             Intent i = new Intent(MenuCampo.this, RecogerFiltros.class);
+            i.putExtra("idFiltroAsignado", idFiltro);
+            i.putExtra("idequipo", idequipo);
+            i.putExtra("tipo", tipo);
             startActivity(i);
             finish();
         }
@@ -132,16 +140,18 @@ public class MenuCampo extends AppCompatActivity {
 
     }
 
-    private void irListaEquipos(String activity){
-        Intent i = new Intent(MenuCampo.this, ListaEquipos.class);
-        i.putExtra("activity", activity);
+    public void verDetalles(View v){
+
+        Intent i = new Intent(MenuCampo.this, Detalles.class);
+        i.putExtra("idequipo", idequipo);
         startActivity(i);
         finish();
     }
 
     private void showDialogCalibracion(){
 
-        AlertDialog.Builder builder = new  AlertDialog.Builder(MenuCampo.this).setMessage("")
+        AlertDialog.Builder builder = new  AlertDialog.Builder(MenuCampo.this)
+                .setMessage("ESTE EQUIPO NO ESTA CALIBRADO.")
                 .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

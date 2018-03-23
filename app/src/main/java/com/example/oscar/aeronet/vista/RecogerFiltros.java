@@ -15,13 +15,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.oscar.aeronet.R;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
 
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import modelo.Calibracion;
+import modelo.Calibrador;
+import modelo.Constantes;
+import modelo.DataBaseHelper;
 import modelo.Equipo;
 import modelo.Filtro;
 import modelo.Muestra;
+import modelo.Usuarios;
 
 public class RecogerFiltros extends AppCompatActivity {
 
@@ -45,39 +55,64 @@ public class RecogerFiltros extends AppCompatActivity {
     private Filtro filtro;
     private Equipo equipo;
     private Calibracion UltimaCalibracion;
+
+    Dao<Equipo, Integer> daoEquipos;
+    Dao<Calibrador, Integer> daoCalibrador;
+    Dao<Calibracion, Integer> daoCalibracion;
+    Dao<Filtro, Integer> daoFiltros;
+    Dao<Muestra, Integer> daoMuestra;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recoger_filtros);
 
-        SharedPreferences preferences = getSharedPreferences("AeronetPrefs", MODE_PRIVATE);
 
-        idequipo = preferences.getInt("idequipo", 0);
-        tipo = preferences.getString("tipo", "");
-        idFiltro = preferences.getInt("idFiltro", 0);
+        idequipo = getIntent().getIntExtra("idequipo", 0);
+        tipo = getIntent().getStringExtra("tipo");
+        idFiltro = getIntent().getIntExtra("idFiltro", 0);
         Log.e("idFiltro", String.valueOf(idFiltro));
         // CONSULTAR FILTRO
         List<Filtro> filtros = null;
 
+        DataBaseHelper helper = OpenHelperManager.getHelper(RecogerFiltros.this, DataBaseHelper.class);
+        try {
+            daoFiltros = helper.getFiltroDao();
+            daoCalibrador = helper.getCalibradorDao();
+            daoCalibracion = helper.getCalibracionDao();
+            daoEquipos = helper.getEquipoDao();
+            daoMuestra = helper.getMuestraDao();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         // CONSULTAR EQUIPO
-        //List<Equipo> equiposList = Equipo.find(Equipo.class, "idequipo = ?", String.valueOf(idequipo));
         List<Equipo> equiposList = null;
 
         // CONSULTAR ULTIMA CALIBRACION
         List<Calibracion> calibracions = null;
 
+        QueryBuilder<Filtro, Integer> queryBuilderFilter = daoFiltros.queryBuilder();
+        QueryBuilder<Equipo, Integer> qbEquipo = daoEquipos.queryBuilder();
+        QueryBuilder<Calibracion, Integer> qbCalibracion = daoCalibracion.queryBuilder();
 
-        if (filtros.size() > 0){
-            filtro = filtros.get(0);
+        try {
+            queryBuilderFilter.where().eq("idFiltros", idFiltro);
+            qbEquipo.where().eq("idequipo", idequipo);
+            qbCalibracion.where().eq("equipos_idequipo", idequipo);
+
+            PreparedQuery<Filtro> pQFiltro = queryBuilderFilter.prepare();
+            PreparedQuery<Equipo> pQEquipo = qbEquipo.prepare();
+            PreparedQuery<Calibracion> pQCalibracion = qbCalibracion.prepare();
+
+            filtro = daoFiltros.queryForFirst(pQFiltro);
+            equipo = daoEquipos.queryForFirst(pQEquipo);
+            UltimaCalibracion = daoCalibracion.queryForFirst(pQCalibracion);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-        if (equiposList.size() > 0){
-            equipo = equiposList.get(0);
-        }
-
-        if (calibracions.size() > 0){
-            UltimaCalibracion = calibracions.get(calibracions.size() - 1);
-        }
         edtTempAmbiente = findViewById(R.id.edt_temp_amb);
         edtFechaMuestreo = findViewById(R.id.edt_fecha_muestreo);
         edtHorometro = findViewById(R.id.edt_horometro_fin);
@@ -172,7 +207,11 @@ public class RecogerFiltros extends AppCompatActivity {
         dialogo1.setCancelable(false);
         dialogo1.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
-                aceptar();
+                try {
+                    aceptar();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
         dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -183,29 +222,35 @@ public class RecogerFiltros extends AppCompatActivity {
         dialogo1.show();
     }
 
-    public void aceptar() {
+    public void aceptar() throws SQLException {
 
         if (!tipoEsLowVol()){ //guardar muestra HiVol
 
-            filtro.getMuestra().setHoromatro2(Horometro);
-            filtro.getMuestra().setPresion_amb2(PresionAtm);
-            filtro.getMuestra().setPresion_est_final(PresionEstFinal);
-            filtro.getMuestra().setTemp_amb2(TempAmb);
+            Muestra muestra = new Muestra();
 
-            filtro.getMuestra().setPresion_est_promedio();
-            filtro.getMuestra().setPresion_amb();
-            filtro.getMuestra().setTemp_ambC();
-            filtro.getMuestra().setTemp_ambK();
-            filtro.getMuestra().setTiempo_operacion();
-            filtro.getMuestra().setPoPa();
-            filtro.getMuestra().setQr(UltimaCalibracion.getM_pendiente(), UltimaCalibracion.getB_intercepto());
-            filtro.getMuestra().setQstd();
-            filtro.getMuestra().setVstd();
-            filtro.getMuestra().setObservaciones(Observaciones);
-            //filtro.getMuestra().save();
+            muestra.setHoromatro2(Horometro);
+            muestra.setPresion_amb2(PresionAtm);
+            muestra.setPresion_est_final(PresionEstFinal);
+            muestra.setTemp_amb2(TempAmb);
 
-            filtro.setIdequipo(null);
+            muestra.setPresion_est_promedio();
+            muestra.setPresion_amb();
+            muestra.setTemp_ambC();
+            muestra.setTemp_ambK();
+            muestra.setTiempo_operacion();
+            muestra.setPoPa();
+            muestra.setQr(UltimaCalibracion.getM_pendiente(), UltimaCalibracion.getB_intercepto());
+            muestra.setQstd();
+            muestra.setVstd();
+            muestra.setObservaciones(Observaciones);
+
+            daoMuestra.create(muestra);
+            filtro.setRecogido(Constantes.sdf.format(new Date()));
+            daoFiltros.update(filtro);
+
             equipo.setOcupado(0);
+
+            daoEquipos.update(equipo);
             salir();
 
         }else { // Equipo Low Vol (Nueva muestra)
@@ -227,6 +272,5 @@ public class RecogerFiltros extends AppCompatActivity {
 
         return tipo.equals("Low Vol");
     }
-
 
 }

@@ -34,6 +34,8 @@ public class InstalarFiltros extends AppCompatActivity {
 
     private Dao<Equipo, Integer> daoEquipos;
     private Dao<Filtro, Integer> daoFiltros;
+    private Dao<Muestra, Integer> daoMuestras;
+
     private TextView tvFiltro;
     private EditText edtTempAmb;
     private EditText edtPresionAtm;
@@ -55,7 +57,6 @@ public class InstalarFiltros extends AppCompatActivity {
         edtPresionEstIni = findViewById(R.id.edt_presion_est_ini);
         edtTempAmb = findViewById(R.id.edt_temp_amb);
 
-
         idFiltro = getIntent().getIntExtra("idFiltroAsignado", 0);
         idEquipo = getIntent().getIntExtra("idequipo", 0);
 
@@ -64,6 +65,7 @@ public class InstalarFiltros extends AppCompatActivity {
         try {
             daoEquipos = helper.getEquipoDao();
             daoFiltros = helper.getFiltroDao();
+            daoMuestras = helper.getMuestraDao();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,9 +80,6 @@ public class InstalarFiltros extends AppCompatActivity {
         }
         Log.e("idFiltro", String.valueOf(idFiltro));
         // CONSULTAR FILTRO
-        if (filtro ==  null){
-
-        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -141,9 +140,13 @@ public class InstalarFiltros extends AppCompatActivity {
         Muestra muestra = new Muestra(PresionEstInicial, PresionAtm, TempAmb, Horometro, idFiltro);
         //filtro.setMuestra(muestra);
         filtro.setInstalado(Constantes.sdf.format(new Date()));
-        //muestra.save();
-        //filtro.save();
-
+        filtro.setUploadedInstalado(false);
+        try {
+            daoMuestras.create(muestra);
+            daoFiltros.update(filtro);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         Toast t=Toast.makeText(this,"Filtro instalado exitosamente.", Toast.LENGTH_SHORT);
         t.show();
         startActivity(new Intent(InstalarFiltros.this, MenuCampo.class));

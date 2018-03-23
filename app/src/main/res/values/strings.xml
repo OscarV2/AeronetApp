@@ -50,6 +50,12 @@
     <string name="sincro">Sincronizar</string>
     <string name="Dfiltros">Descargar Filtros</string>
     <string name="Csesion">Cerrar Sesión</string>
+    <string name="verfiltros">Ver Filtros</string>
+    <string name="marca">Marca:</string>
+    <string name="tipo">Tipo:</string>
+    <string name="filtros">Filtros:</string>
+    <string name="ultima_calibracion">Ultima Calibración:</string>
+    <string name="descripcion">Descripción</string>
 
 
 </resources>

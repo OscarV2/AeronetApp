@@ -142,7 +142,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/alto_item_menu"
         android:background="@color/color_fondo_App"
-        android:onClick="calibrarEquipo"
+        android:onClick="verDetalles"
         android:layout_marginLeft="10dp"
         >
 

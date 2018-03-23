@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity implements UpdateListener{
                 }
             }
         }, 2000);
-
-
     }
 
     private boolean checkDb() throws SQLException {
@@ -76,8 +74,6 @@ public class MainActivity extends AppCompatActivity implements UpdateListener{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Log.e("checking","  DB ");
-
         return daoEquipo.countOf() > 0;
     }
 
