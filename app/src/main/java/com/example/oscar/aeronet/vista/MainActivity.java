@@ -14,6 +14,7 @@ import com.example.oscar.aeronet.R;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Logger;
 
 import api.UpdateListener;
@@ -39,7 +40,21 @@ public class MainActivity extends AppCompatActivity implements UpdateListener{
         syncTask =  new SincronizarDatos(MainActivity.this, this);
         SharedPreferences preferences = getSharedPreferences(Constantes.PREFERENCES, Context.MODE_PRIVATE);
         session = preferences.getBoolean("sessionStarted", false);
-
+/*
+        helper = new DataBaseHelper(MainActivity.this);
+        try {
+            Dao<Filtro , Integer> daoFiltros = helper.getFiltroDao();
+            List<Filtro> filtros = daoFiltros.queryForAll();
+            for (Filtro filtro:
+                 filtros) {
+                filtro.setUploadedRecogido(false);
+                daoFiltros.update(filtro);
+                Log.e("filtro", "updated");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+*/
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

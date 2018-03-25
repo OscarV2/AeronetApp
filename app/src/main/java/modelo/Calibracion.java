@@ -10,17 +10,23 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "calibraciones")
 public class Calibracion {
 
+    @DatabaseField(generatedId = true)
+    private Integer _id;
+
+    @DatabaseField(columnName = "idcal")
+    private Integer id;
+
     @DatabaseField
     public String fecha;
 
     @DatabaseField
-    public Integer equipos_idequipo;
+    private Integer equipos_idequipo;
     @DatabaseField
-    public Double m_pendiente;
+    private String m_pendiente;
     @DatabaseField
-    public Double b_intercepto;
+    private String b_intercepto;
     @DatabaseField
-    public Double r;
+    public String r;
     @DatabaseField
     public String datosx;
     @DatabaseField
@@ -32,7 +38,7 @@ public class Calibracion {
     public Calibracion() {
     }
 
-    public Calibracion(String fecha, Integer equipos_idequipo, Double m_pendiente, Double b_intercepto, Double r) {
+    public Calibracion(String fecha, Integer equipos_idequipo, String m_pendiente, String b_intercepto, String r) {
         this.fecha = fecha;
         this.equipos_idequipo = equipos_idequipo;
         this.m_pendiente = m_pendiente;
@@ -40,15 +46,23 @@ public class Calibracion {
         this.r = r;
     }
 
-    public Double getM_pendiente() {
+    public String getM_pendiente() {
         return m_pendiente;
     }
 
-    public Double getB_intercepto() {
+    public String getB_intercepto() {
         return b_intercepto;
     }
 
     public void setUploaded(boolean uploaded) {
         this.uploaded = uploaded;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 }

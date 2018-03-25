@@ -1,8 +1,12 @@
 package modelo;
 
 
+import com.google.gson.Gson;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Usuario on 28/11/2017.
@@ -11,6 +15,9 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "muestras")
 public class Muestra  {
 
+    @DatabaseField(generatedId = true)
+    private transient Integer id;
+
     @DatabaseField
     private Double presion_est_inicial;
     @DatabaseField
@@ -18,9 +25,9 @@ public class Muestra  {
     @DatabaseField
     private Double presion_est_promedio;
     @DatabaseField
-    private Double presion_amb1;
+    private transient Double presion_amb1;
     @DatabaseField
-    private Double presion_amb2;
+    private transient Double presion_amb2;
     @DatabaseField
     private Double presion_amb;
     @DatabaseField
@@ -28,13 +35,13 @@ public class Muestra  {
     @DatabaseField
     private Double temp_ambK;
     @DatabaseField
-    private Double temp_amb1;
+    private transient Double temp_amb1;
     @DatabaseField
-    private Double temp_amb2;
+    private transient Double temp_amb2;
     @DatabaseField
-    private Double horometro1;
+    private Double horometro_inicial;
     @DatabaseField
-    private Double horomatro2;
+    private Double horometro_final;
     @DatabaseField
     private Double tiempo_operacion;
 
@@ -47,16 +54,17 @@ public class Muestra  {
     @DatabaseField
     private Double Vstd;
     @DatabaseField
-    private String Observaciones;
-    @DatabaseField
     private Integer idFiltro;
+
+    @DatabaseField
+    private Double diff_rfo;
 
     public Muestra(Double presion_est_inicial, Double presion_amb1,
                    Double temp_amb1, Double horometro1, Integer idFiltro) {
         this.presion_est_inicial = presion_est_inicial;
         this.presion_amb1 = presion_amb1;
         this.temp_amb1 = temp_amb1;
-        this.horometro1 = horometro1;
+        this.horometro_inicial = horometro1;
         this.idFiltro = idFiltro;
     }
 
@@ -74,7 +82,7 @@ public class Muestra  {
     }
 
     public void setPresion_est_promedio() {
-        this.presion_est_promedio = (inH2OAmmHg(presion_est_final) + inH2OAmmHg(presion_est_final))/2;
+        this.presion_est_promedio = inH2OAmmHg ((presion_est_final + presion_est_final)/2);
     }
 
     public void setPresion_amb2(Double presion_amb2) {
@@ -97,12 +105,15 @@ public class Muestra  {
         this.temp_amb2 = temp_amb2;
     }
 
-    public void setHoromatro2(Double horomatro2) {
-        this.horomatro2 = horomatro2;
+    public void setHorometro_final(Double horomatro2) {
+        this.horometro_final = horomatro2;
     }
 
-    public void setTiempo_operacion() {
-        this.tiempo_operacion = horomatro2 - horometro1;
+    public void setTiempo_operacion(String tipo) {
+        if (!tipo.equals(Constantes.TIPO_LOW_VOL)){
+            this.tiempo_operacion = 60* (horometro_final - horometro_inicial);
+
+        }
     }
 
     public void setPoPa() {
@@ -121,13 +132,69 @@ public class Muestra  {
         Vstd = (tiempo_operacion*Qstd)/1000;
     }
 
-    public void setObservaciones(String observaciones) {
-        Observaciones = observaciones;
-    }
-
     private Double inH2OAmmHg(Double inH2O){
 
         return 1.86832*inH2O;
+    }
+
+    public Double getDiff_rfo() {
+        return diff_rfo;
+    }
+
+    public void setDiff_rfo(Double diff_rfo) {
+        this.diff_rfo = diff_rfo;
+    }
+
+    public Double getPresion_est_inicial() {
+        return presion_est_inicial;
+    }
+
+    public Double getPresion_est_final() {
+        return presion_est_final;
+    }
+
+    public Double getPresion_est_promedio() {
+        return presion_est_promedio;
+    }
+
+    public Double getPresion_amb() {
+        return presion_amb;
+    }
+
+    public Double getTemp_ambC() {
+        return temp_ambC;
+    }
+
+    public Double getTemp_ambK() {
+        return temp_ambK;
+    }
+
+    public Double getHorometro_inicial() {
+        return horometro_inicial;
+    }
+
+    public Double getHorometro_final() {
+        return horometro_final;
+    }
+
+    public Double getTiempo_operacion() {
+        return tiempo_operacion;
+    }
+
+    public Double getPoPa() {
+        return PoPa;
+    }
+
+    public Double getQr() {
+        return Qr;
+    }
+
+    public Double getQstd() {
+        return Qstd;
+    }
+
+    public Double getVstd() {
+        return Vstd;
     }
 
     public Integer getIdFiltro() {
@@ -139,5 +206,20 @@ public class Muestra  {
     }
 
     public Muestra() {
+    }
+
+    @Override
+    public String toString() {
+
+        Gson obj = new Gson();
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject = new JSONObject(obj.toJson(this));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return jsonObject.toString();
     }
 }

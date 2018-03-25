@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import android.util.Log;
 
 import modelo.Calibracion;
 import modelo.Constantes;
@@ -44,7 +45,6 @@ public class CheckFiltros {
     private Integer idFiltroAsignado;
 
     private DataBaseHelper helper;
-    private Filtro filtro;
     List<Filtro> listaFiltros;
 
     public CheckFiltros(Dao<Equipo, Integer> daoEquipos, Dao<Filtro,
@@ -70,7 +70,27 @@ public class CheckFiltros {
     public boolean tieneFiltroAsignado(){
         try {
             QueryBuilder<Filtro, Integer> queryBuilder = daoFiltros.queryBuilder();
-            queryBuilder.where().isNull("instalado").eq("idequipo", idEquipo);
+            queryBuilder.where().isNull("instalado").and().eq("idequipo", idEquipo)
+            .and().isNull("recogido");
+            PreparedQuery<Filtro> preparedQuery = queryBuilder.prepare();
+            listaFiltros = daoFiltros.query(preparedQuery);
+            if (listaFiltros != null){
+                if (listaFiltros.size() > 0){
+                    Log.e("filtro asignado", listaFiltros.get(0).getInstalado());
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaFiltros.size() > 0;
+    }
+
+    //Filtro se ha instalado pero no se ha recogido
+    public boolean tieneFiltroAsignadoYpesado(){
+        try {
+            QueryBuilder<Filtro, Integer> queryBuilder = daoFiltros.queryBuilder();
+            queryBuilder.where().isNotNull("instalado").and().eq("idequipo", idEquipo)
+                    .and().isNull("recogido");
             PreparedQuery<Filtro> preparedQuery = queryBuilder.prepare();
             listaFiltros = daoFiltros.query(preparedQuery);
         } catch (SQLException e) {
@@ -85,6 +105,7 @@ public class CheckFiltros {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return calibracionList.size() > 0;
     }
 
@@ -95,7 +116,7 @@ public class CheckFiltros {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogAsignarFiltro.dismiss();
-                        dialogFiltros.show();
+                        showFiltros();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -106,6 +127,7 @@ public class CheckFiltros {
                 });
 
         dialogAsignarFiltro = builder2.create();
+        dialogAsignarFiltro.show();
     }
 
     public void showNoHayFiltrosParaAsignar(){
@@ -118,13 +140,14 @@ public class CheckFiltros {
                 });
 
         dialogNoHayFiltros = builder.create();
+        dialogNoHayFiltros.show();
     }
 
     public void showFiltros(){
         try {
 
             QueryBuilder<Filtro, Integer> queryBuilder = daoFiltros.queryBuilder();
-            queryBuilder.where().isNull("instalado").isNull("idequipo");
+            queryBuilder.where().isNull("instalado").and().isNull("idequipo");
             PreparedQuery<Filtro> preparedQuery = queryBuilder.prepare();
             listaFiltros = daoFiltros.query(preparedQuery);
 
@@ -161,7 +184,7 @@ public class CheckFiltros {
 
                     // preguntar si el equipo es hi vol o Low Vol
 
-                    if (tipoEquipo.equals("Hi Vol")){
+                    if (tipoEquipo.equals(Constantes.TIPO_HI_VOL)){
                         irInstalarFiltro();
                     }else{
                         mostrarDialogoFiltroLowVolInstalado();
@@ -199,7 +222,6 @@ public class CheckFiltros {
         Intent i = new Intent(context, InstalarFiltros.class);
         i.putExtra("idFiltroAsignado", idFiltroAsignado);
         i.putExtra("idequipo", idEquipo);
-        helper.close();
         context.startActivity(i);
     }
 
@@ -221,11 +243,65 @@ public class CheckFiltros {
         }
     }
 
+    //setIdFiltro que no ha sido recogido
+    public void setIdFiltroAsignadoNuevo() {
+        try {
+            QueryBuilder<Filtro, Integer> qbFiltro = daoFiltros.queryBuilder();
+            qbFiltro.where().eq("idequipo", idEquipo).and().isNull("recogido")
+                    .and().isNull("instalado");
+
+            PreparedQuery<Filtro> preparedQuery = qbFiltro.prepare();
+
+            this.FiltroAsignado = daoFiltros.query(preparedQuery).get(0);
+            this.idFiltroAsignado = FiltroAsignado.getIdFiltro();
+        } catch (SQLException  e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    //setIdFiltro que no ha sido recogido
     public void setIdFiltroAsignado() {
         try {
-            this.idFiltroAsignado = daoFiltros.queryForEq("idequipo", idEquipo).get(0).getIdFiltro();
+            QueryBuilder<Filtro, Integer> qbFiltro = daoFiltros.queryBuilder();
+            qbFiltro.where().eq("idequipo", idEquipo).and().isNull("recogido");
+
+            PreparedQuery<Filtro> preparedQuery = qbFiltro.prepare();
+
+            this.FiltroAsignado = daoFiltros.query(preparedQuery).get(0);
+            this.idFiltroAsignado = FiltroAsignado.getIdFiltro();
+        } catch (SQLException  e) {
+            e.printStackTrace();
+        }
+    }
+
+    //setIdFiltro que no ha sido recogido
+    public void setIdFiltroAsignadoIns() {
+        try {
+            QueryBuilder<Filtro, Integer> qbFiltro = daoFiltros.queryBuilder();
+            qbFiltro.where().eq("idequipo", idEquipo).and().isNull("instalado");
+
+            PreparedQuery<Filtro> preparedQuery = qbFiltro.prepare();
+
+            this.FiltroAsignado = daoFiltros.query(preparedQuery).get(0);
+            this.idFiltroAsignado = FiltroAsignado.getIdFiltro();
+        } catch (SQLException  e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean hayFiltrosSinAsignar(){
+
+        try {
+            QueryBuilder<Filtro, Integer> queryBuilder = daoFiltros.queryBuilder();
+            queryBuilder.where().isNull("instalado").and().isNull("idequipo")
+            .and().isNull("recogido");
+            PreparedQuery<Filtro> preparedQuery = queryBuilder.prepare();
+            listaFiltros = daoFiltros.query(preparedQuery);
+            Log.e("filtros", "filtros sin asignar "+ String.valueOf(listaFiltros.size()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return listaFiltros.size() > 0;
     }
 }

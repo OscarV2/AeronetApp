@@ -1,17 +1,21 @@
 package modelo;
 
+import com.google.gson.Gson;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.table.DatabaseTable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.SQLException;
 
 @DatabaseTable
 public class Filtro  {
 
-    @DatabaseField(unique = true)
+    @DatabaseField(unique = true, id = true)
     public Integer idFiltros;
 
     @DatabaseField(unique = true)
@@ -34,6 +38,9 @@ public class Filtro  {
 
     @DatabaseField
     public String fecha_muestreo;
+
+    @DatabaseField
+    public String observaciones;
 
     @DatabaseField
     public Integer idequipo;
@@ -121,5 +128,13 @@ public class Filtro  {
 
     public Integer getIdequipo() {
         return idequipo;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
     }
 }

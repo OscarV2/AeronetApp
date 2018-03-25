@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,374 +7,468 @@
     android:orientation="vertical"
     tools:context="com.example.oscar.aeronet.vista.CalibrarActivity">
 
-    <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/datos_calibrador"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/datos_calibrador"
-        android:textSize="22dp"
-        android:layout_centerHorizontal="true"
-        />
-
-    </RelativeLayout>
-    <android.support.design.widget.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/blanco">
-        <EditText
-            android:id="@+id/temp_Amb"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/datos_calibrador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/datos_calibrador"
+                android:textSize="22dp"
+                android:layout_centerHorizontal="true"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:hint="Temperatura Ambiente"
-            android:maxLines="1"
-            android:inputType="numberDecimal"
-            android:maxLength="6"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="@dimen/ancho_datos_calibrador"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/blanco">
+                <EditText
+                    android:id="@+id/m_act"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:hint="m(act)"
+                    android:maxLines="1"
+                    android:inputType="numberDecimal"
+                    android:maxLength="10"
+                    android:textColorHint="@color/blanco"
+
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="@dimen/ancho_datos_calibrador"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/blanco">
+                <EditText
+                    android:id="@+id/b_act"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:hint="b(act)"
+                    android:maxLines="1"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:maxLength="10"
+                    android:textColorHint="@color/text_Color_Hint"
+
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="@dimen/ancho_datos_calibrador"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/blanco">
+                <EditText
+                    android:id="@+id/r_act"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:hint="r(act)"
+                    android:maxLines="1"
+                    android:inputType="numberDecimal"
+                    android:maxLength="10"
+                    android:textColorHint="@color/blanco"
+
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textColorHint="@color/blanco"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp">
+            <EditText
+                android:id="@+id/temp_Amb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:hint="Temperatura Ambiente"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:textColorHint="@color/blanco"
 
-            />
+                />
 
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/blanco">
-        <EditText
-            android:id="@+id/presion_atm"
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:hint="Presión Atmosférica"
-            android:maxLines="1"
-            android:inputType="numberDecimal"
-            android:maxLength="6"
-            android:textColorHint="@color/text_Color_Hint"
+            android:textColorHint="@color/blanco"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp">
+            <EditText
+                android:id="@+id/presion_atm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:hint="Presión Atmosférica"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:textColorHint="@color/text_Color_Hint"
 
-            />
+                />
 
-    </android.support.design.widget.TextInputLayout>
-    <!-- texto Muestras(in H2O) -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/Muestras_calibrador"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/muestras_calibrador"
-            android:textSize="22dp"
-            android:layout_centerHorizontal="true"
-            />
-        <TextView
-            android:id="@+id/Equipo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Equipo"
-            android:textSize="22dp"
-            android:layout_below="@id/Muestras_calibrador"
-            android:layout_marginLeft="30dp"
-            />
-        <TextView
-            android:id="@+id/Calibrador"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Calibrador"
-            android:textSize="22dp"
-            android:layout_below="@id/Muestras_calibrador"
-            android:layout_marginRight="24dp"
-            android:layout_alignParentRight="true"
-            />
-    </RelativeLayout>
+        </android.support.design.widget.TextInputLayout>
+        <!-- texto Muestras(in H2O) -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/Muestras_calibrador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/muestras_calibrador"
+                android:textSize="22dp"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:id="@+id/Equipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Equipo"
+                android:textSize="22dp"
+                android:layout_below="@id/Muestras_calibrador"
+                android:layout_marginLeft="30dp"
+                />
+            <TextView
+                android:id="@+id/Calibrador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calibrador"
+                android:textSize="22dp"
+                android:layout_below="@id/Muestras_calibrador"
+                android:layout_marginRight="24dp"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
 
-    <!-- obtener las presiones del equipo y calibradror-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <!-- obtener las presiones del equipo y calibradror-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/delta_p1"
-                android:layout_width="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/blanco"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                >
-                <EditText
-                    android:id="@+id/deltap1"
-                    android:layout_width="150dp"
+                android:layout_centerHorizontal="true">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/delta_p1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:hint="P. Estancamiento 1."
-                    android:maxLines="1"
-                    android:inputType="numberDecimal"
-                    android:maxLength="6"
-                    android:textColorHint="@color/text_Color_Hint"
-                    android:layout_marginLeft="24dp"
-                    />
+                    android:textColorHint="@color/blanco"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    >
+                    <EditText
+                        android:id="@+id/deltap1"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:hint="P. Estancamiento 1."
+                        android:maxLines="1"
+                        android:inputType="numberDecimal"
+                        android:maxLength="6"
+                        android:textColorHint="@color/text_Color_Hint"
+                        android:layout_marginLeft="24dp"
+                        />
 
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/delta_h1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/blanco"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                >
-                <EditText
-                    android:id="@+id/deltaH1"
-                    android:layout_width="@dimen/layout_width"
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/delta_h1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:hint="P. Calibrador 1."
-                    android:maxLines="1"
-                    android:inputType="numberDecimal"
-                    android:maxLength="6"
-                    android:textColorHint="@color/text_Color_Hint"
-                    />
+                    android:textColorHint="@color/blanco"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    >
+                    <EditText
+                        android:id="@+id/deltaH1"
+                        android:layout_width="@dimen/layout_width"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:hint="P. Calibrador 1."
+                        android:maxLines="1"
+                        android:inputType="numberDecimal"
+                        android:maxLength="6"
+                        android:textColorHint="@color/text_Color_Hint"
+                        />
 
-            </android.support.design.widget.TextInputLayout>
+                </android.support.design.widget.TextInputLayout>
 
+            </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/delta_p2"
-                android:layout_width="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/blanco"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                >
-                <EditText
-                    android:id="@+id/deltap2"
-                    android:layout_width="150dp"
+                android:layout_centerHorizontal="true">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/delta_p2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:hint="P. Estancamiento 2."
-                    android:maxLines="1"
-                    android:inputType="numberDecimal"
-                    android:maxLength="6"
-                    android:textColorHint="@color/text_Color_Hint"
-                    android:layout_marginLeft="24dp"
-                    />
+                    android:textColorHint="@color/blanco"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    >
+                    <EditText
+                        android:id="@+id/deltap2"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:hint="P. Estancamiento 2."
+                        android:maxLines="1"
+                        android:inputType="numberDecimal"
+                        android:maxLength="6"
+                        android:textColorHint="@color/text_Color_Hint"
+                        android:layout_marginLeft="24dp"
+                        />
 
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/delta_H2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/blanco"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                >
-                <EditText
-                    android:id="@+id/deltaH2"
-                    android:layout_width="@dimen/layout_width"
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/delta_H2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:hint="P. Calibrador 2."
-                    android:maxLines="1"
-                    android:inputType="numberDecimal"
-                    android:maxLength="6"
-                    android:textColorHint="@color/text_Color_Hint"
-                    />
+                    android:textColorHint="@color/blanco"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    >
+                    <EditText
+                        android:id="@+id/deltaH2"
+                        android:layout_width="@dimen/layout_width"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:hint="P. Calibrador 2."
+                        android:maxLines="1"
+                        android:inputType="numberDecimal"
+                        android:maxLength="6"
+                        android:textColorHint="@color/text_Color_Hint"
+                        />
 
-            </android.support.design.widget.TextInputLayout>
+                </android.support.design.widget.TextInputLayout>
 
+            </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/delta_p3"
-                android:layout_width="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/blanco"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                >
-                <EditText
-                    android:id="@+id/deltap3"
-                    android:layout_width="150dp"
+                android:layout_centerHorizontal="true">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/delta_p3"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:hint="P. Estancamiento 3."
-                    android:maxLines="1"
-                    android:inputType="numberDecimal"
-                    android:maxLength="6"
-                    android:textColorHint="@color/text_Color_Hint"
-                    android:layout_marginLeft="24dp"
-                    />
+                    android:textColorHint="@color/blanco"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    >
+                    <EditText
+                        android:id="@+id/deltap3"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:hint="P. Estancamiento 3."
+                        android:maxLines="1"
+                        android:inputType="numberDecimal"
+                        android:maxLength="6"
+                        android:textColorHint="@color/text_Color_Hint"
+                        android:layout_marginLeft="24dp"
+                        />
 
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/delta_h3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/blanco"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                >
-                <EditText
-                    android:id="@+id/deltaH3"
-                    android:layout_width="@dimen/layout_width"
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/delta_h3"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:hint="P. Calibrador 3."
-                    android:maxLines="1"
-                    android:inputType="numberDecimal"
-                    android:maxLength="6"
-                    android:textColorHint="@color/text_Color_Hint"
-                    />
+                    android:textColorHint="@color/blanco"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    >
+                    <EditText
+                        android:id="@+id/deltaH3"
+                        android:layout_width="@dimen/layout_width"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:hint="P. Calibrador 3."
+                        android:maxLines="1"
+                        android:inputType="numberDecimal"
+                        android:maxLength="6"
+                        android:textColorHint="@color/text_Color_Hint"
+                        />
 
-            </android.support.design.widget.TextInputLayout>
+                </android.support.design.widget.TextInputLayout>
 
+            </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/delta_p4"
-                android:layout_width="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/blanco"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                >
-                <EditText
-                    android:id="@+id/deltap4"
-                    android:layout_width="150dp"
+                android:layout_centerHorizontal="true">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/delta_p4"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:hint="P. Estancamiento 4."
-                    android:maxLines="1"
-                    android:inputType="numberDecimal"
-                    android:maxLength="6"
-                    android:textColorHint="@color/text_Color_Hint"
-                    android:layout_marginLeft="24dp"
-                    />
+                    android:textColorHint="@color/blanco"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    >
+                    <EditText
+                        android:id="@+id/deltap4"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:hint="P. Estancamiento 4."
+                        android:maxLines="1"
+                        android:inputType="numberDecimal"
+                        android:maxLength="6"
+                        android:textColorHint="@color/text_Color_Hint"
+                        android:layout_marginLeft="24dp"
+                        />
 
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/delta_h4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/blanco"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                >
-                <EditText
-                    android:id="@+id/deltaH4"
-                    android:layout_width="@dimen/layout_width"
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/delta_h4"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:hint="P. Calibrador 4."
-                    android:maxLines="1"
-                    android:inputType="numberDecimal"
-                    android:maxLength="6"
-                    android:textColorHint="@color/text_Color_Hint"
-                    />
+                    android:textColorHint="@color/blanco"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    >
+                    <EditText
+                        android:id="@+id/deltaH4"
+                        android:layout_width="@dimen/layout_width"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:hint="P. Calibrador 4."
+                        android:maxLines="1"
+                        android:inputType="numberDecimal"
+                        android:maxLength="6"
+                        android:textColorHint="@color/text_Color_Hint"
+                        />
 
-            </android.support.design.widget.TextInputLayout>
+                </android.support.design.widget.TextInputLayout>
 
+            </RelativeLayout>
         </RelativeLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/delta_p5"
-                android:layout_width="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/blanco"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                >
-                <EditText
-                    android:id="@+id/deltap5"
-                    android:layout_width="150dp"
+                android:layout_centerHorizontal="true">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/delta_p5"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:hint="P. Estancamiento 5."
-                    android:maxLines="1"
-                    android:inputType="numberDecimal"
-                    android:maxLength="6"
-                    android:textColorHint="@color/text_Color_Hint"
-                    android:layout_marginLeft="24dp"
-                    />
+                    android:textColorHint="@color/blanco"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    >
+                    <EditText
+                        android:id="@+id/deltap5"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:hint="P. Estancamiento 5."
+                        android:maxLines="1"
+                        android:inputType="numberDecimal"
+                        android:maxLength="6"
+                        android:textColorHint="@color/text_Color_Hint"
+                        android:layout_marginLeft="24dp"
+                        />
 
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/delta_h5"
-                android:layout_width="wrap_content"
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/delta_h5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/blanco"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    >
+                    <EditText
+                        android:id="@+id/deltaH5"
+                        android:layout_width="@dimen/layout_width"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:hint="P. Calibrador 5."
+                        android:maxLines="1"
+                        android:inputType="numberDecimal"
+                        android:maxLength="6"
+                        android:textColorHint="@color/text_Color_Hint"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+        <!-- Boton Guardar-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/email_sign_in_button"
+                style="?android:textAppearanceSmall"
+                android:layout_centerHorizontal="true"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/blanco"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                >
-                <EditText
-                    android:id="@+id/deltaH5"
-                    android:layout_width="@dimen/layout_width"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:hint="P. Calibrador 5."
-                    android:maxLines="1"
-                    android:inputType="numberDecimal"
-                    android:maxLength="6"
-                    android:textColorHint="@color/text_Color_Hint"
-                    />
-
-            </android.support.design.widget.TextInputLayout>
+                android:layout_marginTop="16dp"
+                android:text="@string/btn_guardar"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/blanco"
+                android:background="@drawable/forma_boton"
+                android:layout_below="@id/tilcontra"
+                android:onClick="calibrar"
+                />
 
         </RelativeLayout>
-    </RelativeLayout>
-    <!-- Boton Guardar-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/email_sign_in_button"
-            style="?android:textAppearanceSmall"
-            android:layout_centerHorizontal="true"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/btn_guardar"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="@color/blanco"
-            android:background="@drawable/forma_boton"
-            android:layout_below="@id/tilcontra"
-            android:onClick="calibrar"
-            />
 
-    </RelativeLayout>
+    </LinearLayout>
 
-</LinearLayout>
+
+
+</ScrollView>

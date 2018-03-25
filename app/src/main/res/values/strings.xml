@@ -16,12 +16,12 @@
     <string name="calibrar">Calibrar equipo</string>
 
     <!-- Actividad datos -->
-    <string name="hint_temperatura_ambiente">Temperatura ambiente</string>
-    <string name="hint_presion_estancamiento_ini">Presion de estancamiento inicial</string>
-    <string name="hint_presion_estancamiento_fin">Presion de estancamiento final</string>
-    <string name="hint_horometro_ini">Horómetro inicial</string>
+    <string name="hint_temperatura_ambiente">Temperatura ambiente (°C)</string>
+    <string name="hint_presion_estancamiento_ini">Presion de estancamiento inicial (inH2O)</string>
+    <string name="hint_presion_estancamiento_fin">Presion de estancamiento final (inH2O)</string>
+    <string name="hint_horometro_ini">Horómetro inicial </string>
     <string name="hint_horometro_fin">Horómetro final</string>
-    <string name="hint_presion_atmosf">Presion atmosferica</string>
+    <string name="hint_presion_atmosf">Presion atmosferica (mm Hg)</string>
 
     <string name="hint_volumen">Volumen</string>
     <string name="hint_tiempo_operacion">Tiempo de operacion (23 a 25 h)</string>
@@ -54,7 +54,7 @@
     <string name="marca">Marca:</string>
     <string name="tipo">Tipo:</string>
     <string name="filtros">Filtros:</string>
-    <string name="ultima_calibracion">Ultima Calibración:</string>
+    <string name="ultima_calibracion">Ultima \nCalibración:</string>
     <string name="descripcion">Descripción</string>
 
 

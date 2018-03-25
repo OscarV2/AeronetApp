@@ -9,7 +9,7 @@ import java.util.List;
 @DatabaseTable(tableName = "equipos")
 public class Equipo {
 
-    @DatabaseField
+    @DatabaseField(id = true)
     public Integer idequipo;
 
     @DatabaseField
@@ -96,6 +96,10 @@ public class Equipo {
 
     public void isOcupado(){
 
+    }
+
+    public String getDescripcion() {
+        return descripcion;
     }
 
     public void setClase(String clase) {

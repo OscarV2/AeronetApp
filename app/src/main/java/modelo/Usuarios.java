@@ -9,7 +9,7 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "usuarios")
 public class Usuarios {
 
-    @DatabaseField
+    @DatabaseField(id = true)
     public Integer idusuarios;
 
     @DatabaseField

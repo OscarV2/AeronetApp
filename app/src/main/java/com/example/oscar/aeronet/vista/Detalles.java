@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.Calibracion;
 import modelo.DataBaseHelper;
 import modelo.Equipo;
 import modelo.Filtro;
@@ -24,6 +25,8 @@ public class Detalles extends AppCompatActivity {
     TextView TvNombtreEquipo, TvMarca, TvTipo, TvFiltros, TvDescripcion, TvFechaCalibracion;
     Dao<Equipo, Integer> daoEquipos;
     Dao<Filtro, Integer> daoFiltros;
+    Dao<Calibracion, Integer> daoCalibracion;
+
     private Integer idequipo;
     private Equipo equipo;
     @Override
@@ -44,9 +47,12 @@ public class Detalles extends AppCompatActivity {
 
         DataBaseHelper helper = OpenHelperManager.getHelper(this, DataBaseHelper.class);
 
+        Calibracion calibracion = new Calibracion();
+
         try {
             daoEquipos = helper.getEquipoDao();
             daoFiltros = helper.getFiltroDao();
+            daoCalibracion = helper.getCalibracionDao();
 
             QueryBuilder<Equipo, Integer> queryBuilder = daoEquipos.queryBuilder();
             queryBuilder.where().eq("idequipo", idequipo);
@@ -59,6 +65,36 @@ public class Detalles extends AppCompatActivity {
             filtros = daoFiltros.query(pqFiltro);
 
             //mostrar Datos:
+            TvTipo.setText(equipo.getClase());
+            TvNombtreEquipo.setText(equipo.getModelo());
+            TvMarca.setText(equipo.getMarca());
+            TvDescripcion.setText(equipo.getDescripcion());
+
+            QueryBuilder<Calibracion, Integer> qbCalibracion = daoCalibracion.queryBuilder();
+            queryBuilder.where().eq("idequipo", idequipo);
+            PreparedQuery<Calibracion> pqCal = qbCalibracion.prepare();
+
+            calibracion = daoCalibracion.queryForFirst(pqCal);
+
+            if (filtros == null || filtros.size()<= 0){
+
+                TvFiltros.setText("Sin Filtros Asignados.");
+
+            }else{
+                for (Filtro filtro: filtros) {
+
+                    TvFiltros.setText(filtro.getNombre() + "\n");
+                }
+            }
+
+
+
+            if (calibracion == null){
+
+                TvFechaCalibracion.setText("Equipo no calibrado.");
+            }else{
+                TvFechaCalibracion.setText(calibracion.getFecha());
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

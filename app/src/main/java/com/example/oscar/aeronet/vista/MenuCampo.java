@@ -19,6 +19,7 @@ import com.j256.ormlite.dao.Dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import modelo.Constantes;
 import modelo.DataBaseHelper;
 import modelo.Equipo;
 import modelo.Filtro;
@@ -71,18 +72,34 @@ public class MenuCampo extends AppCompatActivity {
 
     public void irInstalarFiltros(View v){
 
+
         if (checkFiltros.equipoCalibrado()){  // si el equipo  esta calibrado
-            if (!checkFiltros.tieneFiltroAsignado()){  //si el equipo no tiene filtro asignado
-                checkFiltros.showNoHayFiltrosParaAsignar();
+            if (!checkFiltros.tieneFiltroAsignado()){  //si el equipo no tiene filtro asignado ni instalado
+                //Si hay filtros para asignar, muestra dialogo asignar filtros
+                if (checkFiltros.hayFiltrosSinAsignar()){
+
+                    checkFiltros.showAsignarFiltro();
+                }else{
+
+                    checkFiltros.showNoHayFiltrosParaAsignar();
+                }
             }else{             // el equipo tiene filtro asignado
 
-                checkFiltros.setIdFiltroAsignado();
+                // si el filtro no ha sido instalado ir a instalar
 
-                if (tipo.equals("Low Vol")){            //equipo Low Vol
-                    // mostrar mensaje instalacion de filtro.
-                    checkFiltros.mostrarDialogoFiltroLowVolInstalado();
-                }else{                                  //Equipo Hi Vol
-                    checkFiltros.irInstalarFiltro();
+                checkFiltros.setIdFiltroAsignadoIns();
+                filtro = checkFiltros.getFiltroAsignado();
+
+                if (filtro.getRecogido()== null){
+                    Toast.makeText(this, "EL FILTRO " + filtro.getNombre()
+                            + " ESTA INSTALADO EN ESTE EQUIPO.", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (tipo.equals(Constantes.TIPO_LOW_VOL)){            //equipo Low Vol
+                        // mostrar mensaje instalacion de filtro.
+                        checkFiltros.mostrarDialogoFiltroLowVolInstalado();
+                    }else{                                  //Equipo Hi Vol
+                        checkFiltros.irInstalarFiltro();
+                    }
                 }
             }
         }else {
@@ -94,23 +111,32 @@ public class MenuCampo extends AppCompatActivity {
     public void irRecogerFiltros(View v){
 
         // consultar filtro asignado
-        idFiltro = checkFiltros.getIdFiltroAsignado();
 
-        if (idFiltro == null){
-            Toast.makeText(this, "ESTE EQUIPO NO TIENE NINGUN FILTRO ASIGNADO.",
-                    Toast.LENGTH_SHORT).show();
+        //si tiene un filtro asignado y pesado
+
+        checkFiltros.setIdFiltroAsignado();
+        if (!checkFiltros.tieneFiltroAsignadoYpesado()){//
+
+            Toast.makeText(this, "ESTE EQUIPO NO TIENE NINGUN FILTRO INSTALADO.", Toast.LENGTH_SHORT).show();
         }else{
-            Intent i = new Intent(MenuCampo.this, RecogerFiltros.class);
-            i.putExtra("idFiltroAsignado", idFiltro);
-            i.putExtra("idequipo", idequipo);
-            i.putExtra("tipo", tipo);
-            startActivity(i);
-            finish();
+
+            checkFiltros.setFiltroAsignado();
+            filtro = checkFiltros.getFiltroAsignado();
+            idFiltro = filtro.getIdFiltro();
+
+                Intent i = new Intent(MenuCampo.this, RecogerFiltros.class);
+                i.putExtra("idFiltroAsignado", idFiltro);
+                i.putExtra("idequipo", idequipo);
+                i.putExtra("tipo", tipo);
+                startActivity(i);
+                finish();
+
         }
+
     }
 
     public void calibrarEquipo(View v){
-        if (tipo.equals("Low Vol")){
+        if (tipo.equals(Constantes.TIPO_LOW_VOL)){
             // este equipo no se puede calibrar
             equipoLowVol();
         }else{
@@ -134,10 +160,6 @@ public class MenuCampo extends AppCompatActivity {
 
         builder.create();
         builder.show();
-    }
-
-    public void salir(View v){
-
     }
 
     public void verDetalles(View v){

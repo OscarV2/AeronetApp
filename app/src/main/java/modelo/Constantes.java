@@ -40,6 +40,10 @@ public class Constantes {
     public static String telefono = "telefono";
     public static String rol = "rol";
 
+    public static final String TIPO_HI_VOL = "Hi Vol";
+    public static final String TIPO_LOW_VOL = "Low Vol";
+
+
     public static final String INSTALADO_UPLOADED = "uploadedInstalado";
     public static final String RECOGIDO_UPLOADED = "uploadedRecogido";
 
@@ -51,6 +55,7 @@ public class Constantes {
     public static final String GET_EQUIPOS = "Equipos/getEquipos";
     public static final String GET_FILTROS = "Filtros/descargarFiltros";
     public static final String GET_CALIBRADOR = "Calibrador/getCalibradores";
+    public static final String GET_CALIBRACIONES = "Calibracion/getUltimasCalibraciones";
     public static final String POST_FILTROS_INSTALADO = "Filtros/instalarFiltro";
     public static final String POST_FILTROS_RECOGIDO = "Filtros/recogerFiltro";
     public static final String POST_CALIBRACION = "Calibracion/nuevaCalibracion";

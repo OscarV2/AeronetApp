@@ -102,7 +102,7 @@ public class ListaEquipos extends AppCompatActivity implements UpdateListener{
             case R.id.sincronizar:
 
                 if (sincronizar.tieneInternet()){    // hay internet, se pueden sincronizar los datos
-
+                    alertDialog.show();
                     sincronizar.sincronizar();
 
                 }else {
@@ -120,13 +120,11 @@ public class ListaEquipos extends AppCompatActivity implements UpdateListener{
                     PreparedQuery<Filtro> preparedQuery = queryBuilder.prepare();
                     listaFiltros = daoFiltros.query(preparedQuery);
                     Log.e("tamaño", "de filtros por ver "+ String.valueOf(listaFiltros.size()));
+
                     final CharSequence[] items = new CharSequence[listaFiltros.size()];
                     for (int i = 0; i < listaFiltros.size(); i++) {
                         items[i] = listaFiltros.get(i).getNombre();
-                    }
 
-                    for (int i = 0; i < items.length; i++) {
-                        Log.e("item", items[i].toString());
                     }
 
                     android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ListaEquipos.this).setTitle("Asignar Filtro.");

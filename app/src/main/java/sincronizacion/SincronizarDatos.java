@@ -9,6 +9,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import modelo.Equipo;
 import modelo.Filtro;
 import modelo.Muestra;
 import modelo.Usuarios;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -161,6 +163,61 @@ public class SincronizarDatos {
 
     }
 
+    private void descargarCalibraciones() {
+
+        Call<List<Calibracion>> calibracionCall = AeronetApiAdapter.getApiService()
+                .getCalibraciones();
+
+        calibracionCall.enqueue(new Callback<List<Calibracion>>() {
+            @Override
+            public void onResponse(Call<List<Calibracion>> call, Response<List<Calibracion>> response) {
+
+                if (response.isSuccessful()){
+                    List<Calibracion> calibraciones = response.body();
+                    if (calibraciones != null){
+                        if (calibraciones.size() > 0){
+
+                            for (Calibracion calibracion:
+                                 calibraciones) {
+                                calibracion.setUploaded(true);
+                                try {
+                                    daoCalibracion.create(calibracion);
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+
+                                if (calibracion == calibraciones.get(calibraciones.size()-1)){
+                                    updateListener.success("success");
+                                }
+
+                            }
+                        }else{
+                            updateListener.success("success");
+                            Log.e("getting", "calibracioones TAMAÑO NOO ES MAYOR A CERO");
+                        }
+                    }else{
+                        Log.e("getting", "calibracioones en NUULL");
+                        updateListener.success("fallo");
+
+                    }
+                }else{
+                    Log.e("getting", "calibracioones RESPONSE Was not successfull");
+                    updateListener.success("fallo");
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Calibracion>> call, Throwable t) {
+                updateListener.success("fallo");
+                Log.e("fallo", "GETTING Calibraciones");
+            }
+        });
+
+
+    }
+
     public void descargarFiltros() {
         Call<List<Filtro>> filtrosCall = AeronetApiAdapter.getApiService()
                 .getFiltros();
@@ -190,7 +247,7 @@ public class SincronizarDatos {
                             updateListener.success("success");
                         }else {
                             Log.e("FiltrosErr","LA LISTA NO TIENE FILTROS SIZE ES CERO");
-                            updateListener.success("sin filtros");
+                            updateListener.success("success");
                         }
                     }else{
                         Log.e("FiltrosErr","LA LISTA ES NULA");
@@ -227,13 +284,13 @@ public class SincronizarDatos {
         QueryBuilder<Calibracion, Integer> qbCalibraciones = daoCalibracion.queryBuilder();
 
         try {
-            queryBuilderIns.where().isNotNull("idequipo").isNotNull("instalado")
-            .eq(Constantes.INSTALADO_UPLOADED, false).isNull("recogido");
+            queryBuilderIns.where().isNotNull("idequipo").and().isNotNull("instalado").and()
+            .eq(Constantes.INSTALADO_UPLOADED, false);
             PreparedQuery<Filtro> preparedQuery = queryBuilderIns.prepare();
             filtrosInstalados = daoFiltros.query(preparedQuery);
 
-            queryBuilderRec.where().isNotNull("idequipo").isNotNull("instalado").isNotNull("recogido")
-                    .eq(Constantes.RECOGIDO_UPLOADED, false);
+            queryBuilderRec.where().isNotNull("idequipo").and().isNotNull("instalado").and().isNotNull("recogido")
+                    .and().eq(Constantes.RECOGIDO_UPLOADED, false);
             PreparedQuery<Filtro> preparedQuery2 = queryBuilderRec.prepare();
             filtrosRecogidos = daoFiltros.query(preparedQuery2);
 
@@ -245,11 +302,16 @@ public class SincronizarDatos {
             e.printStackTrace();
         }
 
-        if (filtrosInstalados.size() == 0 || filtrosRecogidos.size() == 0 || calibraciones.size() == 0){
-            updateListener.success("sin datos");
-        }else {
+        Log.e("tamaño","de filtros instalados " + String.valueOf(filtrosInstalados.size()));
+
+        if (calibraciones.size() > 0){
             subirCalibraciones();
+        }else if (filtrosInstalados.size() > 0){
             subirFiltroInstalado(filtrosInstalados);
+        }else if (filtrosRecogidos.size() > 0){
+            subirFiltroRecogido();
+        }else {
+            descargarCalibraciones();
         }
     }
 
@@ -257,26 +319,44 @@ public class SincronizarDatos {
 
         for (final Filtro filtro : filtros){
 
-            Call<String> postFiltro = AeronetApiAdapter.getApiService()
+            Call<ResponseBody> postFiltro = AeronetApiAdapter.getApiService()
                     .postFiltro(filtro);
 
-            postFiltro.enqueue(new Callback<String>() {
+            postFiltro.enqueue(new Callback<ResponseBody>() {
                 @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    filtro.setUploadedRecogido(true);
-                    try {
-                        daoFiltros.update(filtro);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    if (filtros.indexOf(filtro) == (filtros.size()-1)){ //ultimo filtro
-                        subirFiltroRecogido();
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    Log.e("on response","filtros instalados");
+
+                    if (response.isSuccessful()){
+
+                        filtro.setUploadedInstalado(true);
+                        try {
+                            daoFiltros.update(filtro);
+                            Log.e("filtro","actualizado");
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                            Log.e("el filtro","NO SE PUDO ACTUALIZAR");
+
+                        }
+                        if (filtros.indexOf(filtro) == (filtros.size()-1)){ //ultimo filtro
+                            if (filtrosRecogidos.size() > 0){
+
+                                subirFiltroRecogido();
+                            }else{
+                                descargarCalibraciones();
+                            }
+                        }
+                    }else {
+                        Log.e("on response","filtros subidos WAS NOT SUCCESSFULL");
+
                     }
                 }
 
                 @Override
-                public void onFailure(Call<String> call, Throwable t) {
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
                     updateListener.success("fallo");
+                    Log.e("fallo","subir filtros instalados");
+
 
                 }
             });
@@ -291,33 +371,67 @@ public class SincronizarDatos {
 
             try {
                 muestra = filtro.getMuestra(daoMuestra);
+                Log.e("muestra", muestra.toString());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            Call<String> postFiltro = AeronetApiAdapter.getApiService()
-                    .postFiltroRecogido(muestra);
 
-            postFiltro.enqueue(new Callback<String>() {
+            Call<ResponseBody> postFiltro = AeronetApiAdapter.getApiService()
+                    .postFiltroRecogido(filtro.getIdFiltro(), filtro.getIdequipo(), filtro.getRecogido()
+                    , filtro.getObservaciones(), filtro.getFecha_muestreo(), muestra.getPresion_est_inicial(),
+                            muestra.getPresion_est_final(), muestra.getPresion_est_promedio(), muestra.getPresion_amb(),
+                            muestra.getTemp_ambC(), muestra.getTemp_ambK(), muestra.getHorometro_final(),
+                            muestra.getHorometro_inicial(), muestra.getTiempo_operacion(), muestra.getPoPa(),
+                            muestra.getQr(), muestra.getQstd(), muestra.getVstd(), 1.0);
+
+
+            postFiltro.enqueue(new Callback<ResponseBody>() {
                 @Override
-                public void onResponse(Call<String> call, Response<String> response) {
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    Log.e("on response","filtros recogidos");
+
+
+                    if (response.isSuccessful()){
+                        Log.e("on response","filtros instalados response was successfull.");
+
+
                     filtro.setUploadedRecogido(true);
                     try {
                         daoFiltros.update(filtro);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
+
+                    }
+
+
+                    try {
+                        Log.e("respuesta", "bodi string " + response.body().string());
+                        Log.e("respuesta", "message string " + response.message());
+                        Log.e("respuesta", "to string " + response.toString());
+                        Log.e("respuesta", "headers " + response.headers().toString());
+
+                    } catch (IOException | NullPointerException e) {
+                        Log.e("no se ", "pudo imprimir nada");
+                        e.printStackTrace();
+                    }
+
                     if (filtros.indexOf(filtro) == (filtros.size()-1)){ //ultimo filtro
-                        updateListener.success("sincsuccess");
+
+                        descargarCalibraciones();
+
                     }
                 }
 
                 @Override
-                public void onFailure(Call<String> call, Throwable t) {
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
                     updateListener.success("fallo");
 
                 }
             });
+
         }
+
     }
 
     public void subirCalibraciones(){
@@ -325,12 +439,13 @@ public class SincronizarDatos {
         for (final Calibracion calibracion:
              calibraciones) {
 
-            Call<String> subirNuevaCalibraciones = AeronetApiAdapter.getApiService()
+            Call<ResponseBody> subirNuevaCalibraciones = AeronetApiAdapter.getApiService()
                     .postCalibracion(calibracion);
 
-            subirNuevaCalibraciones.enqueue(new Callback<String>() {
+            subirNuevaCalibraciones.enqueue(new Callback<ResponseBody>() {
                 @Override
-                public void onResponse(Call<String> call, Response<String> response) {
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
                     if (response.isSuccessful()){
                         Log.e("response", "SUCCESSFULL CALIBRACION SUBIDA.");
                         calibracion.setUploaded(true);
@@ -339,14 +454,24 @@ public class SincronizarDatos {
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
+                        if (calibracion == calibraciones.get(calibraciones.size() -1)){
+                            if (filtrosInstalados.size() > 0){
+
+                            }else if (filtrosRecogidos.size() > 0){
+                                subirFiltroRecogido();
+                            }else {
+                                descargarCalibraciones();
+                            }
+                        }
                     }else {
                         Log.e("response", "calibracion was not successfull.");
                     }
                 }
 
                 @Override
-                public void onFailure(Call<String> call, Throwable t) {
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
                     updateListener.success("fallo");
+
                 }
             });
         }

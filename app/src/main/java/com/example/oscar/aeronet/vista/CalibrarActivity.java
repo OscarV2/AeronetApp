@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.oscar.aeronet.R;
@@ -38,9 +39,8 @@ public class CalibrarActivity extends AppCompatActivity {
         return onOptionsItemSelected(item);
     }
 
-    private double mCal = 1.0308057;
-    private double bCal = -0.0313734;
-    private double rCal = 0.9986627;
+    //Datos calibrador
+    private double mCal, bCal, rCal;
 
     private double mEquipo;
     private double bEquipo;
@@ -60,8 +60,12 @@ public class CalibrarActivity extends AppCompatActivity {
 
     private Integer idEquipo;
 
-    private EditText edtTempAmbiente, edtPresionAtm, edtDeltaP1, edtDeltaP2, edtDeltaP3, edtDeltaP4, edtDeltaP5,
-    edtDeltah1, edtDeltah2, edtDeltah3, edtDeltah4, edtDeltah5;
+    private EditText edtTempAmbiente, edtPresionAtm, edtDeltaP1,
+            edtDeltaP2, edtDeltaP3, edtDeltaP4, edtDeltaP5,
+            edtDeltah1, edtDeltah2, edtDeltah3, edtDeltah4, edtDeltah5,
+            edtMact, edtBact, edtRact;
+
+
 
     Dao<Calibrador, Integer> daoCalibrador;
     Dao<Calibracion, Integer> daoCalibracion;
@@ -99,6 +103,10 @@ public class CalibrarActivity extends AppCompatActivity {
         edtTempAmbiente = findViewById(R.id.temp_Amb);
         edtPresionAtm = findViewById(R.id.presion_atm);
 
+        edtRact = findViewById(R.id.r_act);
+        edtMact = findViewById(R.id.m_act);
+        edtBact = findViewById(R.id.b_act);
+
         DeltaH = new double[5];
         DeltaP = new double[5];
 
@@ -110,18 +118,9 @@ public class CalibrarActivity extends AppCompatActivity {
 
     }
 
-    private void getValues(){
-
-    }
-
     private boolean validarTemp(){
 
         return (288 <= TempAmbiente) && (TempAmbiente <= 323);
-    }
-
-    public void CalcCalibracion(){
-
-
     }
 
     public void calibrar(View v){
@@ -133,6 +132,10 @@ public class CalibrarActivity extends AppCompatActivity {
             TempAmbiente = calculos.centigradosAKelvin(TempAmbiente);
             Log.e("temp en KELVIN", String.valueOf(TempAmbiente));
             PresionAtm   = Double.valueOf(edtPresionAtm.getText().toString());
+
+            mCal = Double.valueOf(edtMact.getText().toString());
+            rCal = Double.valueOf(edtRact.getText().toString());
+            bCal = Double.valueOf(edtBact.getText().toString());
 
             DeltaH[0] = Double.valueOf(edtDeltah1.getText().toString());
             DeltaH[1] = Double.valueOf(edtDeltah2.getText().toString());
@@ -179,22 +182,45 @@ public class CalibrarActivity extends AppCompatActivity {
                 //Calcular R del equipo
                 rEquipo = calculos.calcularR(datosX, PoPa, 5);
 
-
                 Log.e("m pendiente ", String.valueOf(mEquipo));
                 Log.e("b interseccion ", String.valueOf(bEquipo));
                 Log.e("r correlacion ", String.valueOf(rEquipo));
 
+                showResults();
             }
 
         }catch (NumberFormatException e){
 
             Toast.makeText(this, "Por favor llene todos los campos para realizar la calibración", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void showResults(){
+
+        String mensaje = " ";
+
+        for (int i = 0; i < PoPa.length; i++){
+            if (i == 0){
+                mensaje = mensaje.concat("PoPa:\n");
+            }
+            mensaje = mensaje.concat(String.valueOf(i + 1)+". " +String.valueOf(PoPa[i]) + "\n");
+        }
+
+        for (int i = 0; i < Qa.length; i++){
+            if (i == 0){
+                mensaje = mensaje.concat("Flujo m3/min:\n");
+            }
+            mensaje = mensaje.concat(String.valueOf(i + 1)+". " +  String.valueOf(Qa[i]) + "\n");
+        }
+
+        mensaje = mensaje.concat("m: " + String.valueOf(mEquipo) + "\nb: " + String.valueOf(bEquipo)
+                + "\nr:" + String.valueOf(rEquipo));
+
+
 
         AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
         dialogo1.setTitle("Datos de Calibracion:");
-        dialogo1.setMessage("m: " + String.valueOf(mEquipo) + "b: " + String.valueOf(bEquipo)
-                + "r:" + String.valueOf(rEquipo));
+        dialogo1.setMessage(mensaje);
         dialogo1.setCancelable(false);
         dialogo1.setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogo1, int id) {
@@ -210,14 +236,10 @@ public class CalibrarActivity extends AppCompatActivity {
         dialogo1.show();
     }
 
-    private void showResults(){
-
-
-    }
-
     public void aceptar() {
 
-        calibracion = new Calibracion(fecha, idEquipo, mEquipo, bEquipo, rEquipo);
+        calibracion = new Calibracion(fecha, idEquipo, String.valueOf(mEquipo),
+                String.valueOf(bEquipo), String.valueOf(rEquipo));
         try {
             calibracion.setUploaded(false);
             daoCalibracion.create(calibracion);

@@ -72,9 +72,10 @@ public class InstalarFiltros extends AppCompatActivity {
 
         try {
             QueryBuilder<Filtro, Integer> queryBuilder = daoFiltros.queryBuilder();
-            queryBuilder.where().eq("instalado", null).eq("idequipo", idEquipo);
+            queryBuilder.where().isNull("instalado").and().eq("idequipo", idEquipo);
             PreparedQuery<Filtro> preparedQuery = queryBuilder.prepare();
             filtro = daoFiltros.queryForFirst(preparedQuery);
+            tvFiltro.setText("Filtro a instalar  " + filtro.getNombre());
         } catch (SQLException e) {
             e.printStackTrace();
         }

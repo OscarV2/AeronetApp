@@ -15,10 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.oscar.aeronet.R;
+import com.google.gson.Gson;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -42,7 +46,6 @@ public class RecogerFiltros extends AppCompatActivity {
     private EditText edtPresionAtm;
     private EditText edtPresionEstFinal;
     private EditText edtHorometro;
-    private EditText edtFechaMuestreo;
     private EditText edtObservaciones;
     private EditText edtVolumen;
     private EditText edtTiempoOperacion;
@@ -62,6 +65,7 @@ public class RecogerFiltros extends AppCompatActivity {
     Dao<Filtro, Integer> daoFiltros;
     Dao<Muestra, Integer> daoMuestra;
 
+    private Muestra muestra;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +74,7 @@ public class RecogerFiltros extends AppCompatActivity {
 
         idequipo = getIntent().getIntExtra("idequipo", 0);
         tipo = getIntent().getStringExtra("tipo");
-        idFiltro = getIntent().getIntExtra("idFiltro", 0);
+        idFiltro = getIntent().getIntExtra("idFiltroAsignado", 0);
         Log.e("idFiltro", String.valueOf(idFiltro));
         // CONSULTAR FILTRO
         List<Filtro> filtros = null;
@@ -82,6 +86,8 @@ public class RecogerFiltros extends AppCompatActivity {
             daoCalibracion = helper.getCalibracionDao();
             daoEquipos = helper.getEquipoDao();
             daoMuestra = helper.getMuestraDao();
+
+            muestra = daoMuestra.queryForEq("idFiltro", idFiltro).get(0);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -114,7 +120,6 @@ public class RecogerFiltros extends AppCompatActivity {
         }
 
         edtTempAmbiente = findViewById(R.id.edt_temp_amb);
-        edtFechaMuestreo = findViewById(R.id.edt_fecha_muestreo);
         edtHorometro = findViewById(R.id.edt_horometro_fin);
         edtVolumen = findViewById(R.id.edt_volumen);
         edtTiempoOperacion = findViewById(R.id.edt_tiempo_operacion);
@@ -122,7 +127,7 @@ public class RecogerFiltros extends AppCompatActivity {
         edtObservaciones = findViewById(R.id.edt_observaciones);
         layLowVol = findViewById(R.id.lay_equipo_low_vol);
         edtPresionAtm = findViewById(R.id.edt_presion_atm);
-        if (tipo.equals("Low Vol")){ // hide edtPresionFinal y horometro
+        if (tipoEsLowVol()){ // hide edtPresionFinal y horometro
 
             edtHorometro.setVisibility(View.GONE);
             edtPresionEstFinal.setVisibility(View.GONE);
@@ -184,7 +189,6 @@ public class RecogerFiltros extends AppCompatActivity {
             Volumen = Double.valueOf(edtVolumen.getText().toString());
             Observaciones = edtObservaciones.getText().toString();
 
-
             if (PresionAtm <= 0|| TiempoOperacion <=0 || TempAmb <=0 || Volumen <= 0){
                 // hay valores negativos o iguales a cero.
                 Toast.makeText(this, "NO SE ADMITEN VALORES NEGATIVOS O IGUALES A CERO.",
@@ -226,9 +230,7 @@ public class RecogerFiltros extends AppCompatActivity {
 
         if (!tipoEsLowVol()){ //guardar muestra HiVol
 
-            Muestra muestra = new Muestra();
-
-            muestra.setHoromatro2(Horometro);
+            muestra.setHorometro_final(Horometro);
             muestra.setPresion_amb2(PresionAtm);
             muestra.setPresion_est_final(PresionEstFinal);
             muestra.setTemp_amb2(TempAmb);
@@ -237,15 +239,17 @@ public class RecogerFiltros extends AppCompatActivity {
             muestra.setPresion_amb();
             muestra.setTemp_ambC();
             muestra.setTemp_ambK();
-            muestra.setTiempo_operacion();
+            muestra.setTiempo_operacion(tipo);
             muestra.setPoPa();
-            muestra.setQr(UltimaCalibracion.getM_pendiente(), UltimaCalibracion.getB_intercepto());
+            muestra.setQr(Double.parseDouble(UltimaCalibracion.getM_pendiente()), Double.parseDouble(UltimaCalibracion.getB_intercepto()));
             muestra.setQstd();
             muestra.setVstd();
-            muestra.setObservaciones(Observaciones);
+            filtro.setObservaciones(Observaciones);
 
-            daoMuestra.create(muestra);
+            daoMuestra.update(muestra);
+            filtro.setFecha_muestreo(Constantes.sdf.format(new Date()));
             filtro.setRecogido(Constantes.sdf.format(new Date()));
+            filtro.setUploadedRecogido(false);
             daoFiltros.update(filtro);
 
             equipo.setOcupado(0);
@@ -270,7 +274,8 @@ public class RecogerFiltros extends AppCompatActivity {
 
     private boolean tipoEsLowVol(){
 
-        return tipo.equals("Low Vol");
+        return tipo.equals(Constantes.TIPO_LOW_VOL);
     }
+
 
 }

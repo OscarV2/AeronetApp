@@ -15,83 +15,128 @@
         android:id="@+id/tv_filtro_a_instalar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="@dimen/texto_datos" />
+        android:textSize="22sp"
+        android:layout_marginTop="10dp"/>
 
-    <!-- Temperatura ambiente -->
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/lay_temp_amb"
+    <LinearLayout
+        android:layout_below="@id/tv_filtro_a_instalar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/lay_presion_est_ini">
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edt_temp_amb"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/hint_temperatura_ambiente"
-            android:inputType="numberDecimal"
-            android:maxLines="1"
-            android:textSize="@dimen/texto_datos" />
-    </android.support.design.widget.TextInputLayout>
-
-    <!-- Presion atmosferica -->
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/lay_presion_atm"
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/lay_temp_amb">
-
-        <EditText
-            android:id="@+id/edt_presion_atm"
-            android:layout_width="match_parent"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="@dimen/texto_datos"
-            android:hint="@string/hint_presion_atmosf"
-            android:maxLines="1"
-            android:inputType="numberDecimal"
-            />
-    </android.support.design.widget.TextInputLayout>
+            android:src="@drawable/ic_temp" />
 
-    <!-- Horometro -->
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/lay_horometro"
+        <!-- Temperatura ambiente -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/lay_temp_amb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <EditText
+                android:id="@+id/edt_temp_amb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/hint_temperatura_ambiente"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:textSize="@dimen/texto_datos" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/lay_presion_atm">
-
-        <EditText
-            android:id="@+id/edt_horometro"
-            android:layout_width="match_parent"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="@dimen/texto_datos"
-            android:hint="@string/hint_horometro_ini"
-            android:maxLines="1"
-            android:inputType="numberDecimal"
-            />
-    </android.support.design.widget.TextInputLayout>
+            android:src="@drawable/ic_pressure" />
 
-    <!-- Presion de estancamiento inicial -->
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/lay_presion_est_ini"
+        <!-- Presion atmosferica -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/lay_presion_atm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <EditText
+                android:id="@+id/edt_presion_atm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/texto_datos"
+                android:hint="@string/hint_presion_atmosf"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_alarm_black_24dp" />
+
+            <!-- Horometro -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/lay_horometro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <EditText
+                    android:id="@+id/edt_horometro"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/texto_datos"
+                    android:hint="@string/hint_horometro_ini"
+                    android:maxLines="1"
+                    android:inputType="numberDecimal"
+                    />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_filtro_a_instalar">
-
-
-        <EditText
-            android:id="@+id/edt_presion_est_ini"
-            android:layout_width="match_parent"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="@dimen/texto_datos"
-            android:hint="@string/hint_presion_estancamiento_ini"
-            android:maxLines="1"
-            android:inputType="numberDecimal"
-            />
-    </android.support.design.widget.TextInputLayout>
+            android:src="@drawable/ic_pressure" />
+
+        <!-- Presion de estancamiento inicial -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/lay_presion_est_ini"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <EditText
+                android:id="@+id/edt_presion_est_ini"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/texto_datos"
+                android:hint="@string/hint_presion_estancamiento_ini"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
+                />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/email_sign_in_button"

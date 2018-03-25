@@ -12,6 +12,8 @@ import modelo.Usuarios;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -38,15 +40,27 @@ public interface AeronetApiServices {
     @GET(Constantes.GET_FILTROS)
     Call<List<Filtro>> getFiltros();
 
+    @GET(Constantes.GET_CALIBRACIONES)
+    Call<List<Calibracion>> getCalibraciones();
+
     @POST(Constantes.POST_FILTROS_INSTALADO)
-    Call<String> postFiltro(@Body Filtro filtro);
+    Call<ResponseBody> postFiltro(@Body Filtro filtro);
 
-
+    @FormUrlEncoded
     @POST(Constantes.POST_FILTROS_RECOGIDO)
-    Call<String> postFiltroRecogido(@Body Muestra muestra);
+    Call<ResponseBody> postFiltroRecogido(@Field("idFiltro") Integer idFiltro, @Field("idequipo") Integer idequipo,
+                                          @Field("recogido") String recogido , @Field("observaciones") String observaciones,
+                                          @Field("fecha_muestreo") String fechaMuestreo,
+                                          @Field("presion_est_inicial") Double presionEstInicial, @Field("presion_est_final") Double presionEstFinal,
+                                          @Field("presion_est_avg")  Double presion_est_promedio, @Field("presion_amb") Double presion_amb,
+                                          @Field("temp_ambC") Double temp_ambC, @Field("temp_ambK") Double temp_ambK,
+                                          @Field("horometro_final") Double horometro_final, @Field("horometro_inicial") Double horometro_inicial,
+                                          @Field("tiempo_operacion") Double tiempo_operacion, @Field("PoPa") Double PoPa,
+                                          @Field("Qr") Double Qr, @Field("Qstd") Double Qstd,
+                                          @Field("Vstd") Double Vstd, @Field("diff_rfo") Double  diff_rfo);
 
     @POST(Constantes.POST_CALIBRACION)
-    Call<String> postCalibracion(@Body Calibracion calibracion);
+    Call<ResponseBody> postCalibracion(@Body Calibracion calibracion);
 
     @POST(Constantes.LOGIN)
     Call<Usuarios> login(@Body Usuarios persona);

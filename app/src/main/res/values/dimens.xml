@@ -15,8 +15,11 @@
     <dimen name="texto_datos">18sp</dimen>
     <dimen name="layout_width">130dp</dimen>
 
-    <dimen name="texto_detalles_izquierda">16sp</dimen>
+    <dimen name="texto_detalles_izquierda">22sp</dimen>
     <dimen name="texto_detalles_derecha">20sp</dimen>
+
+    <dimen name="ancho_datos_calibrador">120dp</dimen>
+
 
 
 </resources>
