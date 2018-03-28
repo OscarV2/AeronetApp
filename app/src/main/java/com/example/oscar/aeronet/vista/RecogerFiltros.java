@@ -50,6 +50,7 @@ public class RecogerFiltros extends AppCompatActivity {
     private EditText edtVolumen;
     private EditText edtTiempoOperacion;
 
+    private TextView TvFiltro;
     private LinearLayout layLowVol;
     Double PresionEstFinal, Horometro, TempAmb,  Volumen, TiempoOperacion, PresionAtm;
     private String FechaMuestreo, Observaciones;
@@ -71,6 +72,7 @@ public class RecogerFiltros extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recoger_filtros);
 
+        TvFiltro = findViewById(R.id.filtro_recoger);
 
         idequipo = getIntent().getIntExtra("idequipo", 0);
         tipo = getIntent().getStringExtra("tipo");
@@ -112,6 +114,7 @@ public class RecogerFiltros extends AppCompatActivity {
             PreparedQuery<Calibracion> pQCalibracion = qbCalibracion.prepare();
 
             filtro = daoFiltros.queryForFirst(pQFiltro);
+            TvFiltro.setText("Filtro # " + filtro.getNombre());
             equipo = daoEquipos.queryForFirst(pQEquipo);
             UltimaCalibracion = daoCalibracion.queryForFirst(pQCalibracion);
 
@@ -242,9 +245,12 @@ public class RecogerFiltros extends AppCompatActivity {
             muestra.setTiempo_operacion(tipo);
             muestra.setPoPa();
             muestra.setQr(Double.parseDouble(UltimaCalibracion.getM_pendiente()), Double.parseDouble(UltimaCalibracion.getB_intercepto()));
+            muestra.setDiff_rfo();
             muestra.setQstd();
             muestra.setVstd();
             filtro.setObservaciones(Observaciones);
+
+            Log.e("muestra ", muestra.toString());
 
             daoMuestra.update(muestra);
             filtro.setFecha_muestreo(Constantes.sdf.format(new Date()));
@@ -255,6 +261,7 @@ public class RecogerFiltros extends AppCompatActivity {
             equipo.setOcupado(0);
 
             daoEquipos.update(equipo);
+
             salir();
 
         }else { // Equipo Low Vol (Nueva muestra)

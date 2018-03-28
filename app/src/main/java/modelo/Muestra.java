@@ -82,7 +82,7 @@ public class Muestra  {
     }
 
     public void setPresion_est_promedio() {
-        this.presion_est_promedio = inH2OAmmHg ((presion_est_final + presion_est_final)/2);
+        this.presion_est_promedio = inH2OAmmHg ((presion_est_inicial + presion_est_final)/2);
     }
 
     public void setPresion_amb2(Double presion_amb2) {
@@ -129,7 +129,7 @@ public class Muestra  {
     }
 
     public void setVstd() {
-        Vstd = (tiempo_operacion*Qstd)/1000;
+        Vstd = tiempo_operacion*Qstd;
     }
 
     private Double inH2OAmmHg(Double inH2O){
@@ -141,8 +141,8 @@ public class Muestra  {
         return diff_rfo;
     }
 
-    public void setDiff_rfo(Double diff_rfo) {
-        this.diff_rfo = diff_rfo;
+    public void setDiff_rfo() {
+        this.diff_rfo = ((Qr - 1.13)/1.13)*100;
     }
 
     public Double getPresion_est_inicial() {

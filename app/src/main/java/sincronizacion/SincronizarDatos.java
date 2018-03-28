@@ -382,7 +382,7 @@ public class SincronizarDatos {
                             muestra.getPresion_est_final(), muestra.getPresion_est_promedio(), muestra.getPresion_amb(),
                             muestra.getTemp_ambC(), muestra.getTemp_ambK(), muestra.getHorometro_final(),
                             muestra.getHorometro_inicial(), muestra.getTiempo_operacion(), muestra.getPoPa(),
-                            muestra.getQr(), muestra.getQstd(), muestra.getVstd(), 1.0);
+                            muestra.getQr(), muestra.getQstd(), muestra.getVstd(), muestra.getDiff_rfo());
 
 
             postFiltro.enqueue(new Callback<ResponseBody>() {
