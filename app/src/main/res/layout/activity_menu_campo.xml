@@ -112,14 +112,14 @@
         android:background="@color/color_fondo_App"
         android:onClick="calibrarEquipo"
         android:layout_marginLeft="10dp"
-        >
+        android:layout_marginStart="10dp">
 
         <ImageView
             android:id="@+id/img_calibrar"
             android:layout_width="@dimen/ancho_alto_img_menu"
             android:layout_height="@dimen/ancho_alto_img_menu"
             android:layout_centerVertical="true"
-            android:src="@mipmap/ic_filter"/>
+            android:src="@drawable/ic_config2"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -144,14 +144,14 @@
         android:background="@color/color_fondo_App"
         android:onClick="verDetalles"
         android:layout_marginLeft="10dp"
-        >
+        android:layout_marginStart="10dp">
 
         <ImageView
             android:id="@+id/img_detalles"
             android:layout_width="@dimen/ancho_alto_img_menu"
             android:layout_height="@dimen/ancho_alto_img_menu"
             android:layout_centerVertical="true"
-            android:src="@mipmap/ic_filter"/>
+            android:src="@drawable/ic_info"/>
 
         <TextView
             android:layout_width="wrap_content"
