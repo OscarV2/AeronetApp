@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/datos_calibrador"
-                android:textSize="22dp"
+                android:textSize="22sp"
                 android:layout_centerHorizontal="true"
                 />
 
@@ -91,7 +91,7 @@
 
         </LinearLayout>
 
-    <LinearLayout
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -101,7 +101,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_temp" />
+            android:src="@drawable/ic_temp"
+            android:contentDescription="TODO" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -116,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:hint="Temperatura Ambiente"
+                android:hint="@string/hint_temperatura_ambiente"
                 android:maxLines="1"
                 android:inputType="numberDecimal"
                 android:maxLength="6"
@@ -155,7 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:hint="Presión Atmosférica"
+                    android:hint="@string/hint_presion_atmosf"
                     android:maxLines="1"
                     android:inputType="numberDecimal"
                     android:maxLength="6"
@@ -166,7 +167,6 @@
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
-
         <!-- texto Muestras(in H2O) -->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -176,51 +176,49 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/muestras_calibrador"
+                android:layout_marginTop="10dp"
                 android:textSize="22dp"
                 android:layout_centerHorizontal="true"
-                />
-            <TextView
-                android:id="@+id/Equipo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Equipo"
-                android:textSize="22dp"
-                android:layout_below="@id/Muestras_calibrador"
-                android:layout_marginLeft="30dp"
-                />
-            <TextView
-                android:id="@+id/Calibrador"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Calibrador"
-                android:textSize="22dp"
-                android:layout_below="@id/Muestras_calibrador"
-                android:layout_marginRight="24dp"
-                android:layout_alignParentRight="true"
                 />
         </RelativeLayout>
 
         <!-- obtener las presiones del equipo y calibradror-->
+
+        <!-- 1.-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp">
-            <RelativeLayout
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="1."
+                android:layout_centerVertical="true"
+                android:textSize="50sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp" />
+
+            <LinearLayout
+                android:layout_toRightOf="@id/tv_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true">
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@id/tv_1">
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/delta_p1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/blanco"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     >
                     <EditText
                         android:id="@+id/deltap1"
-                        android:layout_width="150dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:hint="P. Estancamiento 1."
@@ -228,21 +226,19 @@
                         android:inputType="numberDecimal"
                         android:maxLength="6"
                         android:textColorHint="@color/text_Color_Hint"
-                        android:layout_marginLeft="24dp"
                         />
 
                 </android.support.design.widget.TextInputLayout>
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/delta_h1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/blanco"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
                     >
                     <EditText
                         android:id="@+id/deltaH1"
-                        android:layout_width="@dimen/layout_width"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:hint="P. Calibrador 1."
@@ -254,28 +250,57 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-            </RelativeLayout>
+            </LinearLayout>
+
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/blanco"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginStart="15dp"
+            />
+
+        <!-- 2.-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp">
-            <RelativeLayout
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:id="@+id/tv_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="2."
+                android:layout_centerVertical="true"
+                android:textSize="50sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp" />
+
+            <LinearLayout
+                android:layout_toRightOf="@id/tv_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true">
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@id/tv_2">
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/delta_p2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/blanco"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     >
                     <EditText
                         android:id="@+id/deltap2"
-                        android:layout_width="150dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:hint="P. Estancamiento 2."
@@ -283,21 +308,19 @@
                         android:inputType="numberDecimal"
                         android:maxLength="6"
                         android:textColorHint="@color/text_Color_Hint"
-                        android:layout_marginLeft="24dp"
                         />
 
                 </android.support.design.widget.TextInputLayout>
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/delta_H2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/blanco"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
                     >
                     <EditText
                         android:id="@+id/deltaH2"
-                        android:layout_width="@dimen/layout_width"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:hint="P. Calibrador 2."
@@ -309,28 +332,56 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-            </RelativeLayout>
+            </LinearLayout>
+
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/blanco"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginStart="15dp"
+            />
+
+        <!-- 3.-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp">
-            <RelativeLayout
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:id="@+id/tv_3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="3."
+                android:layout_centerVertical="true"
+                android:textSize="50sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp" />
+
+            <LinearLayout
+                android:layout_toRightOf="@id/tv_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true">
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@id/tv_3">
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/delta_p3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/blanco"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     >
                     <EditText
                         android:id="@+id/deltap3"
-                        android:layout_width="150dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:hint="P. Estancamiento 3."
@@ -338,21 +389,19 @@
                         android:inputType="numberDecimal"
                         android:maxLength="6"
                         android:textColorHint="@color/text_Color_Hint"
-                        android:layout_marginLeft="24dp"
                         />
 
                 </android.support.design.widget.TextInputLayout>
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/delta_h3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/blanco"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
                     >
                     <EditText
                         android:id="@+id/deltaH3"
-                        android:layout_width="@dimen/layout_width"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:hint="P. Calibrador 3."
@@ -364,28 +413,56 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-            </RelativeLayout>
+            </LinearLayout>
+
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/blanco"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginStart="15dp"
+            />
+
+        <!-- 4.-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp">
-            <RelativeLayout
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:id="@+id/tv_4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="4."
+                android:layout_centerVertical="true"
+                android:textSize="50sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp" />
+
+            <LinearLayout
+                android:layout_toRightOf="@id/tv_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true">
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@id/tv_4">
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/delta_p4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/blanco"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     >
                     <EditText
                         android:id="@+id/deltap4"
-                        android:layout_width="150dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:hint="P. Estancamiento 4."
@@ -393,21 +470,19 @@
                         android:inputType="numberDecimal"
                         android:maxLength="6"
                         android:textColorHint="@color/text_Color_Hint"
-                        android:layout_marginLeft="24dp"
                         />
 
                 </android.support.design.widget.TextInputLayout>
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/delta_h4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/blanco"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
                     >
                     <EditText
                         android:id="@+id/deltaH4"
-                        android:layout_width="@dimen/layout_width"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:hint="P. Calibrador 4."
@@ -419,28 +494,56 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-            </RelativeLayout>
+            </LinearLayout>
+
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/blanco"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginStart="15dp"
+            />
+
+        <!-- 5.-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp">
-            <RelativeLayout
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:id="@+id/tv_5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="5."
+                android:layout_centerVertical="true"
+                android:textSize="50sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp" />
+
+            <LinearLayout
+                android:layout_toRightOf="@id/tv_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true">
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@id/tv_5">
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/delta_p5"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/blanco"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
                     >
                     <EditText
                         android:id="@+id/deltap5"
-                        android:layout_width="150dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:hint="P. Estancamiento 5."
@@ -448,21 +551,19 @@
                         android:inputType="numberDecimal"
                         android:maxLength="6"
                         android:textColorHint="@color/text_Color_Hint"
-                        android:layout_marginLeft="24dp"
                         />
 
                 </android.support.design.widget.TextInputLayout>
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/delta_h5"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/blanco"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
                     >
                     <EditText
                         android:id="@+id/deltaH5"
-                        android:layout_width="@dimen/layout_width"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:hint="P. Calibrador 5."
@@ -474,8 +575,21 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-            </RelativeLayout>
+            </LinearLayout>
+
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/blanco"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginStart="15dp"
+            />
+
         <!-- Boton Guardar-->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -493,13 +607,12 @@
                 android:textColor="@color/blanco"
                 android:background="@drawable/forma_boton"
                 android:layout_below="@id/tilcontra"
+                android:layout_marginBottom="10dp"
                 android:onClick="calibrar"
                 />
 
         </RelativeLayout>
 
     </LinearLayout>
-
-
 
 </ScrollView>

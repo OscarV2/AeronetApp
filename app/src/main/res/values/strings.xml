@@ -30,23 +30,12 @@
     <string name="hint_observaciones">Observaciones</string>
     <string name="txt_detalles">Detalles</string>
 
-    <string-array name="unidades_presion">
-        <item>mmHg</item>
-        <item>atm</item>
-        <item>inHg</item>
-    </string-array>
-
-    <string-array name="unidades_temperatura">
-        <item>°C</item>
-        <item>°F</item>
-        <item>°K</item>
-    </string-array>
-
-    <string name="datos_calibrador">Datos Calibrador</string>
-    <string name="muestras_calibrador">Muestras(in H2O)</string>
+    <!-- Actividad Calibracion -->
+    <string name="datos_calibrador">Datos Orificio de Calibracion</string>
+    <string name="muestras_calibrador">Aperturas Orificio(in H2O)</string>
     <string name="btn_guardar">GUARDAR</string>
 
-    // texto del menu opciones
+    <!-- texto del menu opciones -->
     <string name="sincro">Sincronizar</string>
     <string name="Dfiltros">Descargar Filtros</string>
     <string name="Csesion">Cerrar Sesión</string>
@@ -56,6 +45,5 @@
     <string name="filtros">Filtros:</string>
     <string name="ultima_calibracion">Ultima \nCalibración:</string>
     <string name="descripcion">Descripción</string>
-
 
 </resources>

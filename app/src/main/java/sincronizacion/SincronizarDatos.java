@@ -147,7 +147,7 @@ public class SincronizarDatos {
                             updateListener.success("ceroequipos");
                         }
                     }
-                    descargarFiltros();
+                    descargarCalibraciones();
                 }else {
                     updateListener.success("responsefailed");
                 }
@@ -187,25 +187,23 @@ public class SincronizarDatos {
                                 }
 
                                 if (calibracion == calibraciones.get(calibraciones.size()-1)){
-                                    updateListener.success("success");
+                                    descargarFiltros();
+
                                 }
 
                             }
                         }else{
-                            updateListener.success("success");
+                            descargarFiltros();
                             Log.e("getting", "calibracioones TAMAÑO NOO ES MAYOR A CERO");
                         }
                     }else{
-                        Log.e("getting", "calibracioones en NUULL");
-                        updateListener.success("fallo");
+                        descargarFiltros();
 
                     }
                 }else{
-                    Log.e("getting", "calibracioones RESPONSE Was not successfull");
-                    updateListener.success("fallo");
+                    descargarFiltros();
 
                 }
-
             }
 
             @Override
