@@ -26,10 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapter.AdapterEquipos;
-import controller.EquipoController;
 import api.UpdateListener;
 import dmax.dialog.SpotsDialog;
-import modelo.Constantes;
+import utils.Constantes;
 import modelo.DataBaseHelper;
 import modelo.Equipo;
 import modelo.Filtro;

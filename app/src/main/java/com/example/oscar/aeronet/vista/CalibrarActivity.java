@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.oscar.aeronet.R;
@@ -21,7 +20,7 @@ import java.util.Date;
 
 import modelo.Calibracion;
 import modelo.Calibrador;
-import modelo.Constantes;
+import utils.Constantes;
 import modelo.DataBaseHelper;
 import utils.Calculos;
 

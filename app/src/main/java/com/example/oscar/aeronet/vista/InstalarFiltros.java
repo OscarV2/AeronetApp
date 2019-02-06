@@ -2,7 +2,6 @@ package com.example.oscar.aeronet.vista;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,9 +20,8 @@ import com.j256.ormlite.stmt.QueryBuilder;
 
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 
-import modelo.Constantes;
+import utils.Constantes;
 import modelo.DataBaseHelper;
 import modelo.Equipo;
 import modelo.Filtro;

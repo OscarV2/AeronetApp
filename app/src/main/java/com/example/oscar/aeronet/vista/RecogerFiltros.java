@@ -2,7 +2,6 @@ package com.example.oscar.aeronet.vista;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,14 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.oscar.aeronet.R;
-import com.google.gson.Gson;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -30,12 +25,11 @@ import java.util.List;
 
 import modelo.Calibracion;
 import modelo.Calibrador;
-import modelo.Constantes;
+import utils.Constantes;
 import modelo.DataBaseHelper;
 import modelo.Equipo;
 import modelo.Filtro;
 import modelo.Muestra;
-import modelo.Usuarios;
 
 public class RecogerFiltros extends AppCompatActivity {
 

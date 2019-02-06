@@ -1,4 +1,4 @@
-package modelo;
+package utils;
 
 import android.annotation.SuppressLint;
 
@@ -49,7 +49,7 @@ public class Constantes {
 
     public static final String password = "password";
 
-    public static final String BASE_URL = "http://jorgeeduardodiaz.com/qualis/index.php/api/";
+    public static final String BASE_URL = "http://www.smartbill.us:81/AeronetWeb/index.php/api/";
 
     public static final String LOGIN = "Usuarios/login";
     public static final String GET_EQUIPOS = "Equipos/getEquipos";

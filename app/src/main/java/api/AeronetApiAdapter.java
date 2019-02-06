@@ -1,7 +1,6 @@
 package api;
 
-
-import modelo.Constantes;
+import utils.Constantes;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

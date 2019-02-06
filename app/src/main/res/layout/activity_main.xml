@@ -13,7 +13,7 @@
         android:contentDescription="@string/hint_fecha_muestreo"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@mipmap/logo"/>
+        android:src="@mipmap/ic_logo2"/>
 
     <ImageView
         android:cropToPadding="true"

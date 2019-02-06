@@ -8,21 +8,17 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
-import android.util.Log;
 
 import com.example.oscar.aeronet.R;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Logger;
 
 import api.UpdateListener;
 import dmax.dialog.SpotsDialog;
-import modelo.Constantes;
+import utils.Constantes;
 import modelo.DataBaseHelper;
 import modelo.Equipo;
-import modelo.Filtro;
 import sincronizacion.SincronizarDatos;
 
 public class MainActivity extends AppCompatActivity implements UpdateListener{
@@ -122,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements UpdateListener{
          case "fallo":
              Toast.makeText(MainActivity.this, "NO SE PUDO SINCRONIZAR TODA LA INFORMACION, POR FAVOR INTENTELO MAS TARDE.", Toast.LENGTH_SHORT).show();
              closeDialog();
+             irLogin();
              break;
      }
     }

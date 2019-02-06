@@ -17,7 +17,7 @@ import com.example.oscar.aeronet.R;
 
 import api.UpdateListener;
 import dmax.dialog.SpotsDialog;
-import modelo.Constantes;
+import utils.Constantes;
 import modelo.Usuarios;
 import sincronizacion.SincronizarDatos;
 import android.util.Log;

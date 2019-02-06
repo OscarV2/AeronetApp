@@ -18,7 +18,7 @@ import api.AeronetApiAdapter;
 import api.UpdateListener;
 import modelo.Calibracion;
 import modelo.Calibrador;
-import modelo.Constantes;
+import utils.Constantes;
 import modelo.DataBaseHelper;
 import modelo.Equipo;
 import modelo.Filtro;

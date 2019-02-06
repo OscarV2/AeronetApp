@@ -119,7 +119,7 @@
             android:layout_width="@dimen/ancho_alto_img_menu"
             android:layout_height="@dimen/ancho_alto_img_menu"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_config2"/>
+            android:src="@drawable/ic_info"/>
 
         <TextView
             android:layout_width="wrap_content"

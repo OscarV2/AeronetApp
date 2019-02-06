@@ -7,7 +7,6 @@ import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import com.example.oscar.aeronet.vista.InstalarFiltros;
-import com.example.oscar.aeronet.vista.MenuCampo;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -19,7 +18,6 @@ import java.util.List;
 import android.util.Log;
 
 import modelo.Calibracion;
-import modelo.Constantes;
 import modelo.DataBaseHelper;
 import modelo.Equipo;
 import modelo.Filtro;

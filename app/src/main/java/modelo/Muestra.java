@@ -8,6 +8,8 @@ import com.j256.ormlite.table.DatabaseTable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import utils.Constantes;
+
 /**
  * Created by Usuario on 28/11/2017.
  */
