@@ -72,10 +72,13 @@ public class ListaEquipos extends AppCompatActivity implements UpdateListener{
 
                 String tipo =  equipoList.get(position).getClase();
 
+                String nombreEquipo = equipoList.get(position).getModelo();
+
                 SharedPreferences preferences = getSharedPreferences("AeronetPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putInt("idequipo", idequipo);
                 editor.putString("tipo", tipo);
+                editor.putString("modelo", nombreEquipo);
                 editor.apply();
                 Intent i = new Intent(ListaEquipos.this, MenuCampo.class);
                 startActivity(i);

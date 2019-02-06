@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.oscar.aeronet.R;
@@ -49,6 +50,8 @@ public class MenuCampo extends AppCompatActivity {
 
         idequipo = preferences.getInt("idequipo", 0);
         tipo = preferences.getString("tipo", "");
+        TextView txNombreEquipo = findViewById(R.id.tx_detalles);
+        txNombreEquipo.setText(preferences.getString("modelo", ""));
 
         checkFiltros = new CheckFiltros(daoEquipos, daoFiltros, MenuCampo.this, idequipo
                                                      ,helper, tipo);
@@ -68,7 +71,6 @@ public class MenuCampo extends AppCompatActivity {
     }
 
     public void irInstalarFiltros(View v){
-
 
         if (checkFiltros.equipoCalibrado()){  // si el equipo  esta calibrado
             if (!checkFiltros.tieneFiltroAsignado()){  //si el equipo no tiene filtro asignado ni instalado
@@ -164,7 +166,7 @@ public class MenuCampo extends AppCompatActivity {
         Intent i = new Intent(MenuCampo.this, Detalles.class);
         i.putExtra("idequipo", idequipo);
         startActivity(i);
-        finish();
+
     }
 
     private void showDialogCalibracion(){

@@ -19,9 +19,6 @@
                                   <option name="values">
                                     <map>
                                       <entry key="foregroundImage" value="C:\Users\ingod\OneDrive\Imágenes\logoupc.png" />
-                                      <entry key="generateLegacyIcon" value="false" />
-                                      <entry key="generateRoundIcon" value="false" />
-                                      <entry key="generateWebIcon" value="false" />
                                       <entry key="outputName" value="ic_logoupc" />
                                     </map>
                                   </option>
@@ -34,6 +31,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
+                                      <entry key="iconShape" value="NONE" />
                                       <entry key="imageAsset" value="C:\Users\ingod\OneDrive\Imágenes\logoupc.png" />
                                       <entry key="outputName" value="logoupc" />
                                     </map>

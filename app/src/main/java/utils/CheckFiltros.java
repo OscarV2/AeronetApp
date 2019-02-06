@@ -270,6 +270,8 @@ public class CheckFiltros {
             this.idFiltroAsignado = FiltroAsignado.getIdFiltro();
         } catch (SQLException  e) {
             e.printStackTrace();
+        } catch (Exception ex){
+            Log.e("EXXX","Ocurrio una excepcion " + ex.getMessage());
         }
     }
 
